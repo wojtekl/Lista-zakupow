@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+>
+    <EditText
+        android:id="@+id/DPRODUKTNAZWA"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/NAZWA"
+        android:inputType="textCapSentences"
+    />
+    <EditText
+        android:id="@+id/DPRODUKTCENA"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/CENA"
+        android:inputType="numberDecimal"
+        android:selectAllOnFocus="true"
+    />
+    <EditText
+        android:id="@+id/DPRODUKTSKLEP"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/SKLEP"
+        android:inputType="textCapSentences"
+        android:selectAllOnFocus="true"
+    />
+</LinearLayout>

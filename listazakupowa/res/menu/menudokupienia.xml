@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/doKupieniaWyslijSMSem"
+        android:title="@string/WYSLIJSMSEM"
+    />
+    <item
+        android:id="@+id/doKupieniaWyczysc"
+        android:title="@string/WYCZYSCLISTE"
+    />
+</menu>

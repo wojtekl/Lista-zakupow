@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/produktyStworz"
+        android:title="@string/STWORZ"
+    />
+    <item
+        android:id="@+id/produktyWesprzyjMnie"
+        android:title="@string/WESPRZYJMNIE"
+    />
+    <item
+        android:id="@+id/produktyPolecSMSem"
+        android:title="@string/POLECSMSEM"
+    />
+    <item
+        android:id="@+id/produktyPokazInstrukcje"
+        android:title="@string/POKAZINSTRUKCJE"
+    />
+    <item
+        android:id="@+id/produktyWyczyscWszystko"
+        android:title="@string/WYCZYSCWSZYSTKO"
+    />
+</menu>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lista zakupów</string>
+    <string name="ZABRANE">Zabrane</string>
+    <string name="DOKUPIENIA">Do kupienia</string>
+    <string name="PRODUKTY">Produkty</string>
+    <string name="NAZWA">Nazwa</string>
+    <string name="CENA">Cena</string>
+    <string name="SKLEP">Sklep</string>
+    <string name="ZAPISZ">Zapisz</string>
+    <string name="ZANIECHAJ">Zaniechaj</string>
+    <string name="STWORZ">Stwórz</string>
+    <string name="WYCZYSCLISTE">Wyczyść listę</string>
+    <string name="ZMIEN">Zmień</string>
+    <string name="USUN">Usuń</string>
+    <string name="WYSLIJSMSEM">Wyślij SMSem</string>
+    <string name="WESPRZYJMNIE">Wesprzyj mnie :)</string>
+    <string name="DZIEKUJE">Dziękuję :)</string>
+    <string name="WYCZYSCWSZYSTKO">Wyczyść wszystko</string>
+    <string name="PIERWSZALISTA">[[[\"Chleb\",\"Piekarnia Nowaków\",\"3.49\"],[\"Pasta do zębów\",\"Drogeria\",\"6.79\"]],[[\"Herbata\",\"Harbaciarnia Marysi\",\"12.00\"],[\"Mleko\",\"Super Market\",\"4.99\"],[\"Chusteczki\",\"Drogeria\",\"3.34\"]],[[\"Masło\",\"Rynek Miejski\",\"2.99\"]]]</string>
+    <string name="PIERWSZEURUCHOMIENIE">To jest pierwsze uruchomienie. Do list dodano przykładowe produkty. Dodaj nowe przesuwając ekran w lewo i wybierając Stwórz z menu.</string>
+    <string name="POLECSMSEM">Poleć SMSem</string>
+    <string name="ODNOSNIK">Zobacz aplikację Lista zakupów https://play.google.com/store/apps/details?id=com.gmail.lesniakwojciech.listazakupowa</string>
+    <string name="WYKONAC">Wykonać?</string>
+    <string name="POTWIERDZCZYSZCZENIE">Wszystkie listy i produkty zostaną utracone bezpowrotnie.</string>
+    <string name="TAK">Tak</string>
+    <string name="NIE">Nie</string>
+    <string name="PIERWSZYPRODUKT">Twój pierwszy produkt! Wybierz go, aby przesunąć na listę Do kupienia lub przytrzymaj aby zmienić cenę.</string>
+    <string name="POKAZINSTRUKCJE">Pokaż instrukcje</string>
+    <string name="URUCHOMAPLIKACJEPONOWNIE">Uruchom aplikację ponownie.</string>
+</resources>
