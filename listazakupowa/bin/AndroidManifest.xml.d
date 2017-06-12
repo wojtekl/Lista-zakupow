@@ -1,2 +1,2 @@
-/home/uzytkownik/praca/android/listazakupowa/bin/AndroidManifest.xml : \
-/home/uzytkownik/praca/android/listazakupowa/AndroidManifest.xml \
+/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/AndroidManifest.xml : \
+/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/AndroidManifest.xml \

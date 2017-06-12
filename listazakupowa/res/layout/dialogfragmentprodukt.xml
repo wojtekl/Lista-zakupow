@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout 
+  xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:orientation="vertical" 
+  android:layout_width="wrap_content" 
+  android:layout_height="wrap_content" 
+>
+  <EditText 
+    android:id="@+id/dfpNazwa" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:hint="@string/nazwa" 
+    android:inputType="textCapSentences" 
+  />
+  <EditText 
+    android:id="@+id/dfpSklep" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:hint="@string/sklep" 
+    android:inputType="textCapSentences" 
+    android:selectAllOnFocus="true" 
+  />
+  <EditText 
+    android:id="@+id/dfpCena" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:hint="@string/cena" 
+    android:inputType="numberDecimal" 
+    android:selectAllOnFocus="true" 
+  />
+</LinearLayout>

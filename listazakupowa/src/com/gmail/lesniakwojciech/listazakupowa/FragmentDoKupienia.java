@@ -2,6 +2,7 @@ package com.gmail.lesniakwojciech.listazakupowa;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -16,123 +17,123 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
-
 import java.util.List;
 
-public class FragmentDoKupienia extends Fragment implements DialogProdukt.DialogListener
+public class FragmentDoKupienia 
+  extends Fragment 
+  implements DialogFragmentProdukt.DialogListener
 {
+  private ListView listView;
+  private IWspoldzielenieDanych wspoldzielenieDanych;
+  private List<ModelProdukt> wKoszyku, doKupienia, produkty;
+  private AAdapterListaZakupow aAdapterListaZakupow;
+  
+  @Override
+  public View onCreateView(final LayoutInflater li, final ViewGroup vg, final Bundle bundle)
+  {
+    final View view = li.inflate(R.layout.fragmentprodukty, vg, false);
     
-    private ListView listView;
-    private WspoldzielenieDanych wspoldzielenieDanych;
-    private List<ModelProdukt> doKupienia, produkty, zabrane;
-    private InteractiveArrayAdapter interactiveArrayAdapter;
+    wKoszyku = wspoldzielenieDanych.getWKoszyku();
+    doKupienia = wspoldzielenieDanych.getDoKupienia();
+    produkty = wspoldzielenieDanych.getProdukty();
     
-    @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle icicle)
+    aAdapterListaZakupow = new AAdapterListaZakupow(getActivity(), doKupienia);
+    listView = (ListView)view.findViewById(R.id.fpListView);
+    listView.setAdapter(aAdapterListaZakupow);
+    listView.setOnItemClickListener(onItemClickListener);
+    listView.setOnItemLongClickListener(onItemLongClickListener);
+    listView.setBackgroundColor(Color.parseColor("#10ff0000"));
+    
+    setHasOptionsMenu(true);
+    return view;
+  }
+  
+  @Override
+  public void onAttach(final Context cntxt)
+  {
+    super.onAttach(cntxt);
+    
+    wspoldzielenieDanych = (IWspoldzielenieDanych)cntxt;
+  }
+  
+  @Override
+  public void onCreateOptionsMenu(final Menu menu, final MenuInflater mi)
+  {
+    mi.inflate(R.menu.fragmentdokupieniaoptions, menu);
+  }
+  
+  @Override
+  public boolean onOptionsItemSelected(final MenuItem mi)
+  {
+    switch(mi.getItemId())
     {
-        //super.onCreate(icicle);
-        final View view = inflater.inflate(R.layout.fragmentprodukty, container, false);
-        listView = (ListView)view.findViewById(R.id.produktyLista);
-        doKupienia = wspoldzielenieDanych.doKupienia();
-        interactiveArrayAdapter = new InteractiveArrayAdapter(this.getActivity(), doKupienia);
-        listView.setAdapter(interactiveArrayAdapter);
-        listView.setOnItemClickListener(onItemClickListener);
-        listView.setOnItemLongClickListener(onItemLongClickListener);
-        this.setHasOptionsMenu(true);
-        produkty = wspoldzielenieDanych.produkty();
-        zabrane = wspoldzielenieDanych.zabrane();
-        return view;
-    }
-    
-    private final OnItemClickListener onItemClickListener = new OnItemClickListener()
-    {
-        
-        public void onItemClick(final AdapterView<?> av, final View view, final int i, final long l)
+      case R.id.fdkoWyslijSMSem:
+        int l = doKupienia.size();
+        if(0 < l)
         {
-            zabrane.add(((ModelProdukt)av.getItemAtPosition(i)));
-            doKupienia.remove(i);
-            interactiveArrayAdapter.notifyDataSetChanged();
-        }
-        
-    };
-    
-    private final OnItemLongClickListener onItemLongClickListener = new OnItemLongClickListener()
-    {
-
-        public boolean onItemLongClick(final AdapterView<?> av, final View view, final int i, final long l)
-        {
-            final DialogProdukt dialogProdukt = new DialogProdukt();
-            dialogProdukt.ustaw((ModelProdukt)av.getItemAtPosition(i));
-            dialogProdukt.show(getActivity().getSupportFragmentManager(), "dialogProdukt");
-            return true;
-        }
-
-    };
-    
-    @Override
-    public void onCreateOptionsMenu(final Menu menu, final MenuInflater menuInflater)
-    {
-        menuInflater.inflate(R.menu.menudokupienia, menu);
-    }
-    
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem menu)
-    {
-        switch(menu.getItemId())
-        {
-            case R.id.doKupieniaWyczysc:
-                produkty.addAll(doKupienia);
-                interactiveArrayAdapter.clear();
-                return true;
-            case R.id.doKupieniaWyslijSMSem:
-                int l = doKupienia.size();
-                if(0 < l)
-                {
-                    final StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append(this.getResources().getString(R.string.DOKUPIENIA));
-                    stringBuilder.append(":\n");
-                    --l;
-                    for(int i = 0; i < l; ++i)
-                    {
-                        stringBuilder.append(doKupienia.get(i).getNazwa());
-                        stringBuilder.append(",\n");
-                    }
-                    stringBuilder.append(doKupienia.get(l).getNazwa());
-                    stringBuilder.append(".");
-                    final Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse("smsto:"));
-                    intent.setType("vnd.android-dir/mms-sms");
-                    intent.putExtra("sms_body", stringBuilder.toString());
-                    startActivity(intent);
-                }
-                return true;
+          final StringBuilder stringBuilder = new StringBuilder();
+          stringBuilder.append(getResources().getString(R.string.doKupienia)).append(":\n");
+          --l;
+          for(int i = 0; i < l; ++i)
+          {
+            stringBuilder.append(doKupienia.get(i).getNazwa()).append(",\n");
+          }
+          stringBuilder.append(doKupienia.get(l).getNazwa()).append(".");
+          startActivity(new Intent(Intent.ACTION_VIEW)
+            .setData(Uri.parse("smsto:"))
+            .setType("vnd.android-dir/mms-sms")
+            .putExtra("sms_body", stringBuilder.toString())
+          );
         }
         return true;
+      case R.id.fdkoWyczysc:
+        produkty.addAll(doKupienia);
+        aAdapterListaZakupow.clear();
+        return true;
+      default:
+        return super.onOptionsItemSelected(mi);
     }
-    
-    @Override
-    public void setUserVisibleHint(final boolean isVisibleToUser)
+  }
+  
+  private final OnItemClickListener onItemClickListener = new OnItemClickListener()
+  {
+    public void onItemClick(final AdapterView<?> av, final View view, final int i, final long l)
     {
-        super.setUserVisibleHint(isVisibleToUser);
-        if(null != listView)
-        {
-            interactiveArrayAdapter.notifyDataSetChanged();
-        }
+      ModelProdukt model = (ModelProdukt)av.getItemAtPosition(i);
+      wKoszyku.add(model);
+      aAdapterListaZakupow.remove(model);
     }
-    
-    @Override
-    public void onAttach(final Context c)
+  };
+  
+  private final OnItemLongClickListener onItemLongClickListener = new OnItemLongClickListener()
+  {
+    public boolean onItemLongClick(final AdapterView<?> av, final View view, final int i, final long l)
     {
-        super.onAttach(c);
-        wspoldzielenieDanych = (WspoldzielenieDanych)c;
+      new DialogFragmentProdukt(FragmentDoKupienia.this, (ModelProdukt)av.getItemAtPosition(i))
+        .show(getActivity().getSupportFragmentManager(), "fdkItemLongClick");
+      return true;
     }
+  };
+  
+  @Override
+  public void setUserVisibleHint(final boolean isVisibleToUser)
+  {
+    super.setUserVisibleHint(isVisibleToUser);
+    
+    if(
+      (null != listView) && 
+      (listView.getCount() != aAdapterListaZakupow.getCount()) 
+    )
+    {
+      aAdapterListaZakupow.notifyDataSetChanged();
+    }
+  }
 
-    public void onDialogPositiveClick(final ModelProdukt p)
-    {
-    }
+  public void onDialogPositiveClick(final ModelProdukt model)
+  {
+  }
 
-    public void onDialogNegativeClick(final DialogFragment d)
-    {
-    }
-    
+  public void onDialogNegativeClick(final DialogFragment dialog)
+  {
+  }
 }

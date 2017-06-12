@@ -551,14 +551,13 @@ containing a value of this type.
         public static final int powered_by_google_light=0x7f020035;
     }
     public static final class id {
-        public static final int DPRODUKTCENA=0x7f08002d;
-        public static final int DPRODUKTNAZWA=0x7f08002c;
-        public static final int DPRODUKTSKLEP=0x7f08002e;
-        public static final int LPRODUKTSKLEPCENA=0x7f080031;
-        public static final int LPRODUKTYNAZWA=0x7f080030;
-        public static final int adView=0x7f08002a;
+        public static final int LPRODUKTSKLEPCENA=0x7f08002b;
+        public static final int LPRODUKTYNAZWA=0x7f08002a;
+        public static final int adView=0x7f08002d;
         public static final int adjust_height=0x7f080007;
         public static final int adjust_width=0x7f080008;
+        public static final int aiTextView=0x7f08002c;
+        public static final int alzViewPager=0x7f08002e;
         public static final int android_pay=0x7f080028;
         public static final int android_pay_dark=0x7f08001f;
         public static final int android_pay_light=0x7f080020;
@@ -572,10 +571,21 @@ containing a value of this type.
         public static final int cast_notification_id=0x7f080000;
         public static final int classic=0x7f080022;
         public static final int dark=0x7f080005;
-        public static final int doKupieniaWyczysc=0x7f080033;
-        public static final int doKupieniaWyslijSMSem=0x7f080032;
+        public static final int dfpCena=0x7f080031;
+        public static final int dfpNazwa=0x7f08002f;
+        public static final int dfpSklep=0x7f080030;
         public static final int donate_with=0x7f08001c;
         public static final int donate_with_google=0x7f08001d;
+        public static final int fdkoWyczysc=0x7f080034;
+        public static final int fdkoWyslijSMSem=0x7f080033;
+        public static final int fpListView=0x7f080032;
+        public static final int fpcUaktualnij=0x7f080035;
+        public static final int fpcUsun=0x7f080036;
+        public static final int fpoNowy=0x7f080037;
+        public static final int fpoPokazInstrukcje=0x7f080038;
+        public static final int fpoWyczyscWszystko=0x7f080039;
+        public static final int fwkoWspomozAutora=0x7f08003b;
+        public static final int fwkoZakonczZakupy=0x7f08003a;
         public static final int google_wallet_classic=0x7f080023;
         public static final int google_wallet_grayscale=0x7f080024;
         public static final int google_wallet_monochrome=0x7f080025;
@@ -590,16 +600,7 @@ containing a value of this type.
         public static final int monochrome=0x7f080027;
         public static final int none=0x7f080009;
         public static final int normal=0x7f08000b;
-        public static final int pager=0x7f08002b;
         public static final int production=0x7f080010;
-        public static final int produktyLista=0x7f08002f;
-        public static final int produktyListaUsun=0x7f08003a;
-        public static final int produktyListaZmien=0x7f080039;
-        public static final int produktyPokazInstrukcje=0x7f080037;
-        public static final int produktyPolecSMSem=0x7f080036;
-        public static final int produktyStworz=0x7f080034;
-        public static final int produktyWesprzyjMnie=0x7f080035;
-        public static final int produktyWyczyscWszystko=0x7f080038;
         public static final int sandbox=0x7f080011;
         public static final int satellite=0x7f08000c;
         public static final int selectionDetails=0x7f080015;
@@ -615,47 +616,22 @@ containing a value of this type.
         public static final int google_play_services_version=0x7f090000;
     }
     public static final class layout {
-        public static final int activitylistazakupow=0x7f030000;
-        public static final int dialogprodukt=0x7f030001;
-        public static final int fragmentprodukty=0x7f030002;
-        public static final int listitemprodukt=0x7f030003;
+        public static final int aadapterlistazakupow=0x7f030000;
+        public static final int activityinstrukcje=0x7f030001;
+        public static final int activitylistazakupow=0x7f030002;
+        public static final int dialogfragmentprodukt=0x7f030003;
+        public static final int fragmentprodukty=0x7f030004;
     }
     public static final class menu {
-        public static final int menudokupienia=0x7f0a0000;
-        public static final int menuprodukty=0x7f0a0001;
-        public static final int menuproduktylista=0x7f0a0002;
+        public static final int fragmentdokupieniaoptions=0x7f0a0000;
+        public static final int fragmentproduktycontext=0x7f0a0001;
+        public static final int fragmentproduktyoptions=0x7f0a0002;
+        public static final int fragmentwkoszykuoptions=0x7f0a0003;
     }
     public static final class raw {
         public static final int gtm_analytics=0x7f040000;
     }
     public static final class string {
-        public static final int CENA=0x7f060034;
-        public static final int DOKUPIENIA=0x7f060031;
-        public static final int DZIEKUJE=0x7f06003e;
-        public static final int NAZWA=0x7f060033;
-        public static final int NIE=0x7f060047;
-        public static final int ODNOSNIK=0x7f060043;
-        public static final int PIERWSZALISTA=0x7f060040;
-        public static final int PIERWSZEURUCHOMIENIE=0x7f060041;
-        public static final int PIERWSZYPRODUKT=0x7f060048;
-        public static final int POKAZINSTRUKCJE=0x7f060049;
-        public static final int POLECSMSEM=0x7f060042;
-        public static final int POTWIERDZCZYSZCZENIE=0x7f060045;
-        public static final int PRODUKTY=0x7f060032;
-        public static final int SKLEP=0x7f060035;
-        public static final int STWORZ=0x7f060038;
-        public static final int TAK=0x7f060046;
-        public static final int URUCHOMAPLIKACJEPONOWNIE=0x7f06004a;
-        public static final int USUN=0x7f06003b;
-        public static final int WESPRZYJMNIE=0x7f06003d;
-        public static final int WYCZYSCLISTE=0x7f060039;
-        public static final int WYCZYSCWSZYSTKO=0x7f06003f;
-        public static final int WYKONAC=0x7f060044;
-        public static final int WYSLIJSMSEM=0x7f06003c;
-        public static final int ZABRANE=0x7f060030;
-        public static final int ZANIECHAJ=0x7f060037;
-        public static final int ZAPISZ=0x7f060036;
-        public static final int ZMIEN=0x7f06003a;
         public static final int accept=0x7f060002;
         public static final int ad_app_id=0x7f06002e;
         public static final int app_name=0x7f06002c;
@@ -675,6 +651,7 @@ containing a value of this type.
         /**  Label of a button to disconnect an active cast display connection.  [CHAR LIMIT=25] NOTE: Same text as msgid="9024230238785261495" 
          */
         public static final int cast_notification_disconnect=0x7f06000c;
+        public static final int cena=0x7f060035;
         /**   Text for notification shown when the Android Wear apps needs to be updated. Only shown on the wearable. [CHAR LIMIT=NONE] 
          */
         public static final int common_android_wear_notification_needs_update_text=0x7f06000f;
@@ -790,15 +767,40 @@ containing a value of this type.
         public static final int create_calendar_message=0x7f060005;
         public static final int create_calendar_title=0x7f060004;
         public static final int decline=0x7f060003;
+        public static final int doKupienia=0x7f060031;
+        public static final int dziekuje=0x7f06003e;
+        public static final int nazwa=0x7f060033;
+        public static final int nie=0x7f060045;
+        public static final int nowy=0x7f060038;
         public static final int pelnoekranowa_ad_unit_id=0x7f06002f;
+        public static final int pierwszaLista=0x7f060040;
+        public static final int pierwszeUruchomienie=0x7f060041;
+        public static final int pierwszyProdukt=0x7f060046;
+        public static final int pokazInstrukcje=0x7f060047;
+        public static final int potwierdzCzyszczenie=0x7f060043;
+        public static final int produkty=0x7f060032;
+        public static final int sklep=0x7f060034;
         public static final int store_picture_message=0x7f060001;
         public static final int store_picture_title=0x7f060000;
+        public static final int tak=0x7f060044;
+        public static final int uaktualnij=0x7f06003a;
+        public static final int uruchomAplikacjePonownie=0x7f060048;
+        public static final int usun=0x7f06003b;
+        public static final int wKoszyku=0x7f060030;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 
  Text on a button that allows a user to make a payment with Google Wallet
          [CHAR LIMIT=30] 
          */
         public static final int wallet_buy_button_place_holder=0x7f06002b;
+        public static final int wspomozAutora=0x7f06003d;
+        public static final int wyczyscListe=0x7f060039;
+        public static final int wyczyscWszystko=0x7f06003f;
+        public static final int wykonac=0x7f060042;
+        public static final int wyslijSMSem=0x7f06003c;
+        public static final int zachowaj=0x7f060037;
+        public static final int zakonczZakupy=0x7f060049;
+        public static final int zaniechaj=0x7f060036;
     }
     public static final class style {
         public static final int Theme_IAPTheme=0x7f050000;

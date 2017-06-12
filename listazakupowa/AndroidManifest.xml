@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.gmail.lesniakwojciech.listazakupowa"
-      android:versionCode="3"
-      android:versionName="2.1">
+      android:versionCode="4"
+      android:versionName="3.0">
     <uses-sdk android:minSdkVersion="9" />
     
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="ActivityInstrukcje" />
         <activity android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
