@@ -17,6 +17,7 @@ public class AAdapterListaZakupow
   public AAdapterListaZakupow(final Activity activity, final List<ModelProdukt> list)
   {
     super(activity, R.layout.aadapterlistazakupow, list);
+    
     this.activity = activity;
     this.list = list;
   }
@@ -46,12 +47,11 @@ public class AAdapterListaZakupow
     }
     final ModelProdukt model = list.get(position);
     viewHolder.textViewNazwa.setText(model.getNazwa());
-    viewHolder.textViewSklepCena.setText(
-      new StringBuilder()
-        .append(model.getSklep())
-        .append(": ")
-        .append((new DecimalFormat("#0.00")).format(model.getCena()))
-        .toString()
+    viewHolder.textViewSklepCena.setText(new StringBuilder()
+      .append(model.getSklep())
+      .append(": ")
+      .append((new DecimalFormat("#0.00")).format(model.getCena()))
+      .toString()
     );
     
     /* view.setOnClickListener(new OnClickListener()

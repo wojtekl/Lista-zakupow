@@ -12,6 +12,7 @@ public class ActivityInstrukcje
   {
     super.onCreate(bundle);
     setContentView(R.layout.activityinstrukcje);
+    
     ((TextView)findViewById(R.id.aiTextView)).setText(getIntent().getStringExtra("INSTRUKCJE"));
   }
 }
