@@ -3,7 +3,6 @@ package com.gmail.lesniakwojciech.listazakupowa;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,14 +21,13 @@ import com.google.android.gms.ads.InterstitialAd;
 import java.util.List;
 
 public class FragmentWKoszyku 
-  extends Fragment 
-  implements DialogFragmentProdukt.DialogListener
+  extends Fragment
 {
   private InterstitialAd mInterstitialAd;
   private ListView listView;
+  private AAdapterListaZakupow aAdapterListaZakupow;
   private IWspoldzielenieDanych wspoldzielenieDanych;
   private List<ModelProdukt> wKoszyku, doKupienia, produkty;
-  private AAdapterListaZakupow aAdapterListaZakupow;
   
   @Override
   public View onCreateView(final LayoutInflater li, final ViewGroup vg, final Bundle bundle)
@@ -102,7 +100,7 @@ public class FragmentWKoszyku
   {
     public void onItemClick(final AdapterView<?> av, final View view, final int i, final long l)
     {
-      ModelProdukt model = (ModelProdukt)av.getItemAtPosition(i);
+      final ModelProdukt model = (ModelProdukt)av.getItemAtPosition(i);
       doKupienia.add(model);
       aAdapterListaZakupow.remove(model);
     }
@@ -112,7 +110,9 @@ public class FragmentWKoszyku
   {
     public boolean onItemLongClick(final AdapterView<?> av, final View view, final int i, final long l)
     {
-      new DialogFragmentProdukt(FragmentWKoszyku.this, (ModelProdukt)av.getItemAtPosition(i))
+      final ModelProdukt model = (ModelProdukt)av.getItemAtPosition(i);
+      DialogFragmentProdukt
+        .newInstance(i, model.getNazwa(), model.getSklep(), model.getCena())
         .show(getActivity().getSupportFragmentManager(), "fwkItemLongClick");
       return true;
     }
@@ -130,13 +130,5 @@ public class FragmentWKoszyku
     {
       aAdapterListaZakupow.notifyDataSetChanged();
     }
-  }
-  
-  public void onDialogPositiveClick(ModelProdukt model)
-  {
-  }
-  
-  public void onDialogNegativeClick(DialogFragment dialog)
-  {
   }
 }

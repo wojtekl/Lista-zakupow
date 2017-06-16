@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.ViewPager;
@@ -24,15 +25,11 @@ import org.json.JSONException;
 
 public class ActivityListaZakupow 
   extends FragmentActivity 
-  implements ActionBar.TabListener, IWspoldzielenieDanych
+  implements ActionBar.TabListener, IWspoldzielenieDanych, DialogFragmentProdukt.DialogListener
 {
   private AdView mAdView;
-  
   private ViewPager viewPager;
-  
-  private List<ModelProdukt> produkty;
-  private List<ModelProdukt> doKupienia;
-  private List<ModelProdukt> wKoszyku;
+  private List<ModelProdukt> wKoszyku, doKupienia, produkty;
   
   @Override
   protected void onCreate(final Bundle bundle)
@@ -275,5 +272,70 @@ public class ActivityListaZakupow
   public void setWKoszyku(final List<ModelProdukt> wKoszyku)
   {
     this.wKoszyku = wKoszyku;
+  }
+  
+  public void onDialogNegativeClick(final DialogFragment dialog)
+  {
+  }
+  
+  public void onDialogPositiveClick(final DialogFragment dialog, final int i, final String nazwa, 
+    final String sklep, final float cena)
+  {
+    final String tag = dialog.getTag();
+    if(tag.equals("fwkItemLongClick"))
+    {
+      ModelProdukt model = wKoszyku.get(i);
+      model.setNazwa(nazwa);
+      model.setSklep(sklep);
+      model.setCena(cena);
+      return ;
+    }
+    if(tag.equals("fdkItemLongClick"))
+    {
+      ModelProdukt model = doKupienia.get(i);
+      model.setNazwa(nazwa);
+      model.setSklep(sklep);
+      model.setCena(cena);
+      return ;
+    }
+    if(tag.equals("fpoNowy"))
+    {
+      final ModelProdukt model = new ModelProdukt();
+      model.setNazwa(nazwa);
+      model.setSklep(sklep);
+      model.setCena(cena);
+      produkty.add(model);
+      final SharedPreferences settings = getSharedPreferences("LISTA-ZAKUPOW", 0);
+      if(settings.getBoolean("PIERWSZY-PRODUKT", true))
+      {
+        settings.edit().putBoolean("PIERWSZY-PRODUKT", false).commit();
+        final Resources resources = getResources();
+        final String string = resources.getString(R.string.pierwszyProdukt);
+        ((NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE))
+          .notify(0, new NotificationCompat.Builder(this)
+            .setSmallIcon(R.drawable.ic_launcher)
+            .setContentTitle(resources.getString(R.string.app_name))
+            .setContentText(string)
+            .setAutoCancel(true)
+            .setContentIntent(PendingIntent.getActivity(
+              this, 
+              0, 
+              new Intent(this, ActivityInstrukcje.class).putExtra("INSTRUKCJE", string), 
+              PendingIntent.FLAG_UPDATE_CURRENT
+            )
+            )
+            .build()
+          );
+      }
+      return ;
+    }
+    if(tag.equals("fpcUaktualnij"))
+    {
+      ModelProdukt model = produkty.get(i);
+      model.setNazwa(nazwa);
+      model.setSklep(sklep);
+      model.setCena(cena);
+      return ;
+    }
   }
 }

@@ -46,11 +46,18 @@ public class AAdapterListaZakupow
     }
     final ModelProdukt model = list.get(position);
     viewHolder.textViewNazwa.setText(model.getNazwa());
-    viewHolder.textViewSklepCena.setText(model.getSklep() + ": " + (new DecimalFormat("#0.00")).format(model.getCena()));
-    /*view.setOnClickListener(new OnClickListener()
+    viewHolder.textViewSklepCena.setText(
+      new StringBuilder()
+        .append(model.getSklep())
+        .append(": ")
+        .append((new DecimalFormat("#0.00")).format(model.getCena()))
+        .toString()
+    );
+    
+    /* view.setOnClickListener(new OnClickListener()
     {
       private final InteractiveArrayAdapter interactiveArrayAdapter = iAA;
-      public void onClick(View view1)
+      public void onClick(final View view1)
       {
         final String wybrana = ((ViewHolder)view1.getTag()).textView.getText().toString();
         int w = -1;
@@ -70,15 +77,18 @@ public class AAdapterListaZakupow
         interactiveArrayAdapter.notifyDataSetChanged();
         Toast.makeText(context, wybrana, Toast.LENGTH_LONG).show();
       }
-      
-    });*/
-    /*holder.checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener()
+    }
+    ); */
+    
+    /* viewHolder.checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener()
     {
-      public void onCheckedChanged(CompoundButton cb, boolean bln) {
-        ((Model)holder.checkBox.getTag()).setCheked(cb.isSelected());
+      public void onCheckedChanged(final CompoundButton cb, final boolean bln)
+      {
+        ((Model)viewHolder.checkBox.getTag()).setCheked(cb.isSelected());
       }
-      
-    });*/
+    }
+    ); */
+    
     return view;
   }
 }

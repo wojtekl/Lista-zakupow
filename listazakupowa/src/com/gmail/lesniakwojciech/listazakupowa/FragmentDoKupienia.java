@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,13 +19,12 @@ import android.widget.ListView;
 import java.util.List;
 
 public class FragmentDoKupienia 
-  extends Fragment 
-  implements DialogFragmentProdukt.DialogListener
+  extends Fragment
 {
   private ListView listView;
+  private AAdapterListaZakupow aAdapterListaZakupow;
   private IWspoldzielenieDanych wspoldzielenieDanych;
   private List<ModelProdukt> wKoszyku, doKupienia, produkty;
-  private AAdapterListaZakupow aAdapterListaZakupow;
   
   @Override
   public View onCreateView(final LayoutInflater li, final ViewGroup vg, final Bundle bundle)
@@ -99,7 +97,7 @@ public class FragmentDoKupienia
   {
     public void onItemClick(final AdapterView<?> av, final View view, final int i, final long l)
     {
-      ModelProdukt model = (ModelProdukt)av.getItemAtPosition(i);
+      final ModelProdukt model = (ModelProdukt)av.getItemAtPosition(i);
       wKoszyku.add(model);
       aAdapterListaZakupow.remove(model);
     }
@@ -109,7 +107,9 @@ public class FragmentDoKupienia
   {
     public boolean onItemLongClick(final AdapterView<?> av, final View view, final int i, final long l)
     {
-      new DialogFragmentProdukt(FragmentDoKupienia.this, (ModelProdukt)av.getItemAtPosition(i))
+      final ModelProdukt model = (ModelProdukt)av.getItemAtPosition(i);
+      DialogFragmentProdukt
+        .newInstance(i, model.getNazwa(), model.getSklep(), model.getCena())
         .show(getActivity().getSupportFragmentManager(), "fdkItemLongClick");
       return true;
     }
@@ -127,13 +127,5 @@ public class FragmentDoKupienia
     {
       aAdapterListaZakupow.notifyDataSetChanged();
     }
-  }
-
-  public void onDialogPositiveClick(final ModelProdukt model)
-  {
-  }
-
-  public void onDialogNegativeClick(final DialogFragment dialog)
-  {
   }
 }
