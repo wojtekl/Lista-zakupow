@@ -24,8 +24,7 @@ public class AAdapterListaZakupow
   
   private static class ViewHolder
   {
-    private TextView textViewNazwa;
-    private TextView textViewSklepCena;
+    private TextView textViewNazwa, textViewSklepCena;
   }
   
   @Override
