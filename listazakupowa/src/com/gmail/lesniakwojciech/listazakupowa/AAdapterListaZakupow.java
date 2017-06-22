@@ -36,8 +36,8 @@ public class AAdapterListaZakupow
     {
       view = activity.getLayoutInflater().inflate(R.layout.aadapterlistazakupow, null);
       viewHolder = new ViewHolder();
-      viewHolder.textViewNazwa = (TextView)view.findViewById(R.id.LPRODUKTYNAZWA);
-      viewHolder.textViewSklepCena = (TextView)view.findViewById(R.id.LPRODUKTSKLEPCENA);
+      viewHolder.textViewNazwa = (TextView)view.findViewById(R.id.aalzTvNazwa);
+      viewHolder.textViewSklepCena = (TextView)view.findViewById(R.id.aalzTvSklepCena);
       view.setTag(viewHolder);
     }
     else

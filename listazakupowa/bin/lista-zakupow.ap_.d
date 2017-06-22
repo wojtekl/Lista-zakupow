@@ -661,7 +661,9 @@
 /home/uzytkownik/praca/github/Lista-zakupow/google-play-services_lib/bin/res/drawable-mdpi/cast_ic_notification_on.png \
 /home/uzytkownik/praca/github/Lista-zakupow/google-play-services_lib/bin/res/drawable-mdpi/common_plus_signin_btn_text_light_disabled.9.png \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/drawable-hdpi/ic_launcher.png \
+/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/xml/awinfolistazakupow.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/values-pl/strings.xml \
+/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/layout/awproviderlistazakupow.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/layout/activityinstrukcje.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/layout/activitylistazakupow.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/layout/fragmentprodukty.xml \
@@ -675,6 +677,8 @@
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/drawable-mdpi/ic_launcher.png \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/values/strings.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/values/styles.xml \
+/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/values/dimens.xml \
+/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/values-v14/dimens.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/values-v11/styles.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/res/drawable-hdpi/ic_launcher.png \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/res/drawable-ldpi/ic_launcher.png \

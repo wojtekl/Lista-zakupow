@@ -56,9 +56,9 @@ public class DialogFragmentProdukt
   {
     final Activity activity = getActivity();
     final View view = activity.getLayoutInflater().inflate(R.layout.dialogfragmentprodukt, null);
-    etNazwa = (EditText)view.findViewById(R.id.dfpNazwa);
-    etSklep = (EditText)view.findViewById(R.id.dfpSklep);
-    etCena = (EditText)view.findViewById(R.id.dfpCena);
+    etNazwa = (EditText)view.findViewById(R.id.dfpEtNazwa);
+    etSklep = (EditText)view.findViewById(R.id.dfpEtSklep);
+    etCena = (EditText)view.findViewById(R.id.dfpEtCena);
     final Bundle arguments = getArguments();
     etNazwa.setText(arguments.getString("nazwa", ""));
     etSklep.setText(arguments.getString("sklep", ""));

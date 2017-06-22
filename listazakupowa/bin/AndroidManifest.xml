@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.gmail.lesniakwojciech.listazakupowa"
-      android:versionCode="5"
-      android:versionName="3.1">
+      android:versionCode="6"
+      android:versionName="4">
     <uses-sdk android:minSdkVersion="9" />
     
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -22,6 +22,13 @@
             </intent-filter>
         </activity>
         <activity android:name="ActivityInstrukcje" />
+        <receiver android:name="AWProviderListaZakupow" >
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" 
+          android:resource="@xml/awinfolistazakupow" />
+        </receiver>
         <activity android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />

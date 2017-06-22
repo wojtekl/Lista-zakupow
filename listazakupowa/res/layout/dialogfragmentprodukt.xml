@@ -6,14 +6,14 @@
   android:layout_height="wrap_content" 
 >
   <EditText 
-    android:id="@+id/dfpNazwa" 
+    android:id="@+id/dfpEtNazwa" 
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
     android:hint="@string/nazwa" 
     android:inputType="textCapSentences" 
   />
   <EditText 
-    android:id="@+id/dfpSklep" 
+    android:id="@+id/dfpEtSklep" 
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
     android:hint="@string/sklep" 
@@ -21,7 +21,7 @@
     android:selectAllOnFocus="true" 
   />
   <EditText 
-    android:id="@+id/dfpCena" 
+    android:id="@+id/dfpEtCena" 
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
     android:hint="@string/cena" 
