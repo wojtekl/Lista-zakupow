@@ -24,7 +24,7 @@ public class AAdapterListaZakupow
   
   private static class ViewHolder
   {
-    private TextView textViewNazwa, textViewSklepCena;
+    private TextView textViewNazwa, textViewSklep, textViewCena;
   }
   
   @Override
@@ -37,7 +37,8 @@ public class AAdapterListaZakupow
       view = activity.getLayoutInflater().inflate(R.layout.aadapterlistazakupow, null);
       viewHolder = new ViewHolder();
       viewHolder.textViewNazwa = (TextView)view.findViewById(R.id.aalzTvNazwa);
-      viewHolder.textViewSklepCena = (TextView)view.findViewById(R.id.aalzTvSklepCena);
+      viewHolder.textViewSklep = (TextView)view.findViewById(R.id.aalzTvSklep);
+      viewHolder.textViewCena = (TextView)view.findViewById(R.id.aalzTvCena);
       view.setTag(viewHolder);
     }
     else
@@ -46,12 +47,8 @@ public class AAdapterListaZakupow
     }
     final ModelProdukt model = list.get(position);
     viewHolder.textViewNazwa.setText(model.getNazwa());
-    viewHolder.textViewSklepCena.setText(new StringBuilder()
-      .append(model.getSklep())
-      .append(": ")
-      .append((new DecimalFormat("#0.00")).format(model.getCena()))
-      .toString()
-    );
+    viewHolder.textViewSklep.setText(model.getSklep());
+    viewHolder.textViewCena.setText((new DecimalFormat("#0.00")).format(model.getCena()));
     
     /* view.setOnClickListener(new OnClickListener()
     {

@@ -161,8 +161,6 @@ public class ActivityListaZakupow
   @Override
   protected void onStop()
   {
-    super.onStop();
-    
     final StringBuilder stringBuilder = new StringBuilder();
     int d;
     
@@ -225,6 +223,8 @@ public class ActivityListaZakupow
       .getAppWidgetIds(new ComponentName(this, AWProviderListaZakupow.class))
     );
     sendBroadcast(intent);
+    
+    super.onStop();
   }
   
   @Override

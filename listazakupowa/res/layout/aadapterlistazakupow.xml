@@ -6,23 +6,23 @@
 >
   <TextView 
     android:id="@+id/aalzTvNazwa" 
-    android:layout_width="fill_parent" 
+    android:layout_width="wrap_content" 
     android:layout_height="wrap_content" 
     android:layout_alignParentTop="true" 
     android:textSize="32sp" 
   />
   <TextView 
-    android:id="@+id/aalzTvSklepCena" 
-    android:layout_width="fill_parent" 
+    android:id="@+id/aalzTvSklep" 
+    android:layout_width="wrap_content" 
     android:layout_height="wrap_content" 
     android:layout_below="@+id/aalzTvNazwa" 
     android:textSize="20sp" 
   />
-  <!-- <TextView 
-    android:id="@+id/LPRODUKTSKLEP" 
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:layout_weight="1" 
+  <TextView 
+    android:id="@+id/aalzTvCena" 
+    android:layout_width="wrap_content" 
+    android:layout_height="fill_parent" 
+    android:layout_alignParentRight="true" 
     android:textSize="20sp" 
-  /> -->
+  />
 </RelativeLayout>
