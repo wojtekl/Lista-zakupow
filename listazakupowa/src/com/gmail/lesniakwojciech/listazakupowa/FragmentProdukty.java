@@ -82,7 +82,7 @@ public class FragmentProdukty
       case R.id.fpoWyczyscWszystko:
         new AlertDialog.Builder(getActivity())
           .setIcon(android.R.drawable.ic_dialog_alert)
-          .setTitle(R.string.wykonac)
+          .setTitle(R.string.wyczyscWszystko)
           .setMessage(R.string.potwierdzCzyszczenie)
           .setNegativeButton(R.string.nie, new DialogInterface.OnClickListener()
           {

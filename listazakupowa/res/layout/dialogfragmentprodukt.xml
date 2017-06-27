@@ -28,7 +28,7 @@
     android:hint="@string/sklep" 
     android:inputType="textCapSentences" 
     android:selectAllOnFocus="true" 
-    android:paddingTop="8sp" 
+    android:paddingTop="16sp" 
     android:paddingBottom="8sp" 
   />
   <EditText 
@@ -38,7 +38,7 @@
     android:hint="@string/cena" 
     android:inputType="numberDecimal" 
     android:selectAllOnFocus="true" 
-    android:paddingTop="8sp" 
+    android:paddingTop="16sp" 
     android:paddingBottom="8sp" 
   />
 </LinearLayout>

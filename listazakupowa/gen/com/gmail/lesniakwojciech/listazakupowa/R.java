@@ -689,23 +689,23 @@ containing a value of this type.
         public static final int doKupienia=0x7f070031;
         public static final int dziekuje=0x7f07003f;
         public static final int nazwa=0x7f070034;
-        public static final int nie=0x7f070046;
+        public static final int nie=0x7f070045;
         public static final int nowy=0x7f070039;
         public static final int pelnoekranowa_ad_unit_id=0x7f07002f;
         public static final int pierwszaLista=0x7f070041;
         public static final int pierwszeUruchomienie=0x7f070042;
-        public static final int pierwszyProdukt=0x7f070047;
-        public static final int pokazInstrukcje=0x7f070048;
-        public static final int potwierdzCzyszczenie=0x7f070044;
-        public static final int powrot=0x7f07004b;
+        public static final int pierwszyProdukt=0x7f070046;
+        public static final int pokazInstrukcje=0x7f070047;
+        public static final int potwierdzCzyszczenie=0x7f070043;
+        public static final int powrot=0x7f07004a;
         public static final int produkt=0x7f070033;
         public static final int produkty=0x7f070032;
         public static final int sklep=0x7f070035;
         public static final int store_picture_message=0x7f070001;
         public static final int store_picture_title=0x7f070000;
-        public static final int tak=0x7f070045;
+        public static final int tak=0x7f070044;
         public static final int uaktualnij=0x7f07003b;
-        public static final int uruchomAplikacjePonownie=0x7f070049;
+        public static final int uruchomAplikacjePonownie=0x7f070048;
         public static final int usun=0x7f07003c;
         public static final int wKoszyku=0x7f070030;
         /**  Text on a placeholder buy button when Google Play services is not
@@ -715,10 +715,9 @@ containing a value of this type.
         public static final int wspomozAutora=0x7f07003e;
         public static final int wyczyscListe=0x7f07003a;
         public static final int wyczyscWszystko=0x7f070040;
-        public static final int wykonac=0x7f070043;
         public static final int wyslijSMSem=0x7f07003d;
         public static final int zachowaj=0x7f070038;
-        public static final int zakonczZakupy=0x7f07004a;
+        public static final int zakonczZakupy=0x7f070049;
         public static final int zaniechaj=0x7f070037;
     }
     public static final class style {

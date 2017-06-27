@@ -20,7 +20,6 @@
   <string name="wyczyscWszystko">Wyczyść wszystko</string>
   <string name="pierwszaLista">[[[\"Ręczniki papierowe\",\"Market\",\"3.29\"],[\"Chleb\",\"Piekrania\",\"4.39\"],[\"Ketchup\",\"Market\",\"1.99\"],[\"Pomidory\",\"Ryneczek\",\"3.99\"],[\"Ogórek\",\"Ryneczek\",\"1.99\"],[\"Płatki śniadaniowe\",\"Market\",\"1.79\"],[\"Mleko\",\"Ryneczek\",\"2.09\"],[\"Makaron\",\"Market\",\"1.49\"]],[[\"Jabłka\",\"Ryneczek\",\"2.99\"],[\"Ryż\",\"Market\",\"1.69\"],[\"Jaja\",\"Ryneczek\",\"0.85\"],[\"Sałata\",\"Ryneczek\",\"0.99\"],[\"Szampon\",\"Sklep ziołowy\",\"7.99\"],[\"Kawa\",\"Market\",\"16.22\"],[\"Mydło\",\"Sklep ziołowy\",\"2.49\"],[\"Cukier\",\"Market\",\"3.19\"],[\"Pasta do zębów\",\"Sklep ziołowy\",\"4.99\"],[\"Ser żółty\",\"Ryneczek\",\"22.99\"]],[[\"Napój gazowany\",\"Market\",\"2.69\"],[\"Herbata\",\"Sklep ziołowy\",\"7.99\"],[\"Czekolada\",\"Market\",\"1.99\"],[\"Masło\",\"Ryneczek\",\"3.69\"]]]</string>
   <string name="pierwszeUruchomienie">To jest pierwsze uruchomienie. Do list dodano przykładowe produkty. Dodaj nowe przesuwając ekran w lewo i wybierając Nowy z menu.</string>
-  <string name="wykonac">Wykonać?</string>
   <string name="potwierdzCzyszczenie">Wszystkie listy i produkty zostaną utracone bezpowrotnie.</string>
   <string name="tak">Tak</string>
   <string name="nie">Nie</string>
