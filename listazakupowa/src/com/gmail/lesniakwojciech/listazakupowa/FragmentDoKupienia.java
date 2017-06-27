@@ -2,7 +2,6 @@ package com.gmail.lesniakwojciech.listazakupowa;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -40,7 +39,7 @@ public class FragmentDoKupienia
     listView.setAdapter(aAdapterListaZakupow);
     listView.setOnItemClickListener(onItemClickListener);
     listView.setOnItemLongClickListener(onItemLongClickListener);
-    listView.setBackgroundColor(Color.parseColor("#10ff0000"));
+    listView.setBackgroundColor(getResources().getColor(R.color.red50));
     
     setHasOptionsMenu(true);
     return view;

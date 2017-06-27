@@ -4,13 +4,22 @@
   android:orientation="vertical" 
   android:layout_width="wrap_content" 
   android:layout_height="wrap_content" 
+  android:padding="24sp" 
 >
+  <TextView 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/produkt" 
+    android:paddingBottom="20sp" 
+    android:textSize="24sp" 
+  />
   <EditText 
     android:id="@+id/dfpEtNazwa" 
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
     android:hint="@string/nazwa" 
     android:inputType="textCapSentences" 
+    android:paddingBottom="8sp" 
   />
   <EditText 
     android:id="@+id/dfpEtSklep" 
@@ -19,6 +28,8 @@
     android:hint="@string/sklep" 
     android:inputType="textCapSentences" 
     android:selectAllOnFocus="true" 
+    android:paddingTop="8sp" 
+    android:paddingBottom="8sp" 
   />
   <EditText 
     android:id="@+id/dfpEtCena" 
@@ -27,5 +38,7 @@
     android:hint="@string/cena" 
     android:inputType="numberDecimal" 
     android:selectAllOnFocus="true" 
+    android:paddingTop="8sp" 
+    android:paddingBottom="8sp" 
   />
 </LinearLayout>

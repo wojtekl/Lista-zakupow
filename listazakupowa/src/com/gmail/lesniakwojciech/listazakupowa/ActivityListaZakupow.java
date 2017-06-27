@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -57,6 +58,8 @@ public class ActivityListaZakupow
     viewPager = (ViewPager)findViewById(R.id.alzViewPager);
     viewPager.setAdapter(new FPAdapterListaZakupow(getSupportFragmentManager()));
     final ActionBar actionBar = getActionBar();
+    actionBar.setBackgroundDrawable(new ColorDrawable(resources.getColor(R.color.purple200)));
+    actionBar.setStackedBackgroundDrawable(new ColorDrawable(resources.getColor(R.color.purple200)));
     actionBar.setHomeButtonEnabled(false);
     actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
     actionBar.addTab(actionBar.newTab().setText(resources.getString(R.string.wKoszyku)).setTabListener(this));

@@ -1,7 +1,6 @@
 package com.gmail.lesniakwojciech.listazakupowa;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -46,7 +45,7 @@ public class FragmentWKoszyku
     listView.setAdapter(aAdapterListaZakupow);
     listView.setOnItemClickListener(onItemClickListener);
     listView.setOnItemLongClickListener(onItemLongClickListener);
-    listView.setBackgroundColor(Color.parseColor("#10ff8000"));
+    listView.setBackgroundColor(getResources().getColor(R.color.organe50));
     
     setHasOptionsMenu(true);
     return view;

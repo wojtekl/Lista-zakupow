@@ -30,6 +30,5 @@
     <attr name="useViewLifecycle" format="boolean"/>
     <attr name="zOrderOnTop" format="boolean"/>
     <attr name="uiMapToolbar" format="boolean"/>
-    <attr name="ambientEnabled" format="boolean"/>
   </declare-styleable>
 </resources>

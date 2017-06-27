@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-  <style name="styl" parent="android:Theme.Black">
+  <style name="styl" parent="android:Theme.Light">
     <item name="android:windowNoTitle">false</item>
   </style>
 </resources>

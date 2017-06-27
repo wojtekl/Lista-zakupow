@@ -4,6 +4,8 @@
   android:id="@+id/aiTextView" 
   android:layout_width="fill_parent" 
   android:layout_height="fill_parent" 
-  android:textSize="12pt" 
   android:gravity="center" 
+  android:padding="8sp" 
+  android:textSize="20sp" 
+  android:textColor="@color/blackl80" 
 />

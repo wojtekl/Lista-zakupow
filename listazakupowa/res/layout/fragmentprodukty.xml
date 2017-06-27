@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout 
+<RelativeLayout 
   xmlns:android="http://schemas.android.com/apk/res/android" 
   android:orientation="vertical" 
   android:layout_width="fill_parent" 
@@ -9,6 +9,11 @@
     android:id="@+id/fpListView" 
     android:layout_width="fill_parent" 
     android:layout_height="fill_parent" 
+    android:layout_alignParentTop="true" 
+    android:paddingTop="8sp" 
+    android:paddingLeft="16sp" 
+    android:paddingRight="16sp" 
+    android:divider="@null" 
   />
   <!-- <TextView 
     android:id="@+id/wycieczkiSzukaj" 
@@ -16,4 +21,4 @@
     android:layout_height="wrap_content" 
     android:layout_weight="1" 
   /> -->
-</LinearLayout>
+</RelativeLayout>

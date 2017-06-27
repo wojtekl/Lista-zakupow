@@ -6,23 +6,27 @@
 >
   <TextView 
     android:id="@+id/aalzTvNazwa" 
-    android:layout_width="wrap_content" 
+    android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
-    android:layout_alignParentTop="true" 
-    android:textSize="32sp" 
+    android:layout_toLeftOf="@+id/aalzTvCena" 
+    android:textSize="24sp" 
+    android:textColor="@color/blackl80" 
   />
   <TextView 
     android:id="@+id/aalzTvSklep" 
-    android:layout_width="wrap_content" 
+    android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
     android:layout_below="@+id/aalzTvNazwa" 
-    android:textSize="20sp" 
+    android:textSize="16sp" 
+    android:textColor="@color/blackl80" 
   />
   <TextView 
     android:id="@+id/aalzTvCena" 
     android:layout_width="wrap_content" 
-    android:layout_height="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:layout_alignParentTop="true" 
     android:layout_alignParentRight="true" 
-    android:textSize="20sp" 
+    android:textSize="24sp" 
+    android:textColor="@color/blackl80" 
   />
 </RelativeLayout>

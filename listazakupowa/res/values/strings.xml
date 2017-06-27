@@ -7,6 +7,7 @@
   <string name="wKoszyku">In basket</string>
   <string name="doKupienia">To buy</string>
   <string name="produkty">Products</string>
+  <string name="produkt">Item</string>
   <string name="nazwa">Name</string>
   <string name="sklep">Store</string>
   <string name="cena">Price</string>
@@ -20,14 +21,15 @@
   <string name="wspomozAutora">Support me :-)</string>
   <string name="dziekuje">Thank You ^_^</string>
   <string name="wyczyscWszystko">Clean all</string>
-  <string name="pierwszaLista">[[[\"Soda\",\"Supa Maket\",\"2.00\"],[\"Tea\",\"Maria\'s Herbal Shop\",\"3.63\"]],[[\"Bread\",\"Charlie\'s Bakery\",\"2.50\"],[\"Ketchup\",\"Supa Maket\",\"1.79\"],[\"Eggs\",\"City Market\",\"1.19\"]],[[\"Towels\",\"Supa Maket\",\"2.20\"]]]</string>
-  <string name="pierwszeUruchomienie">This is the first run. Example products are added to the lists. Create a new one by swiping left and choosing New from menu.</string>
+  <string name="pierwszaLista">[[[\"Towels\",\"Supa Maket\",\"4.97\"],[\"Bread\",\"Charlie\'s Bakery\",\"2.98\"],[\"Ketchup\",\"Supa Maket\",\"2.22\"],[\"Tomatoes\",\"City Market\",\"1.68\"],[\"Cucumber\",\"City Market\",\"2.98\"],[\"Cereal\",\"Supa Maket\",\"3.64\"],[\"Milk\",\"City Market\",\"1.86\"],[\"Pasta\",\"Supa Maket\",\"1.38\"]],[[\"Apples\",\"City Market\",\"2.41\"],[\"Rice\",\"Supa Maket\",\"1.00\"],[\"Eggs\",\"City Market\",\"1.60\"],[\"Salad\",\"City Market\",\"2.48\"],[\"Shampoo\",\"Maria\'s Herbal Shop\",\"2.97\"],[\"Coffee\",\"Supa Maket\",\"8.48\"],[\"Hand Soap\",\"Maria\'s Herbal Shop\",\"2.67\"],[\"Sugar\",\"Supa Maket\",\"2.38\"],[\"Toothpaste\",\"Maria\'s Herbal Shop\",\"2.96\"],[\"Cheese\",\"City Market\",\"2.47\"]],[[\"Soda\",\"Supa Maket\",\"2.50\"],[\"Tea Bags\",\"Maria\'s Herbal Shop\",\"2.32\"],[\"Chocolate Bar\",\"Supa Maket\",\"2.11\"],[\"Butter\",\"City Market\",\"2.98\"]]]</string>
+  <string name="pierwszeUruchomienie">This is the first run. Sample items are added to the lists. Create a new one by swiping left and choosing New from menu.</string>
   <string name="wykonac">Continue?</string>
-  <string name="potwierdzCzyszczenie">All the lists and the products will be lost permanently.</string>
+  <string name="potwierdzCzyszczenie">All the lists and the items will be lost permanently.</string>
   <string name="tak">Yes</string>
   <string name="nie">No</string>
-  <string name="pierwszyProdukt">Your first product! Select it to move to To buy list or hold it to update it\'s price.</string>
+  <string name="pierwszyProdukt">Your first item! Select it to move to To buy list or hold it to update it\'s price.</string>
   <string name="pokazInstrukcje">Show instructions</string>
   <string name="uruchomAplikacjePonownie">Restart application.</string>
   <string name="zakonczZakupy">Finish shopping</string>
+  <string name="powrot">Back</string>
 </resources>
