@@ -1,6 +1,7 @@
 package com.gmail.lesniakwojciech.listazakupowa;
 
-import android.app.Activity;
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -11,41 +12,36 @@ import java.util.List;
 public class AAdapterListaZakupow 
   extends ArrayAdapter<ModelProdukt>
 {
-  private final Activity activity;
-  private final List<ModelProdukt> list;
+  private final int resource;
   
-  public AAdapterListaZakupow(final Activity activity, final List<ModelProdukt> list)
+  private final LayoutInflater inflater;
+  
+  public AAdapterListaZakupow(final Context context, final int resource, final List<ModelProdukt> objects)
   {
-    super(activity, R.layout.aadapterlistazakupow, list);
+    super(context, resource, objects);
+    this.resource = resource;
     
-    this.activity = activity;
-    this.list = list;
-  }
-  
-  private static class ViewHolder
-  {
-    private TextView textViewNazwa, textViewSklep, textViewCena;
+    inflater = LayoutInflater.from(context);
   }
   
   @Override
-  public View getView(final int position, final View convertView, final ViewGroup parent)
+  public View getView(final int position, View convertView, final ViewGroup parent)
   {
-    View view = convertView;
     ViewHolder viewHolder;
-    if(null == view)
+    if(null == convertView)
     {
-      view = activity.getLayoutInflater().inflate(R.layout.aadapterlistazakupow, null);
+      convertView = inflater.inflate(resource, parent, false);
       viewHolder = new ViewHolder();
-      viewHolder.textViewNazwa = (TextView)view.findViewById(R.id.aalzTvNazwa);
-      viewHolder.textViewSklep = (TextView)view.findViewById(R.id.aalzTvSklep);
-      viewHolder.textViewCena = (TextView)view.findViewById(R.id.aalzTvCena);
-      view.setTag(viewHolder);
+      viewHolder.textViewNazwa = (TextView)convertView.findViewById(R.id.aalzTvNazwa);
+      viewHolder.textViewSklep = (TextView)convertView.findViewById(R.id.aalzTvSklep);
+      viewHolder.textViewCena = (TextView)convertView.findViewById(R.id.aalzTvCena);
+      convertView.setTag(viewHolder);
     }
     else
     {
-      viewHolder = (ViewHolder)view.getTag();
+      viewHolder = (ViewHolder)convertView.getTag();
     }
-    final ModelProdukt model = list.get(position);
+    final ModelProdukt model = getItem(position);
     viewHolder.textViewNazwa.setText(model.getNazwa());
     viewHolder.textViewSklep.setText(model.getSklep());
     viewHolder.textViewCena.setText((new DecimalFormat("#0.00")).format(model.getCena()));
@@ -85,6 +81,11 @@ public class AAdapterListaZakupow
     }
     ); */
     
-    return view;
+    return convertView;
+  }
+  
+  private static class ViewHolder
+  {
+    TextView textViewNazwa, textViewSklep, textViewCena;
   }
 }

@@ -11,7 +11,7 @@ public class ActivityInstrukcje
   extends Activity
 {
   @Override
-  public void onCreate(final Bundle bundle)
+  protected void onCreate(final Bundle bundle)
   {
     super.onCreate(bundle);
     setContentView(R.layout.activityinstrukcje);

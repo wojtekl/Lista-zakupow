@@ -40,7 +40,7 @@ public class FragmentWKoszyku
     doKupienia = wspoldzielenieDanych.getDoKupienia();
     produkty = wspoldzielenieDanych.getProdukty();
     
-    aAdapterListaZakupow = new AAdapterListaZakupow(getActivity(), wKoszyku);
+    aAdapterListaZakupow = new AAdapterListaZakupow(getActivity(), R.layout.aadapterlistazakupow, wKoszyku);
     listView = (ListView)view.findViewById(R.id.fpListView);
     listView.setAdapter(aAdapterListaZakupow);
     listView.setOnItemClickListener(onItemClickListener);

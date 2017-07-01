@@ -35,7 +35,8 @@ public class FragmentProdukty
     
     doKupienia = wspoldzielenieDanych.getDoKupienia();
     
-    aAdapterListaZakupow = new AAdapterListaZakupow(getActivity(), wspoldzielenieDanych.getProdukty());
+    aAdapterListaZakupow = new AAdapterListaZakupow(getActivity(), R.layout.aadapterlistazakupow, 
+      wspoldzielenieDanych.getProdukty());
     listView = (ListView)view.findViewById(R.id.fpListView);
     listView.setAdapter(aAdapterListaZakupow);
     listView.setOnItemClickListener(onItemClickListener);
