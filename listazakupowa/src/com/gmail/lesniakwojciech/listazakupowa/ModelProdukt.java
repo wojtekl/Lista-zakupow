@@ -33,19 +33,19 @@ public class ModelProdukt
     this.sklep = sklep;
   }
   
-  private float cena;
+  private double cena;
   
-  public float getCena()
+  public double getCena()
   {
     return cena;
   }
   
-  public void setCena(final float cena)
+  public void setCena(final double cena)
   {
     this.cena = cena;
   }
   
-  public ModelProdukt(final String nazwa, final String sklep, final float cena)
+  public ModelProdukt(final String nazwa, final String sklep, final double cena)
   {
     this.nazwa = nazwa;
     this.sklep = sklep;
@@ -71,7 +71,7 @@ public class ModelProdukt
       final JSONArray jsonArray = new JSONArray(p);
       produkt.nazwa = jsonArray.getString(0);
       produkt.sklep = jsonArray.getString(1);
-      produkt.cena = (float)jsonArray.getDouble(2);
+      produkt.cena = jsonArray.getDouble(2);
     }
     catch(final JSONException exception)
     {

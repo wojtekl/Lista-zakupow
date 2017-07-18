@@ -5,7 +5,6 @@
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/FragmentProdukty$1.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/R$style.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/FragmentDoKupienia$1.class \
-/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/ActivityListaZakupow$2.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/FragmentProdukty.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/FragmentWKoszyku$3.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/DialogFragmentProdukt$1.class \

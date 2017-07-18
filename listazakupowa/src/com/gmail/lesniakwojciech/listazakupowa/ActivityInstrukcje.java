@@ -1,7 +1,6 @@
 package com.gmail.lesniakwojciech.listazakupowa;
 
 import android.app.Activity;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +15,6 @@ public class ActivityInstrukcje
     super.onCreate(bundle);
     setContentView(R.layout.activityinstrukcje);
     
-    getActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.purple200)));
     ((TextView)findViewById(R.id.aiTextView)).setText(getIntent().getStringExtra("INSTRUKCJE"));
   }
   

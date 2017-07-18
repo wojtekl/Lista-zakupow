@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-  <style name="styl" parent="android:Theme.Holo.Light">
+  <style name="Theme.Styled" parent="@android:style/Theme.Holo.Light">
     <item name="android:windowNoTitle">false</item>
+    <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item>
+  </style>
+  <style name="Widget.Styled.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+    <item name="android:background">@color/cyan500</item>
   </style>
 </resources>

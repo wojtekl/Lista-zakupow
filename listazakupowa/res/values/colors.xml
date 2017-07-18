@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="red50">#ffebee</color>
-  <color name="organe50">#fff3e0</color>
-  <color name="purple">#e5deff</color>
+  <color name="cyan500">#00bcd4</color>
+  <color name="redA100">#ff8a80</color>
+  <color name="amberA100">#ffe57f</color>
   <color name="blackl80">#333333</color>
   <color name="whitel95">#f2f2f2</color>
   <color name="whitea240l95">#f0f2f2f2</color>
-  <color name="purple200">#b39ddb</color>
 </resources>

@@ -17,7 +17,7 @@ public class DialogFragmentProdukt
   {
     public void onDialogNegativeClick(final DialogFragment dialog);
     public void onDialogPositiveClick(final DialogFragment dialog, final int i, final String nazwa, 
-      final String sklep, final float cena);
+      final String sklep, final double cena);
   }
   
   private DialogListener listener;
@@ -37,13 +37,13 @@ public class DialogFragmentProdukt
   }
   
   public static DialogFragmentProdukt newInstance(final int i, final String nazwa, final String sklep, 
-    final float cena)
+    final double cena)
   {
     final Bundle bundle = new Bundle();
     bundle.putInt("i", i);
     bundle.putString("nazwa", nazwa);
     bundle.putString("sklep", sklep);
-    bundle.putFloat("cena", cena);
+    bundle.putDouble("cena", cena);
     final DialogFragmentProdukt dialogFragment = new DialogFragmentProdukt();
     dialogFragment.setArguments(bundle);
     return dialogFragment;
@@ -62,7 +62,7 @@ public class DialogFragmentProdukt
     final Bundle arguments = getArguments();
     etNazwa.setText(arguments.getString("nazwa", ""));
     etSklep.setText(arguments.getString("sklep", ""));
-    etCena.setText((new DecimalFormat("#0.00")).format(arguments.getFloat("cena", 0.0f)));
+    etCena.setText((new DecimalFormat("#0.00")).format(arguments.getDouble("cena", 0.0f)));
     return new AlertDialog
       .Builder(activity)
       .setView(view)
@@ -80,7 +80,7 @@ public class DialogFragmentProdukt
         {
           listener.onDialogPositiveClick(DialogFragmentProdukt.this, arguments.getInt("i", -1), 
             etNazwa.getText().toString(), etSklep.getText().toString(), 
-            Float.parseFloat(etCena.getText().toString().replaceAll(",", ".")));
+            Double.parseDouble(etCena.getText().toString().replaceAll(",", ".")));
         }
       }
       )

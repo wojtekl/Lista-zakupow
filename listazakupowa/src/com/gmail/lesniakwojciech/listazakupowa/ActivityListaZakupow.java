@@ -1,7 +1,6 @@
 package com.gmail.lesniakwojciech.listazakupowa;
 
-import android.app.ActionBar;
-import android.app.FragmentTransaction;
+import android.Manifest;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -9,12 +8,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import com.google.android.gms.ads.AdListener;
@@ -28,10 +29,9 @@ import org.json.JSONException;
 
 public class ActivityListaZakupow 
   extends FragmentActivity 
-  implements ActionBar.TabListener, IWspoldzielenieDanych, DialogFragmentProdukt.DialogListener
+  implements IWspoldzielenieDanych, DialogFragmentProdukt.DialogListener
 {
   private AdView mAdView;
-  private ViewPager viewPager;
   private List<ModelProdukt> wKoszyku, doKupienia, produkty;
   
   @Override
@@ -54,37 +54,6 @@ public class ActivityListaZakupow
     }
     );
     mAdView.loadAd(new AdRequest.Builder().build());
-    
-    viewPager = (ViewPager)findViewById(R.id.alzViewPager);
-    viewPager.setAdapter(new FPAdapterListaZakupow(getSupportFragmentManager()));
-    final ActionBar actionBar = getActionBar();
-    actionBar.setBackgroundDrawable(new ColorDrawable(resources.getColor(R.color.purple200)));
-    actionBar.setStackedBackgroundDrawable(new ColorDrawable(resources.getColor(R.color.purple200)));
-    actionBar.setHomeButtonEnabled(false);
-    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-    actionBar.addTab(actionBar.newTab().setText(resources.getString(R.string.wKoszyku)).setTabListener(this));
-    actionBar.addTab(actionBar.newTab().setText(resources.getString(R.string.doKupienia)).setTabListener(this));
-    actionBar.addTab(actionBar.newTab().setText(resources.getString(R.string.produkty)).setTabListener(this));
-    
-    viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
-    {
-      @Override
-      public void onPageScrolled(final int i, final float f, final int i1)
-      {
-      }
-      
-      @Override
-      public void onPageSelected(final int i)
-      {
-        actionBar.setSelectedNavigationItem(i);
-      }
-      
-      @Override
-      public void onPageScrollStateChanged(final int i)
-      {
-      }
-    }
-    );
     
     final SharedPreferences settings = getSharedPreferences("LISTA-ZAKUPOW", 0);
     String stringLista = settings.getString("LISTA", "[[],[],[]]");
@@ -142,7 +111,15 @@ public class ActivityListaZakupow
     {
     }
     
+    final ViewPager viewPager = (ViewPager)findViewById(R.id.alzViewPager);
+    viewPager.setAdapter(new FPAdapterListaZakupow(getSupportFragmentManager(), this));
     viewPager.setCurrentItem(1);
+    
+    if(PackageManager.PERMISSION_GRANTED != ContextCompat.checkSelfPermission(this, 
+      Manifest.permission.SEND_SMS))
+    {
+      ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 0);
+    }
   }
   
   @Override
@@ -238,19 +215,6 @@ public class ActivityListaZakupow
     super.onDestroy();
   }
   
-  public void onTabSelected(final ActionBar.Tab tab, final FragmentTransaction ft)
-  {
-    viewPager.setCurrentItem(tab.getPosition());
-  }
-
-  public void onTabUnselected(final ActionBar.Tab tab, final FragmentTransaction ft)
-  {
-  }
-
-  public void onTabReselected(final ActionBar.Tab tab, final FragmentTransaction ft)
-  {
-  }
-  
   @Override
   public List<ModelProdukt> getProdukty()
   {
@@ -292,7 +256,7 @@ public class ActivityListaZakupow
   }
   
   public void onDialogPositiveClick(final DialogFragment dialog, final int i, final String nazwa, 
-    final String sklep, final float cena)
+    final String sklep, final double cena)
   {
     final String tag = dialog.getTag();
     if(tag.equals("fwkItemLongClick"))

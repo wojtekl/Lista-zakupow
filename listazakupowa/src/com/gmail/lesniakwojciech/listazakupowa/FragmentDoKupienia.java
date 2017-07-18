@@ -1,10 +1,13 @@
 package com.gmail.lesniakwojciech.listazakupowa;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,7 +42,7 @@ public class FragmentDoKupienia
     listView.setAdapter(aAdapterListaZakupow);
     listView.setOnItemClickListener(onItemClickListener);
     listView.setOnItemLongClickListener(onItemLongClickListener);
-    listView.setBackgroundColor(getResources().getColor(R.color.red50));
+    listView.setBackgroundColor(getResources().getColor(R.color.redA100));
     
     setHasOptionsMenu(true);
     return view;
@@ -76,11 +79,15 @@ public class FragmentDoKupienia
             stringBuilder.append(doKupienia.get(i).getNazwa()).append(",\n");
           }
           stringBuilder.append(doKupienia.get(l).getNazwa()).append(".");
-          startActivity(new Intent(Intent.ACTION_VIEW)
-            .setData(Uri.parse("smsto:"))
-            .setType("vnd.android-dir/mms-sms")
-            .putExtra("sms_body", stringBuilder.toString())
-          );
+          if(PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(getActivity(), 
+            Manifest.permission.SEND_SMS))
+          {
+            startActivity(new Intent(Intent.ACTION_VIEW)
+              .setData(Uri.parse("smsto:"))
+              .setType("vnd.android-dir/mms-sms")
+              .putExtra("sms_body", stringBuilder.toString())
+            );
+          }
         }
         return true;
       case R.id.fdkoWyczysc:

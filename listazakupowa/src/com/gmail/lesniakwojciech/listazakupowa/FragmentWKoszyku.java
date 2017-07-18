@@ -45,7 +45,7 @@ public class FragmentWKoszyku
     listView.setAdapter(aAdapterListaZakupow);
     listView.setOnItemClickListener(onItemClickListener);
     listView.setOnItemLongClickListener(onItemLongClickListener);
-    listView.setBackgroundColor(getResources().getColor(R.color.organe50));
+    listView.setBackgroundColor(getResources().getColor(R.color.amberA100));
     
     setHasOptionsMenu(true);
     return view;

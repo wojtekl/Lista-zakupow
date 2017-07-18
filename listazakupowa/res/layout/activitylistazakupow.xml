@@ -23,5 +23,17 @@
     android:layout_width="fill_parent" 
     android:layout_height="fill_parent" 
     android:layout_below="@+id/adView" 
-  />
+  >
+    <android.support.v4.view.PagerTabStrip 
+      android:id="@+id/alzPagerTitleStrip" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content" 
+      android:layout_gravity="top" 
+      android:background="@color/cyan500" 
+      android:paddingTop="16sp" 
+      android:paddingBottom="16sp" 
+      android:paddingLeft="16sp" 
+      android:paddingRight="16sp" 
+    />
+  </android.support.v4.view.ViewPager>
 </RelativeLayout>

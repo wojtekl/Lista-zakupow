@@ -360,6 +360,7 @@
 /home/uzytkownik/praca/github/Lista-zakupow/google-play-services_lib/bin/res/drawable-mdpi/cast_ic_notification_on.png \
 /home/uzytkownik/praca/github/Lista-zakupow/google-play-services_lib/bin/res/drawable-mdpi/common_signin_btn_text_normal_dark.9.png \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/drawable-hdpi/ic_launcher.png \
+/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/drawable-xhdpi/ic_launcher.png \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/xml/awinfolistazakupow.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/values-pl/strings.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/layout/awproviderlistazakupow.xml \
@@ -382,6 +383,7 @@
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/values-v14/dimens.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/values-v11/styles.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/res/drawable-hdpi/ic_launcher.png \
+/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/res/drawable-xhdpi/ic_launcher.png \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/res/drawable-ldpi/ic_launcher.png \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/res/drawable-mdpi/ic_launcher.png \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/AndroidManifest.xml \
