@@ -8,4 +8,5 @@
   android:padding="8sp" 
   android:textSize="20sp" 
   android:textColor="@color/blackl80" 
+  android:background="@color/whitel95" 
 />

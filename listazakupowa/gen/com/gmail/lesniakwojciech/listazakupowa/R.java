@@ -411,7 +411,7 @@ containing a value of this type.
         public static final int common_signin_btn_light_text_pressed=0x7f090005;
         public static final int common_signin_btn_text_dark=0x7f09001d;
         public static final int common_signin_btn_text_light=0x7f09001e;
-        public static final int cyan500=0x7f090017;
+        public static final int lightBlue500=0x7f090017;
         public static final int redA100=0x7f090018;
         public static final int wallet_bright_foreground_disabled_holo_light=0x7f09000f;
         /** 

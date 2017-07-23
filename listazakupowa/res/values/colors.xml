@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="cyan500">#00bcd4</color>
+  <color name="lightBlue500">#03a9f4</color>
   <color name="redA100">#ff8a80</color>
   <color name="amberA100">#ffe57f</color>
   <color name="blackl80">#333333</color>
