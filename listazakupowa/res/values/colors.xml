@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="lightBlue500">#03a9f4</color>
-  <color name="redA100">#ff8a80</color>
+  <color name="white">#ffffff</color>
   <color name="amberA100">#ffe57f</color>
-  <color name="blackl80">#333333</color>
-  <color name="whitel95">#f2f2f2</color>
-  <color name="whitea240l95">#f0f2f2f2</color>
+  <color name="redA100">#ff8a80</color>
+  <color name="lightBlueA100">#80d8ff</color>
+  <color name="greenA100">#b9f6ca</color>
+  <color name="red500">#f0f44336</color>
 </resources>

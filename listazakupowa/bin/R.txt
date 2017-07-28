@@ -36,8 +36,7 @@ int attr uiZoomGestures 0x7f010012
 int attr useViewLifecycle 0x7f010013
 int attr windowTransitionStyle 0x7f010025
 int attr zOrderOnTop 0x7f010014
-int color amberA100 0x7f090019
-int color blackl80 0x7f09001a
+int color amberA100 0x7f090018
 int color common_action_bar_splitter 0x7f090009
 int color common_signin_btn_dark_text_default 0x7f090000
 int color common_signin_btn_dark_text_disabled 0x7f090002
@@ -50,8 +49,10 @@ int color common_signin_btn_light_text_focused 0x7f090007
 int color common_signin_btn_light_text_pressed 0x7f090005
 int color common_signin_btn_text_dark 0x7f09001d
 int color common_signin_btn_text_light 0x7f09001e
-int color lightBlue500 0x7f090017
-int color redA100 0x7f090018
+int color greenA100 0x7f09001b
+int color lightBlueA100 0x7f09001a
+int color red500 0x7f09001c
+int color redA100 0x7f090019
 int color wallet_bright_foreground_disabled_holo_light 0x7f09000f
 int color wallet_bright_foreground_holo_dark 0x7f09000a
 int color wallet_bright_foreground_holo_light 0x7f090010
@@ -67,8 +68,7 @@ int color wallet_holo_blue_light 0x7f090015
 int color wallet_link_text_light 0x7f090016
 int color wallet_primary_text_holo_light 0x7f09001f
 int color wallet_secondary_text_holo_dark 0x7f090020
-int color whitea240l95 0x7f09001c
-int color whitel95 0x7f09001b
+int color white 0x7f090017
 int dimen widget_margin 0x7f0b0000
 int drawable cast_ic_notification_0 0x7f020000
 int drawable cast_ic_notification_1 0x7f020001
@@ -111,13 +111,13 @@ int drawable powered_by_google_light 0x7f020025
 int id aalzTvCena 0x7f08001b
 int id aalzTvNazwa 0x7f08001a
 int id aalzTvSklep 0x7f08001c
-int id adView 0x7f08001e
+int id adView 0x7f08001f
 int id adjust_height 0x7f080001
 int id adjust_width 0x7f080002
 int id aiPowrot 0x7f080026
 int id aiTextView 0x7f08001d
 int id alzPagerTitleStrip 0x7f080020
-int id alzViewPager 0x7f08001f
+int id alzViewPager 0x7f08001e
 int id awplzTextView 0x7f080021
 int id book_now 0x7f080012
 int id buyButton 0x7f08000e
@@ -159,7 +159,7 @@ int id wrap_content 0x7f080011
 int integer google_play_services_version 0x7f0a0000
 int layout aadapterlistazakupow 0x7f030000
 int layout activityinstrukcje 0x7f030001
-int layout activitylistazakupow 0x7f030002
+int layout activitymain 0x7f030002
 int layout awproviderlistazakupow 0x7f030003
 int layout dialogfragmentprodukt 0x7f030004
 int layout fragmentprodukty 0x7f030005

@@ -395,8 +395,7 @@ containing a value of this type.
         public static final int zOrderOnTop=0x7f010014;
     }
     public static final class color {
-        public static final int amberA100=0x7f090019;
-        public static final int blackl80=0x7f09001a;
+        public static final int amberA100=0x7f090018;
         public static final int common_action_bar_splitter=0x7f090009;
         /**  Sign-in Button Colors 
          */
@@ -411,8 +410,10 @@ containing a value of this type.
         public static final int common_signin_btn_light_text_pressed=0x7f090005;
         public static final int common_signin_btn_text_dark=0x7f09001d;
         public static final int common_signin_btn_text_light=0x7f09001e;
-        public static final int lightBlue500=0x7f090017;
-        public static final int redA100=0x7f090018;
+        public static final int greenA100=0x7f09001b;
+        public static final int lightBlueA100=0x7f09001a;
+        public static final int red500=0x7f09001c;
+        public static final int redA100=0x7f090019;
         public static final int wallet_bright_foreground_disabled_holo_light=0x7f09000f;
         /** 
          Wallet colors to support consistent Wallet fragment holo dark UI in client application
@@ -433,8 +434,7 @@ containing a value of this type.
         public static final int wallet_link_text_light=0x7f090016;
         public static final int wallet_primary_text_holo_light=0x7f09001f;
         public static final int wallet_secondary_text_holo_dark=0x7f090020;
-        public static final int whitea240l95=0x7f09001c;
-        public static final int whitel95=0x7f09001b;
+        public static final int white=0x7f090017;
     }
     public static final class dimen {
         public static final int widget_margin=0x7f0b0000;
@@ -483,13 +483,13 @@ containing a value of this type.
         public static final int aalzTvCena=0x7f08001b;
         public static final int aalzTvNazwa=0x7f08001a;
         public static final int aalzTvSklep=0x7f08001c;
-        public static final int adView=0x7f08001e;
+        public static final int adView=0x7f08001f;
         public static final int adjust_height=0x7f080001;
         public static final int adjust_width=0x7f080002;
         public static final int aiPowrot=0x7f080026;
         public static final int aiTextView=0x7f08001d;
         public static final int alzPagerTitleStrip=0x7f080020;
-        public static final int alzViewPager=0x7f08001f;
+        public static final int alzViewPager=0x7f08001e;
         public static final int awplzTextView=0x7f080021;
         public static final int book_now=0x7f080012;
         public static final int buyButton=0x7f08000e;
@@ -535,7 +535,7 @@ containing a value of this type.
     public static final class layout {
         public static final int aadapterlistazakupow=0x7f030000;
         public static final int activityinstrukcje=0x7f030001;
-        public static final int activitylistazakupow=0x7f030002;
+        public static final int activitymain=0x7f030002;
         public static final int awproviderlistazakupow=0x7f030003;
         public static final int dialogfragmentprodukt=0x7f030004;
         public static final int fragmentprodukty=0x7f030005;

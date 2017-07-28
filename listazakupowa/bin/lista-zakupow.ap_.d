@@ -365,8 +365,8 @@
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/values-pl/strings.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/layout/awproviderlistazakupow.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/layout/activityinstrukcje.xml \
-/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/layout/activitylistazakupow.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/layout/fragmentprodukty.xml \
+/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/layout/activitymain.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/layout/aadapterlistazakupow.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/layout/dialogfragmentprodukt.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/menu/fragmentdokupieniaoptions.xml \

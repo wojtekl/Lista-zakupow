@@ -11,7 +11,7 @@
     android:id="@+id/awplzTextView" 
     android:padding="8sp" 
     android:textSize="16sp" 
-    android:textColor="@color/blackl80" 
-    android:background="@color/whitea240l95" 
+    android:background="@color/red500" 
+    android:textColor="@color/white" 
   />
 </FrameLayout>

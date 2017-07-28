@@ -40,6 +40,7 @@ public class FragmentProdukty
     listView = (ListView)view.findViewById(R.id.fpListView);
     listView.setAdapter(aAdapterListaZakupow);
     listView.setOnItemClickListener(onItemClickListener);
+    listView.setBackgroundColor(getResources().getColor(R.color.lightBlueA100));
     registerForContextMenu(listView);
     
     setHasOptionsMenu(true);

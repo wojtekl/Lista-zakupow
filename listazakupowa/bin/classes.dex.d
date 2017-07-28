@@ -1,5 +1,4 @@
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes.dex : \
-/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/ActivityListaZakupow$1.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/R$dimen.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/R$color.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/FragmentProdukty$1.class \
@@ -13,6 +12,7 @@
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/R$attr.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/AAdapterListaZakupow$1.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/BuildConfig.class \
+/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/ActivityMain.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/R$xml.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/R$raw.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/ModelProdukt.class \
@@ -20,7 +20,7 @@
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/FragmentDoKupienia$2.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/R$drawable.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/AAdapterListaZakupow.class \
-/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/FPAdapterListaZakupow.class \
+/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/FPagerAdapterMain.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/FragmentWKoszyku.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/R$id.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/R$integer.class \
@@ -28,8 +28,8 @@
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/R$styleable.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/DialogFragmentProdukt.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/FragmentWKoszyku$1.class \
+/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/ActivityMain$1.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/FragmentDoKupienia.class \
-/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/ActivityListaZakupow.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/IWspoldzielenieDanych.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/R$menu.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/R$layout.class \

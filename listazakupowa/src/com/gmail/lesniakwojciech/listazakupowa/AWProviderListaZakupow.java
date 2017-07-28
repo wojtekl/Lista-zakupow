@@ -54,7 +54,7 @@ public class AWProviderListaZakupow
       views.setOnClickPendingIntent(R.id.awplzTextView, PendingIntent.getActivity(
         context, 
         0, 
-        new Intent(context, ActivityListaZakupow.class), 
+        new Intent(context, ActivityMain.class), 
         0
       )
       );
