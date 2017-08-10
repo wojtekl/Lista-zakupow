@@ -11,6 +11,7 @@
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/DialogFragmentProdukt$DialogListener.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/R$attr.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/AAdapterListaZakupow$1.class \
+/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/ActivityKomunikat.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/BuildConfig.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/ActivityMain.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/R$xml.class \
@@ -38,7 +39,6 @@
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/DialogFragmentProdukt$2.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/R$string.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/FragmentProdukty$3.class \
-/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/gmail/lesniakwojciech/listazakupowa/ActivityInstrukcje.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/google/android/gms/R$color.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/google/android/gms/R$style.class \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/bin/classes/com/google/android/gms/R$attr.class \

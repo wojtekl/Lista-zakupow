@@ -1,6 +1,5 @@
 package com.gmail.lesniakwojciech.listazakupowa;
 
-import android.Manifest;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -8,14 +7,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import com.google.android.gms.ads.AdListener;
@@ -31,6 +27,12 @@ public class ActivityMain
   extends FragmentActivity 
   implements IWspoldzielenieDanych, DialogFragmentProdukt.DialogListener
 {
+  public static final String SHARED_PREFERENCES = "ListaZakupow";
+  public static final String SP_LISTY = "listy";
+  public static final String SP_PIERWSZE_URUCHOMIENIE = "pierwszeUruchomienie";
+  public static final String SP_PIERWSZY_PRODUKT = "pierwszyProdukt";
+  public static final String IE_KOMUNIKAT = "komunikat";
+  
   private AdView mAdView;
   private List<ModelProdukt> wKoszyku, doKupienia, produkty;
   
@@ -55,11 +57,11 @@ public class ActivityMain
     );
     mAdView.loadAd(new AdRequest.Builder().build());
     
-    final SharedPreferences settings = getSharedPreferences("LISTA-ZAKUPOW", 0);
-    String stringLista = settings.getString("LISTA", "[[],[],[]]");
-    if(settings.getBoolean("PIERWSZE-URUCHOMIENIE", true))
+    final SharedPreferences settings = getSharedPreferences(SHARED_PREFERENCES, 0);
+    String stringLista = settings.getString(SP_LISTY, "[[],[],[]]");
+    if(settings.getBoolean(SP_PIERWSZE_URUCHOMIENIE, true))
     {
-      settings.edit().putBoolean("PIERWSZE-URUCHOMIENIE", false).commit();
+      settings.edit().putBoolean(SP_PIERWSZE_URUCHOMIENIE, false).commit();
       if(stringLista.equals("[[],[],[]]"))
       {
         stringLista = resources.getString(R.string.pierwszaLista);
@@ -74,7 +76,7 @@ public class ActivityMain
           .setContentIntent(PendingIntent.getActivity(
             this, 
             0, 
-            new Intent(this, ActivityInstrukcje.class).putExtra("INSTRUKCJE", string), 
+            new Intent(this, ActivityKomunikat.class).putExtra(IE_KOMUNIKAT, string), 
             PendingIntent.FLAG_UPDATE_CURRENT
           )
           )
@@ -114,12 +116,6 @@ public class ActivityMain
     final ViewPager viewPager = (ViewPager)findViewById(R.id.alzViewPager);
     viewPager.setAdapter(new FPagerAdapterMain(getSupportFragmentManager(), this));
     viewPager.setCurrentItem(1);
-    
-    if(PackageManager.PERMISSION_GRANTED != ContextCompat.checkSelfPermission(this, 
-      Manifest.permission.SEND_SMS))
-    {
-      ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 0);
-    }
   }
   
   @Override
@@ -190,10 +186,10 @@ public class ActivityMain
     
     final String stringLista = stringBuilder.toString();
     
-    final SharedPreferences settings = getSharedPreferences("LISTA-ZAKUPOW", 0);
-    if(!settings.getString("LISTA", "[[],[],[]]").equals(stringLista))
+    final SharedPreferences settings = getSharedPreferences(SHARED_PREFERENCES, 0);
+    if(!settings.getString(SP_LISTY, "[[],[],[]]").equals(stringLista))
     {
-      settings.edit().putString("LISTA", stringLista).commit();
+      settings.edit().putString(SP_LISTY, stringLista).commit();
     }
     
     final Intent intent = new Intent(this, AWProviderListaZakupow.class);
@@ -259,7 +255,7 @@ public class ActivityMain
     final String sklep, final double cena)
   {
     final String tag = dialog.getTag();
-    if(tag.equals("fwkItemLongClick"))
+    if(tag.equals(FragmentWKoszyku.ITEM_LONG_CLICK))
     {
       ModelProdukt model = wKoszyku.get(i);
       model.setNazwa(nazwa);
@@ -267,7 +263,7 @@ public class ActivityMain
       model.setCena(cena);
       return ;
     }
-    if(tag.equals("fdkItemLongClick"))
+    if(tag.equals(FragmentDoKupienia.ITEM_LONG_CLICK))
     {
       ModelProdukt model = doKupienia.get(i);
       model.setNazwa(nazwa);
@@ -275,17 +271,17 @@ public class ActivityMain
       model.setCena(cena);
       return ;
     }
-    if(tag.equals("fpoNowy"))
+    if(tag.equals(FragmentProdukty.OPTIONS_DODAJ_PRODUKT))
     {
       final ModelProdukt model = new ModelProdukt();
       model.setNazwa(nazwa);
       model.setSklep(sklep);
       model.setCena(cena);
       produkty.add(model);
-      final SharedPreferences settings = getSharedPreferences("LISTA-ZAKUPOW", 0);
-      if(settings.getBoolean("PIERWSZY-PRODUKT", true))
+      final SharedPreferences settings = getSharedPreferences(SHARED_PREFERENCES, 0);
+      if(settings.getBoolean(SP_PIERWSZY_PRODUKT, true))
       {
-        settings.edit().putBoolean("PIERWSZY-PRODUKT", false).commit();
+        settings.edit().putBoolean(SP_PIERWSZY_PRODUKT, false).commit();
         final Resources resources = getResources();
         final String string = resources.getString(R.string.pierwszyProdukt);
         ((NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE))
@@ -297,7 +293,7 @@ public class ActivityMain
             .setContentIntent(PendingIntent.getActivity(
               this, 
               0, 
-              new Intent(this, ActivityInstrukcje.class).putExtra("INSTRUKCJE", string), 
+              new Intent(this, ActivityKomunikat.class).putExtra(IE_KOMUNIKAT, string), 
               PendingIntent.FLAG_UPDATE_CURRENT
             )
             )
@@ -306,7 +302,7 @@ public class ActivityMain
       }
       return ;
     }
-    if(tag.equals("fpcUaktualnij"))
+    if(tag.equals(FragmentProdukty.CONTEXT_UAKTUALNIJ))
     {
       ModelProdukt model = produkty.get(i);
       model.setNazwa(nazwa);

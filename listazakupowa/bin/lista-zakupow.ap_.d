@@ -370,10 +370,10 @@
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/layout/aadapterlistazakupow.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/layout/dialogfragmentprodukt.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/menu/fragmentdokupieniaoptions.xml \
+/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/menu/activitykomunikatoptions.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/menu/fragmentproduktycontext.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/menu/fragmentwkoszykuoptions.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/menu/fragmentproduktyoptions.xml \
-/home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/menu/activityinstrukcjeoptions.xml \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/drawable-ldpi/ic_launcher.png \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/drawable-mdpi/ic_launcher.png \
 /home/uzytkownik/praca/github/Lista-zakupow/listazakupowa/res/values/strings.xml \

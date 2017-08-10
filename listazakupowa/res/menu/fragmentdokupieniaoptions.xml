@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
   <item 
-    android:id="@+id/fdkoWyslijSMSem" 
-    android:title="@string/wyslijSMSem" 
+    android:id="@+id/fdkoWyslijListeSMSem" 
+    android:title="@string/wyslijListeSMSem" 
     android:icon="@android:drawable/ic_menu_send" 
     android:showAsAction="ifRoom" 
   />

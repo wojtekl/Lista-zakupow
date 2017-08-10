@@ -23,6 +23,9 @@ import java.util.List;
 public class FragmentProdukty 
   extends Fragment
 {
+  public static final String OPTIONS_DODAJ_PRODUKT = "fpoDodajProdukt";
+  public static final String CONTEXT_UAKTUALNIJ = "fpcUaktualnij";
+  
   private ListView listView;
   private AAdapterListaZakupow aAdapterListaZakupow;
   private IWspoldzielenieDanych wspoldzielenieDanych;
@@ -66,16 +69,16 @@ public class FragmentProdukty
   {
     switch(mi.getItemId())
     {
-      case R.id.fpoNowy:
+      case R.id.fpoDodajProdukt:
         DialogFragmentProdukt
           .newInstance(-1, "", "", 0.0f)
-          .show(getActivity().getSupportFragmentManager(), "fpoNowy");
+          .show(getActivity().getSupportFragmentManager(), OPTIONS_DODAJ_PRODUKT);
         return true;
       case R.id.fpoPokazInstrukcje:
         final Activity activity = getActivity();
-        activity.getSharedPreferences("LISTA-ZAKUPOW", 0).edit()
-          .putBoolean("PIERWSZE-URUCHOMIENIE", true)
-          .putBoolean("PIERWSZY-PRODUKT", true)
+        activity.getSharedPreferences(ActivityMain.SHARED_PREFERENCES, 0).edit()
+          .putBoolean(ActivityMain.SP_PIERWSZE_URUCHOMIENIE, true)
+          .putBoolean(ActivityMain.SP_PIERWSZY_PRODUKT, true)
           .commit();
         Toast.makeText(activity.getApplicationContext(), R.string.uruchomAplikacjePonownie, Toast.LENGTH_LONG)
           .show();
@@ -128,7 +131,7 @@ public class FragmentProdukty
         final ModelProdukt model = aAdapterListaZakupow.getItem(i);
         DialogFragmentProdukt
           .newInstance(i, model.getNazwa(), model.getSklep(), model.getCena())
-          .show(getActivity().getSupportFragmentManager(), "fpcUaktualnij");
+          .show(getActivity().getSupportFragmentManager(), CONTEXT_UAKTUALNIJ);
         return true;
       case R.id.fpcUsun:
         aAdapterListaZakupow.remove(aAdapterListaZakupow.getItem(menuInfo.position));

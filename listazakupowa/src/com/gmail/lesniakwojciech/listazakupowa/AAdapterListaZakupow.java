@@ -12,6 +12,8 @@ import java.util.List;
 public class AAdapterListaZakupow 
   extends ArrayAdapter<ModelProdukt>
 {
+  private static final String CENA_FORMAT = "#0.00";
+  
   private final int resource;
   
   private final LayoutInflater inflater;
@@ -44,7 +46,7 @@ public class AAdapterListaZakupow
     final ModelProdukt model = getItem(position);
     viewHolder.textViewNazwa.setText(model.getNazwa());
     viewHolder.textViewSklep.setText(model.getSklep());
-    viewHolder.textViewCena.setText((new DecimalFormat("#0.00")).format(model.getCena()));
+    viewHolder.textViewCena.setText((new DecimalFormat(CENA_FORMAT)).format(model.getCena()));
     
     /* view.setOnClickListener(new OnClickListener()
     {

@@ -21,8 +21,8 @@ public class AWProviderListaZakupow
     try
     {
       final JSONArray jsonArray = new JSONArray(context
-        .getSharedPreferences("LISTA-ZAKUPOW", 0)
-        .getString("LISTA", "[[],[],[]]")
+        .getSharedPreferences(ActivityMain.SHARED_PREFERENCES, 0)
+        .getString(ActivityMain.SP_LISTY, "[[],[],[]]")
       ).getJSONArray(1);
       for(int i = 0, d = jsonArray.length(); i < d; ++i)
       {

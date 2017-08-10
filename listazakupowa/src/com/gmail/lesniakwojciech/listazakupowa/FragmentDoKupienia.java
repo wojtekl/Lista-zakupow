@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -23,6 +24,8 @@ import java.util.List;
 public class FragmentDoKupienia 
   extends Fragment
 {
+  public static final String ITEM_LONG_CLICK = "fdkItemLongClick";
+  
   private ListView listView;
   private AAdapterListaZakupow aAdapterListaZakupow;
   private IWspoldzielenieDanych wspoldzielenieDanych;
@@ -67,7 +70,7 @@ public class FragmentDoKupienia
   {
     switch(mi.getItemId())
     {
-      case R.id.fdkoWyslijSMSem:
+      case R.id.fdkoWyslijListeSMSem:
         int l = doKupienia.size();
         if(0 < l)
         {
@@ -87,6 +90,10 @@ public class FragmentDoKupienia
               .setType("vnd.android-dir/mms-sms")
               .putExtra("sms_body", stringBuilder.toString())
             );
+          }
+          else
+          {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.SEND_SMS}, 0);
           }
         }
         return true;
@@ -116,7 +123,7 @@ public class FragmentDoKupienia
       final ModelProdukt model = (ModelProdukt)av.getItemAtPosition(i);
       DialogFragmentProdukt
         .newInstance(i, model.getNazwa(), model.getSklep(), model.getCena())
-        .show(getActivity().getSupportFragmentManager(), "fdkItemLongClick");
+        .show(getActivity().getSupportFragmentManager(), ITEM_LONG_CLICK);
       return true;
     }
   };

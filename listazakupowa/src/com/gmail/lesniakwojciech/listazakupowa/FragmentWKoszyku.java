@@ -22,6 +22,8 @@ import java.util.List;
 public class FragmentWKoszyku 
   extends Fragment
 {
+  public static final String ITEM_LONG_CLICK = "fwkItemLongClick";
+  
   private InterstitialAd mInterstitialAd;
   private ListView listView;
   private AAdapterListaZakupow aAdapterListaZakupow;
@@ -74,7 +76,7 @@ public class FragmentWKoszyku
         produkty.addAll(wKoszyku);
         aAdapterListaZakupow.clear();
         return true;
-      case R.id.fwkoWspomozAutora:
+      case R.id.fwkoPokazPropozycje:
         mInterstitialAd.setAdListener(new AdListener()
         {
           @Override
@@ -83,7 +85,7 @@ public class FragmentWKoszyku
             if(mInterstitialAd.isLoaded())
             {
               mInterstitialAd.show();
-              Toast.makeText(getActivity().getApplicationContext(), R.string.dziekuje, Toast.LENGTH_LONG).show();
+              Toast.makeText(getActivity().getApplicationContext(), R.string.dziekujeCi, Toast.LENGTH_LONG).show();
             }
           }
         }
@@ -112,7 +114,7 @@ public class FragmentWKoszyku
       final ModelProdukt model = (ModelProdukt)av.getItemAtPosition(i);
       DialogFragmentProdukt
         .newInstance(i, model.getNazwa(), model.getSklep(), model.getCena())
-        .show(getActivity().getSupportFragmentManager(), "fwkItemLongClick");
+        .show(getActivity().getSupportFragmentManager(), ITEM_LONG_CLICK);
       return true;
     }
   };

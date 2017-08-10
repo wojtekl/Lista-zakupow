@@ -6,5 +6,5 @@
     android:icon="@android:drawable/ic_menu_upload" 
     android:showAsAction="ifRoom" 
   />
-  <item android:id="@+id/fwkoWspomozAutora" android:title="@string/wspomozAutora" />
+  <item android:id="@+id/fwkoPokazPropozycje" android:title="@string/pokazPropozycje" />
 </menu>

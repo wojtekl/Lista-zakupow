@@ -13,6 +13,11 @@ import java.text.DecimalFormat;
 public class DialogFragmentProdukt 
   extends DialogFragment
 {
+  private static final String NAZWA = "nazwa";
+  private static final String SKLEP = "sklep";
+  private static final String CENA = "cena";
+  private static final String CENA_FORMAT = "#0.00";
+  
   protected interface DialogListener
   {
     public void onDialogNegativeClick(final DialogFragment dialog);
@@ -41,9 +46,9 @@ public class DialogFragmentProdukt
   {
     final Bundle bundle = new Bundle();
     bundle.putInt("i", i);
-    bundle.putString("nazwa", nazwa);
-    bundle.putString("sklep", sklep);
-    bundle.putDouble("cena", cena);
+    bundle.putString(NAZWA, nazwa);
+    bundle.putString(SKLEP, sklep);
+    bundle.putDouble(CENA, cena);
     final DialogFragmentProdukt dialogFragment = new DialogFragmentProdukt();
     dialogFragment.setArguments(bundle);
     return dialogFragment;
@@ -60,9 +65,9 @@ public class DialogFragmentProdukt
     etSklep = (EditText)view.findViewById(R.id.dfpEtSklep);
     etCena = (EditText)view.findViewById(R.id.dfpEtCena);
     final Bundle arguments = getArguments();
-    etNazwa.setText(arguments.getString("nazwa", ""));
-    etSklep.setText(arguments.getString("sklep", ""));
-    etCena.setText((new DecimalFormat("#0.00")).format(arguments.getDouble("cena", 0.0f)));
+    etNazwa.setText(arguments.getString(NAZWA, ""));
+    etSklep.setText(arguments.getString(SKLEP, ""));
+    etCena.setText((new DecimalFormat(CENA_FORMAT)).format(arguments.getDouble(CENA, 0.0f)));
     return new AlertDialog
       .Builder(activity)
       .setView(view)
