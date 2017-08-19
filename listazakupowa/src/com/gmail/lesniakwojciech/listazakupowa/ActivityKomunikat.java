@@ -15,7 +15,8 @@ public class ActivityKomunikat
     super.onCreate(bundle);
     setContentView(R.layout.activityinstrukcje);
     
-    ((TextView)findViewById(R.id.aiTextView)).setText(getIntent().getStringExtra(ActivityMain.IE_KOMUNIKAT));
+    ((TextView)findViewById(R.id.aiTextView)).setText(getIntent().getStringExtra(
+      ActivityMain.IE_KOMUNIKAT));
   }
   
   @Override

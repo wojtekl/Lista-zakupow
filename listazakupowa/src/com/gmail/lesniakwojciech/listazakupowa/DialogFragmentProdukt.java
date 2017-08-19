@@ -21,8 +21,8 @@ public class DialogFragmentProdukt
   protected interface DialogListener
   {
     public void onDialogNegativeClick(final DialogFragment dialog);
-    public void onDialogPositiveClick(final DialogFragment dialog, final int i, final String nazwa, 
-      final String sklep, final double cena);
+    public void onDialogPositiveClick(final DialogFragment dialog, final int i, 
+      final String nazwa, final String sklep, final double cena);
   }
   
   private DialogListener listener;
@@ -41,8 +41,8 @@ public class DialogFragmentProdukt
     }
   }
   
-  public static DialogFragmentProdukt newInstance(final int i, final String nazwa, final String sklep, 
-    final double cena)
+  public static DialogFragmentProdukt newInstance(final int i, final String nazwa, 
+    final String sklep, final double cena)
   {
     final Bundle bundle = new Bundle();
     bundle.putInt("i", i);
@@ -60,7 +60,8 @@ public class DialogFragmentProdukt
   public Dialog onCreateDialog(final Bundle bundle)
   {
     final Activity activity = getActivity();
-    final View view = activity.getLayoutInflater().inflate(R.layout.dialogfragmentprodukt, null);
+    final View view = activity.getLayoutInflater().inflate(R.layout.dialogfragmentprodukt, 
+      null);
     etNazwa = (EditText)view.findViewById(R.id.dfpEtNazwa);
     etSklep = (EditText)view.findViewById(R.id.dfpEtSklep);
     etCena = (EditText)view.findViewById(R.id.dfpEtCena);

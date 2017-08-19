@@ -18,7 +18,8 @@ public class AAdapterListaZakupow
   
   private final LayoutInflater inflater;
   
-  public AAdapterListaZakupow(final Context context, final int resource, final List<ModelProdukt> objects)
+  public AAdapterListaZakupow(final Context context, final int resource, 
+    final List<ModelProdukt> objects)
   {
     super(context, resource, objects);
     this.resource = resource;
@@ -88,6 +89,6 @@ public class AAdapterListaZakupow
   
   private static class ViewHolder
   {
-    TextView textViewNazwa, textViewSklep, textViewCena;
+    private TextView textViewNazwa, textViewSklep, textViewCena;
   }
 }

@@ -37,12 +37,26 @@ public class FragmentWKoszyku
     
     mInterstitialAd = new InterstitialAd(getContext());
     mInterstitialAd.setAdUnitId(getResources().getString(R.string.pelnoekranowa_ad_unit_id));
+    mInterstitialAd.setAdListener(new AdListener()
+    {
+      @Override
+      public void onAdLoaded()
+      {
+        if(mInterstitialAd.isLoaded())
+        {
+          mInterstitialAd.show();
+          Toast.makeText(getContext(), R.string.dziekujeCi, Toast.LENGTH_LONG).show();
+        }
+      }
+    }
+    );
     
     wKoszyku = wspoldzielenieDanych.getWKoszyku();
     doKupienia = wspoldzielenieDanych.getDoKupienia();
     produkty = wspoldzielenieDanych.getProdukty();
     
-    aAdapterListaZakupow = new AAdapterListaZakupow(getActivity(), R.layout.aadapterlistazakupow, wKoszyku);
+    aAdapterListaZakupow = new AAdapterListaZakupow(getActivity(), 
+      R.layout.aadapterlistazakupow, wKoszyku);
     listView = (ListView)view.findViewById(R.id.fpListView);
     listView.setAdapter(aAdapterListaZakupow);
     listView.setOnItemClickListener(onItemClickListener);
@@ -77,19 +91,6 @@ public class FragmentWKoszyku
         aAdapterListaZakupow.clear();
         return true;
       case R.id.fwkoPokazPropozycje:
-        mInterstitialAd.setAdListener(new AdListener()
-        {
-          @Override
-          public void onAdLoaded()
-          {
-            if(mInterstitialAd.isLoaded())
-            {
-              mInterstitialAd.show();
-              Toast.makeText(getActivity().getApplicationContext(), R.string.dziekujeCi, Toast.LENGTH_LONG).show();
-            }
-          }
-        }
-        );
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         return true;
       default:
@@ -99,7 +100,8 @@ public class FragmentWKoszyku
   
   private final OnItemClickListener onItemClickListener = new OnItemClickListener()
   {
-    public void onItemClick(final AdapterView<?> av, final View view, final int i, final long l)
+    public void onItemClick(final AdapterView<?> av, final View view, final int i, 
+      final long l)
     {
       final ModelProdukt model = (ModelProdukt)av.getItemAtPosition(i);
       doKupienia.add(model);
@@ -109,7 +111,8 @@ public class FragmentWKoszyku
   
   private final OnItemLongClickListener onItemLongClickListener = new OnItemLongClickListener()
   {
-    public boolean onItemLongClick(final AdapterView<?> av, final View view, final int i, final long l)
+    public boolean onItemLongClick(final AdapterView<?> av, final View view, final int i, 
+      final long l)
     {
       final ModelProdukt model = (ModelProdukt)av.getItemAtPosition(i);
       DialogFragmentProdukt

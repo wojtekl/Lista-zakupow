@@ -38,8 +38,8 @@ public class FragmentProdukty
     
     doKupienia = wspoldzielenieDanych.getDoKupienia();
     
-    aAdapterListaZakupow = new AAdapterListaZakupow(getActivity(), R.layout.aadapterlistazakupow, 
-      wspoldzielenieDanych.getProdukty());
+    aAdapterListaZakupow = new AAdapterListaZakupow(getActivity(), 
+      R.layout.aadapterlistazakupow, wspoldzielenieDanych.getProdukty());
     listView = (ListView)view.findViewById(R.id.fpListView);
     listView.setAdapter(aAdapterListaZakupow);
     listView.setOnItemClickListener(onItemClickListener);
@@ -80,8 +80,7 @@ public class FragmentProdukty
           .putBoolean(ActivityMain.SP_PIERWSZE_URUCHOMIENIE, true)
           .putBoolean(ActivityMain.SP_PIERWSZY_PRODUKT, true)
           .commit();
-        Toast.makeText(activity.getApplicationContext(), R.string.uruchomAplikacjePonownie, Toast.LENGTH_LONG)
-          .show();
+        Toast.makeText(activity, R.string.uruchomAplikacjePonownie, Toast.LENGTH_LONG).show();
         return true;
       case R.id.fpoWyczyscWszystko:
         new AlertDialog.Builder(getActivity())
@@ -114,7 +113,8 @@ public class FragmentProdukty
   }
   
   @Override
-  public void onCreateContextMenu(final ContextMenu cm, final View view, final ContextMenu.ContextMenuInfo cmi)
+  public void onCreateContextMenu(final ContextMenu cm, final View view, 
+    final ContextMenu.ContextMenuInfo cmi)
   {
     super.onCreateContextMenu(cm, view, cmi);
     getActivity().getMenuInflater().inflate(R.menu.fragmentproduktycontext, cm);
@@ -143,7 +143,8 @@ public class FragmentProdukty
   
   private final OnItemClickListener onItemClickListener = new OnItemClickListener()
   {
-    public void onItemClick(final AdapterView<?> av, final View view, final int i, final long l)
+    public void onItemClick(final AdapterView<?> av, final View view, final int i, 
+      final long l)
     {
       final ModelProdukt model = (ModelProdukt)av.getItemAtPosition(i);
       doKupienia.add(model);

@@ -15,7 +15,8 @@ public class AWProviderListaZakupow
   extends AppWidgetProvider
 {
   @Override
-  public void onUpdate(final Context context, final AppWidgetManager appWidgetManager, final int []appWidgetIds)
+  public void onUpdate(final Context context, final AppWidgetManager appWidgetManager, 
+    final int []appWidgetIds)
   {
     final List<ModelProdukt> doKupienia = new ArrayList<ModelProdukt>();
     try
@@ -49,7 +50,8 @@ public class AWProviderListaZakupow
     
     for(int i = 0, d = appWidgetIds.length; i < d; ++i)
     {
-      final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.awproviderlistazakupow);
+      final RemoteViews views = new RemoteViews(context.getPackageName(), 
+        R.layout.awproviderlistazakupow);
       views.setTextViewText(R.id.awplzTextView, string);
       views.setOnClickPendingIntent(R.id.awplzTextView, PendingIntent.getActivity(
         context, 

@@ -40,7 +40,8 @@ public class FragmentDoKupienia
     doKupienia = wspoldzielenieDanych.getDoKupienia();
     produkty = wspoldzielenieDanych.getProdukty();
     
-    aAdapterListaZakupow = new AAdapterListaZakupow(getActivity(), R.layout.aadapterlistazakupow, doKupienia);
+    aAdapterListaZakupow = new AAdapterListaZakupow(getActivity(), 
+      R.layout.aadapterlistazakupow, doKupienia);
     listView = (ListView)view.findViewById(R.id.fpListView);
     listView.setAdapter(aAdapterListaZakupow);
     listView.setOnItemClickListener(onItemClickListener);
@@ -82,8 +83,8 @@ public class FragmentDoKupienia
             stringBuilder.append(doKupienia.get(i).getNazwa()).append(",\n");
           }
           stringBuilder.append(doKupienia.get(l).getNazwa()).append(".");
-          if(PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(getActivity(), 
-            Manifest.permission.SEND_SMS))
+          if(PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(
+            getActivity(), Manifest.permission.SEND_SMS))
           {
             startActivity(new Intent(Intent.ACTION_VIEW)
               .setData(Uri.parse("smsto:"))
@@ -93,7 +94,8 @@ public class FragmentDoKupienia
           }
           else
           {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.SEND_SMS}, 0);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{
+              Manifest.permission.SEND_SMS}, 0);
           }
         }
         return true;
@@ -108,7 +110,8 @@ public class FragmentDoKupienia
   
   private final OnItemClickListener onItemClickListener = new OnItemClickListener()
   {
-    public void onItemClick(final AdapterView<?> av, final View view, final int i, final long l)
+    public void onItemClick(final AdapterView<?> av, final View view, final int i, 
+      final long l)
     {
       final ModelProdukt model = (ModelProdukt)av.getItemAtPosition(i);
       wKoszyku.add(model);
@@ -118,7 +121,8 @@ public class FragmentDoKupienia
   
   private final OnItemLongClickListener onItemLongClickListener = new OnItemLongClickListener()
   {
-    public boolean onItemLongClick(final AdapterView<?> av, final View view, final int i, final long l)
+    public boolean onItemLongClick(final AdapterView<?> av, final View view, final int i, 
+      final long l)
     {
       final ModelProdukt model = (ModelProdukt)av.getItemAtPosition(i);
       DialogFragmentProdukt

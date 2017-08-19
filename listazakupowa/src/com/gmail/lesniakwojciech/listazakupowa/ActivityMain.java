@@ -251,8 +251,8 @@ public class ActivityMain
   {
   }
   
-  public void onDialogPositiveClick(final DialogFragment dialog, final int i, final String nazwa, 
-    final String sklep, final double cena)
+  public void onDialogPositiveClick(final DialogFragment dialog, final int i, 
+    final String nazwa, final String sklep, final double cena)
   {
     final String tag = dialog.getTag();
     if(tag.equals(FragmentWKoszyku.ITEM_LONG_CLICK))
