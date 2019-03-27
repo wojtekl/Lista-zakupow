@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fpoDodajProdukt"
+        android:title="@string/dodajProdukt" />
+    <item
+        android:id="@+id/fpoPokazInstrukcje"
+        android:title="@string/pokazInstrukcje" />
+    <item
+        android:id="@+id/fpoWyczyscWszystko"
+        android:title="@string/wyczyscWszystko" />
+</menu>

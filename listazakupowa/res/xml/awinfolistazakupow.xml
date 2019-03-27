@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<appwidget-provider 
-  xmlns:android="http://schemas.android.com/apk/res/android" 
-  android:minWidth="110sp" 
-  android:minHeight="40sp" 
-  android:initialLayout="@layout/awproviderlistazakupow" 
-  android:resizeMode="horizontal|vertical" 
->
-</appwidget-provider>

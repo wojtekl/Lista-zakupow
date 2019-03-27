@@ -1,0 +1,28 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/widget_margin">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/awplzTextViewTytul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8sp"
+            android:text="@string/doKupienia"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/awplistazakupowtytul" />
+        <TextView
+            android:id="@+id/awplzTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/awplzTextViewTytul"
+            android:padding="8sp"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/awplistazakupowlista" />
+    </RelativeLayout>
+</FrameLayout>
