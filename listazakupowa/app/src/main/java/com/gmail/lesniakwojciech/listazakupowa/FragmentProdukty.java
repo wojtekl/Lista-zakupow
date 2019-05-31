@@ -11,6 +11,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -165,11 +166,12 @@ public class FragmentProdukty
                             mode.finish();
                             return true;
                         case R.id.fpcPokazCeny:
+                            Log.d("ziutek", String.valueOf(new Ustawienia(requireContext()).getAdres("").length()));
                             new AsyncTaskRzadanie(new AsyncTaskRzadanie.Gotowe() {
                                 @Override
                                 public void wykonaj(String odpowiedz) {
                                     startActivity(new Intent(getContext(), ActivityKomunikat.class)
-                                            .putExtra(ActivityKomunikat.IE_KOMUNIKAT, odpowiedz));
+                                            .putExtra(ActivityKomunikat.IE_KOMUNIKAT, odpowiedz.substring(0, 20)));
                                 }
                             }).execute(new Ustawienia(requireContext()).getAdres(""));
                             mode.finish();

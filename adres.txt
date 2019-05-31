@@ -1,1 +1,1 @@
-https://github.com/wojtekl/Lista-zakupow/README.md
+﻿https://github.com/wojtekl/Lista-zakupow/raw/master/README.md

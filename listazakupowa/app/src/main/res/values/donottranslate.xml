@@ -12,5 +12,5 @@
     <string name="pelnoekranowa_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
     <string name="znagroda_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string-->
 
-    <string name="adres">https://github.com/wojtekl/Lista-zakupow/adres.txt</string>
+    <string name="adres">https://github.com/wojtekl/Lista-zakupow/raw/master/adres.txt</string>
 </resources>
