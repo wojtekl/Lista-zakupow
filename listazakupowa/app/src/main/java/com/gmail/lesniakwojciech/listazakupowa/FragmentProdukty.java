@@ -166,10 +166,10 @@ public class FragmentProdukty
                             mode.finish();
                             return true;
                         case R.id.fpcPokazCeny:
-                            Log.d("ziutek", String.valueOf(new Ustawienia(requireContext()).getAdres("").length()));
                             new AsyncTaskRzadanie(new AsyncTaskRzadanie.Gotowe() {
                                 @Override
                                 public void wykonaj(String odpowiedz) {
+                                    Log.d("ziutek", odpowiedz);
                                     startActivity(new Intent(getContext(), ActivityKomunikat.class)
                                             .putExtra(ActivityKomunikat.IE_KOMUNIKAT, odpowiedz.substring(0, 20)));
                                 }
