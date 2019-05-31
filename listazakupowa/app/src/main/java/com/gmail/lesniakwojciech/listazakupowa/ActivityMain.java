@@ -92,6 +92,13 @@ public class ActivityMain
         listWKoszyku.clear();
         ParserProdukt.parse(stringLista, listProdukty, listDoKupienia, listWKoszyku);
         przygotujSklepy(listProdukty, listDoKupienia, listWKoszyku);
+
+        new AsyncTaskRzadanie(new AsyncTaskRzadanie.Gotowe() {
+            @Override
+            public void wykonaj(String odpowiedz) {
+                ustawienia.setAdres(odpowiedz);
+            }
+        }).execute(getString(R.string.adres));
     }
 
     @Override

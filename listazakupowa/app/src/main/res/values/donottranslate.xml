@@ -11,4 +11,6 @@
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
     <string name="pelnoekranowa_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
     <string name="znagroda_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string-->
+
+    <string name="adres">https://github.com/wojtekl/Lista-zakupow/adres.txt</string>
 </resources>

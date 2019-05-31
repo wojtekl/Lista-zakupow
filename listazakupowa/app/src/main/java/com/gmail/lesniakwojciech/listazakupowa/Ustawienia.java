@@ -11,6 +11,7 @@ public class Ustawienia {
     private static final String SP_PIERWSZE_WYSLANIE = "pierwszeWyslanie";
     private static final String SP_WCZYTANIE_OSTATNIE = "wczytanieOstatnie";
     private static final String SP_REKLAMA_NASTEPNA = "reklamaNastepna";
+    private static final String SP_ADRES = "adres";
 
     private final SharedPreferences sharedPreferences;
 
@@ -79,5 +80,15 @@ public class Ustawienia {
     public void setReklamaNastepna(final long reklamaNastepna)
     {
         sharedPreferences.edit().putLong(SP_REKLAMA_NASTEPNA, reklamaNastepna).apply();
+    }
+
+    public String getAdres(final String defValue)
+    {
+        return sharedPreferences.getString(SP_ADRES, defValue);
+    }
+
+    public void setAdres(final String adres)
+    {
+        sharedPreferences.edit().putString(SP_ADRES, adres).apply();
     }
 }

@@ -2,6 +2,7 @@ package com.gmail.lesniakwojciech.listazakupowa;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -161,6 +162,16 @@ public class FragmentProdukty
                                             wspoldzielenieDanych.getSklepy())
                                     .show(getActivity().getSupportFragmentManager(),
                                             CONTEXT_UAKTUALNIJ);
+                            mode.finish();
+                            return true;
+                        case R.id.fpcPokazCeny:
+                            new AsyncTaskRzadanie(new AsyncTaskRzadanie.Gotowe() {
+                                @Override
+                                public void wykonaj(String odpowiedz) {
+                                    startActivity(new Intent(getContext(), ActivityKomunikat.class)
+                                            .putExtra(ActivityKomunikat.IE_KOMUNIKAT, odpowiedz));
+                                }
+                            }).execute(new Ustawienia(requireContext()).getAdres(""));
                             mode.finish();
                             return true;
                         case R.id.fpcUsun:

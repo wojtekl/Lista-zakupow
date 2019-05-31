@@ -1,5 +1,6 @@
 package com.gmail.lesniakwojciech.listazakupowa;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -31,6 +32,7 @@ public class NotificationMain {
                                 )
                         )
                         .setStyle(new NotificationCompat.BigTextStyle().bigText(string))
+                        .setDefaults(Notification.DEFAULT_SOUND)
                         .build()
                 );
     }
