@@ -52,7 +52,7 @@ public class FPagerAdapterMain
     public static void tabLayout(final ViewPager viewPager, final TabLayout tabLayout,
                                  final Resources resources){
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            private final int tabColors[] = {
+            private final int []tabColors = {
                     ResourcesCompat.getColor(resources, R.color.amberA100, null),
                     ResourcesCompat.getColor(resources, R.color.redA100, null),
                     ResourcesCompat.getColor(resources, R.color.lightBlueA100, null)
@@ -66,7 +66,7 @@ public class FPagerAdapterMain
 
         tabLayout.setupWithViewPager(viewPager);
 
-        final int tabIcons[] = {
+        final int []tabIcons = {
                 R.drawable.ic_shopping_cart,
                 R.drawable.ic_list,
                 R.drawable.ic_kitchen

@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 public class FragmentDoKupienia
         extends Fragment
         implements DialogFragmentProdukt.DialogListener {
-    public static final String ITEM_LONG_CLICK = "fdkItemLongClick";
+    private static final String ITEM_LONG_CLICK = "fdkItemLongClick";
 
     private AdapterListaZakupow adapterListaZakupow;
     private AdapterListaZakupow wKoszyku, produkty;
@@ -31,7 +31,7 @@ public class FragmentDoKupienia
     public View onCreateView(@NonNull final LayoutInflater li, final ViewGroup vg, final Bundle bundle) {
         final View view = li.inflate(R.layout.fragmentprodukty, vg, false);
 
-        final IWspoldzielenieDanych wspoldzielenieDanych = (IWspoldzielenieDanych) getActivity();
+        final IWspoldzielenieDanych wspoldzielenieDanych = (IWspoldzielenieDanych) requireActivity();
         wKoszyku = wspoldzielenieDanych.getWKoszyku();
         produkty = wspoldzielenieDanych.getProdukty();
 
@@ -95,8 +95,8 @@ public class FragmentDoKupienia
             DialogFragmentProdukt
                     .newInstance(FragmentDoKupienia.this, position, model.getNazwa(),
                             model.getSklep(), model.getCena(),
-                            ((IWspoldzielenieDanych)getActivity()).getSklepy())
-                    .show(getActivity().getSupportFragmentManager(), ITEM_LONG_CLICK);
+                            ((IWspoldzielenieDanych)requireActivity()).getSklepy())
+                    .show(requireActivity().getSupportFragmentManager(), ITEM_LONG_CLICK);
         }
     };
 
@@ -110,7 +110,7 @@ public class FragmentDoKupienia
                 stringBuilder.append(adapterListaZakupow.getItem(i).getNazwa()).append(",\n");
             }
             stringBuilder.append(adapterListaZakupow.getItem(l).getNazwa()).append(".");
-            final PackageManager packageManager = getContext().getPackageManager();
+            final PackageManager packageManager = requireContext().getPackageManager();
             final Intent intent = new Intent(Intent.ACTION_SENDTO)
                     .setData(Uri.parse("smsto:"))
                     .putExtra("sms_body", stringBuilder.toString());

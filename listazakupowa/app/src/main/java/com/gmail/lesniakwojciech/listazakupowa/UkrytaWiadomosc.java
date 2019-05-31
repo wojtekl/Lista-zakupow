@@ -74,7 +74,7 @@ public class UkrytaWiadomosc {
 
     public Uri przygotuj(final Context context)
     {
-        final byte wiadomosc[] = new StringBuilder()
+        final byte []wiadomosc = new StringBuilder()
                 .append(PODPIS)
                 .append(";")
                 .append(Calendar.getInstance().getTimeInMillis())
@@ -83,7 +83,7 @@ public class UkrytaWiadomosc {
                 .toString()
                 .getBytes();
 
-        final byte ikona[] = Utils.readFromStream(context.getResources()
+        final byte []ikona = Utils.readFromStream(context.getResources()
                 .openRawResource(R.raw.ic_launcher));
         try {
             final File file = File.createTempFile(

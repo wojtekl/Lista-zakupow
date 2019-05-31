@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 public class FragmentWKoszyku
         extends Fragment
         implements DialogFragmentProdukt.DialogListener {
-    public static final String ITEM_LONG_CLICK = "fwkItemLongClick";
+    private static final String ITEM_LONG_CLICK = "fwkItemLongClick";
 
     private View view;
     private AdapterListaZakupow adapterListaZakupow;
@@ -27,7 +27,7 @@ public class FragmentWKoszyku
     public View onCreateView(@NonNull final LayoutInflater li, final ViewGroup vg, final Bundle bundle) {
         view = li.inflate(R.layout.fragmentprodukty, vg, false);
 
-        final IWspoldzielenieDanych wspoldzielenieDanych = (IWspoldzielenieDanych) getActivity();
+        final IWspoldzielenieDanych wspoldzielenieDanych = (IWspoldzielenieDanych) requireActivity();
         doKupienia = wspoldzielenieDanych.getDoKupienia();
         produkty = wspoldzielenieDanych.getProdukty();
 
@@ -86,8 +86,8 @@ public class FragmentWKoszyku
             DialogFragmentProdukt
                     .newInstance(FragmentWKoszyku.this, position, model.getNazwa(),
                             model.getSklep(), model.getCena(),
-                            ((IWspoldzielenieDanych)getActivity()).getSklepy())
-                    .show(getActivity().getSupportFragmentManager(), ITEM_LONG_CLICK);
+                            ((IWspoldzielenieDanych)requireActivity()).getSklepy())
+                    .show(requireActivity().getSupportFragmentManager(), ITEM_LONG_CLICK);
         }
     };
 

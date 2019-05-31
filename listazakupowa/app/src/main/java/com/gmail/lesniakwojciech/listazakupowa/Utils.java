@@ -30,7 +30,7 @@ public class Utils {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         final int BUFFOR_SIZE = 4096;
-        final byte buffor[] = new byte[BUFFOR_SIZE];
+        final byte []buffor = new byte[BUFFOR_SIZE];
         try{
             for(int d = inputStream.read(buffor); -1 < d; d = inputStream.read(buffor)){
                 baos.write(buffor, 0, d);

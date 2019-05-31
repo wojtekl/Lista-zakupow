@@ -1,17 +1,13 @@
 package com.gmail.lesniakwojciech.listazakupowa;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 
 public class AsyncTaskRzadanie extends AsyncTask<String, Integer, String> {
-    private Gotowe gotowe;
+    private final Gotowe gotowe;
 
     public AsyncTaskRzadanie(final Gotowe gotowe) {
         this.gotowe = gotowe;
@@ -22,30 +18,20 @@ public class AsyncTaskRzadanie extends AsyncTask<String, Integer, String> {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         try {
-            final HttpURLConnection httpURLConnection = (HttpURLConnection) new java.net.URL(strings[0]).openConnection();
-
-            final InputStream inputStream = new BufferedInputStream(httpURLConnection.getInputStream());
-            final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            final StringBuilder stringBuilder = new StringBuilder(inputStream.available());
-            String line;
-            while(null != (line = bufferedReader.readLine())) {
-                stringBuilder.append(line);
+            final HttpURLConnection httpURLConnection
+                    = (HttpURLConnection) new java.net.URL(strings[0]).openConnection();
+            final InputStream inputStream = httpURLConnection.getInputStream();
+            final int BUFFOR_SIZE = 4096;
+            final byte []buffor = new byte[BUFFOR_SIZE];
+            for(int d = inputStream.read(buffor); -1 < d; d = inputStream.read(buffor)) {
+                baos.write(buffor, 0, d);
             }
-            bufferedReader.close();
             inputStream.close();
             httpURLConnection.disconnect();
-            return stringBuilder.toString();
-            /* final int BUFFOR_SIZE = 4096;
-            final byte buffor[] = new byte[BUFFOR_SIZE];
-            for(int d = inputStream.read(buffor); -1 < d; d = inputStream.read(buffor)) {
-                baos.write(buffor);
-            } */
         }
-        catch(final Exception exception) {
-            return exception.getLocalizedMessage();
-        }
+        catch(final Exception exception) {}
 
-        //return baos.toString();
+        return baos.toString();
     }
 
     @Override

@@ -11,7 +11,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,8 +22,8 @@ import android.view.ViewGroup;
 public class FragmentProdukty
         extends Fragment
         implements DialogFragmentProdukt.DialogListener {
-    public static final String OPTIONS_DODAJ_PRODUKT = "fpoDodajProdukt";
-    public static final String CONTEXT_UAKTUALNIJ = "fpcUaktualnij";
+    private static final String OPTIONS_DODAJ_PRODUKT = "fpoDodajProdukt";
+    private static final String CONTEXT_UAKTUALNIJ = "fpcUaktualnij";
 
     private View view;
     private IWspoldzielenieDanych wspoldzielenieDanych;
@@ -37,7 +36,7 @@ public class FragmentProdukty
     public View onCreateView(@NonNull final LayoutInflater li, final ViewGroup vg, final Bundle bundle) {
         view = li.inflate(R.layout.fragmentprodukty, vg, false);
 
-        wspoldzielenieDanych = (IWspoldzielenieDanych) getActivity();
+        wspoldzielenieDanych = (IWspoldzielenieDanych) requireActivity();
         doKupienia = wspoldzielenieDanych.getDoKupienia();
 
         adapterListaZakupow = wspoldzielenieDanych.getProdukty();
@@ -56,7 +55,7 @@ public class FragmentProdukty
                 DialogFragmentProdukt
                         .newInstance(FragmentProdukty.this, -1, "", "",
                                 0.0f, wspoldzielenieDanych.getSklepy())
-                        .show(getActivity().getSupportFragmentManager(), OPTIONS_DODAJ_PRODUKT);
+                        .show(requireActivity().getSupportFragmentManager(), OPTIONS_DODAJ_PRODUKT);
             }
         });
 
@@ -85,10 +84,10 @@ public class FragmentProdukty
                 DialogFragmentProdukt
                         .newInstance(FragmentProdukty.this, -1, "", "",
                                 0.0f, wspoldzielenieDanych.getSklepy())
-                        .show(getActivity().getSupportFragmentManager(), OPTIONS_DODAJ_PRODUKT);
+                        .show(requireActivity().getSupportFragmentManager(), OPTIONS_DODAJ_PRODUKT);
                 return true;
             case R.id.fpoPokazInstrukcje:
-                final Ustawienia ustawienia = new Ustawienia(getContext());
+                final Ustawienia ustawienia = new Ustawienia(requireContext());
                 ustawienia.setPierwszeUruchomienie(true);
                 ustawienia.setPierwszyProdukt(true);
                 ustawienia.setPierwszeWyslanie(true);
@@ -139,7 +138,7 @@ public class FragmentProdukty
             }
 
             adapterListaZakupow.setSelection(view);
-            actionMode = getActivity().startActionMode(new ActionMode.Callback() {
+            actionMode = requireActivity().startActionMode(new ActionMode.Callback() {
 
                 @Override
                 public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -155,25 +154,24 @@ public class FragmentProdukty
                 @Override
                 public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                     switch (item.getItemId()) {
+                        case R.id.fpcCena:
+                            new AsyncTaskRzadanie(new AsyncTaskRzadanie.Gotowe() {
+                                @Override
+                                public void wykonaj(final String odpowiedz) {
+                                    startActivity(new Intent(getContext(), ActivityKomunikat.class)
+                                            .putExtra(ActivityKomunikat.IE_KOMUNIKAT, odpowiedz));
+                                }
+                            }).execute(new Ustawienia(requireContext()).getAdres(""));
+                            mode.finish();
+                            return true;
                         case R.id.fpcUaktualnij:
                             final ModelProdukt model = adapterListaZakupow.getItem(position);
                             DialogFragmentProdukt
                                     .newInstance(FragmentProdukty.this, position,
                                             model.getNazwa(), model.getSklep(), model.getCena(),
                                             wspoldzielenieDanych.getSklepy())
-                                    .show(getActivity().getSupportFragmentManager(),
+                                    .show(requireActivity().getSupportFragmentManager(),
                                             CONTEXT_UAKTUALNIJ);
-                            mode.finish();
-                            return true;
-                        case R.id.fpcPokazCeny:
-                            new AsyncTaskRzadanie(new AsyncTaskRzadanie.Gotowe() {
-                                @Override
-                                public void wykonaj(String odpowiedz) {
-                                    Log.d("ziutek", odpowiedz);
-                                    startActivity(new Intent(getContext(), ActivityKomunikat.class)
-                                            .putExtra(ActivityKomunikat.IE_KOMUNIKAT, odpowiedz.substring(0, 20)));
-                                }
-                            }).execute(new Ustawienia(requireContext()).getAdres(""));
                             mode.finish();
                             return true;
                         case R.id.fpcUsun:
@@ -208,7 +206,7 @@ public class FragmentProdukty
             model.setCena(cena);
             adapterListaZakupow.addItem(model);
             adapterListaZakupow.sort(new ComparatorProduktPopularnosc());
-            final Ustawienia ustawienia = new Ustawienia(getContext());
+            final Ustawienia ustawienia = new Ustawienia(requireContext());
             if (ustawienia.getPierwszyProdukt(true)) {
                 NotificationMain.show(getContext(), getString(R.string.pierwszyProdukt));
                 ustawienia.setPierwszyProdukt(false);
