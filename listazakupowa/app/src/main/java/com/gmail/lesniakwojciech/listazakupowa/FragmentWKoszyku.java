@@ -1,12 +1,9 @@
 package com.gmail.lesniakwojciech.listazakupowa;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,18 +11,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class FragmentWKoszyku
         extends Fragment
         implements DialogFragmentProdukt.DialogListener {
-    private static final String ITEM_LONG_CLICK = "fwkItemLongClick";
+    private static final String CONTEXT_UAKTUALNIJ = "fwcUaktualnij";
 
-    private View view;
     private AdapterListaZakupow adapterListaZakupow;
     private AdapterListaZakupow doKupienia, produkty;
 
+    private ActionMode actionMode;
+
     @Override
     public View onCreateView(@NonNull final LayoutInflater li, final ViewGroup vg, final Bundle bundle) {
-        view = li.inflate(R.layout.fragmentprodukty, vg, false);
+        final View view = li.inflate(R.layout.fragmentprodukty, vg, false);
 
         final IWspoldzielenieDanych wspoldzielenieDanych = (IWspoldzielenieDanych) requireActivity();
         doKupienia = wspoldzielenieDanych.getDoKupienia();
@@ -53,18 +59,24 @@ public class FragmentWKoszyku
     }
 
     @Override
-    public void onCreateOptionsMenu(final Menu menu, final MenuInflater mi) {
+    public void onPause() {
+        if(null != actionMode) {
+            actionMode.finish();
+        }
+
+        super.onPause();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater mi) {
         mi.inflate(R.menu.fragmentwkoszykuoptions, menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(final MenuItem mi) {
+    public boolean onOptionsItemSelected(@NonNull final MenuItem mi) {
         switch (mi.getItemId()) {
             case R.id.fwkoZakonczZakupy:
                 zakonczZakupy();
-                return true;
-            case R.id.fwkoWyswietlReklame:
-                Reklamy.rewardedVideoAd(getContext(), view);
                 return true;
             default:
                 return super.onOptionsItemSelected(mi);
@@ -75,6 +87,10 @@ public class FragmentWKoszyku
             new AdapterListaZakupow.OnItemClickListener() {
         @Override
         public void onItemClick(final int position) {
+            if(null != actionMode){
+                return;
+            }
+
             doKupienia.addItem(adapterListaZakupow.getItem(position));
             doKupienia.sort(new ComparatorProduktSklep());
             adapterListaZakupow.removeItem(position);
@@ -82,12 +98,64 @@ public class FragmentWKoszyku
 
         @Override
         public void onItemLongClick(final View view, final int position) {
-            final ModelProdukt model = adapterListaZakupow.getItem(position);
-            DialogFragmentProdukt
-                    .newInstance(FragmentWKoszyku.this, position, model.getNazwa(),
-                            model.getSklep(), model.getCena(),
-                            ((IWspoldzielenieDanych)requireActivity()).getSklepy())
-                    .show(requireActivity().getSupportFragmentManager(), ITEM_LONG_CLICK);
+            if(null != actionMode){
+                return;
+            }
+
+            adapterListaZakupow.setSelection(view);
+            actionMode = requireActivity().startActionMode(new ActionMode.Callback() {
+
+                @Override
+                public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                    mode.getMenuInflater().inflate(R.menu.fragmentwkoszykucontext, menu);
+                    return true;
+                }
+
+                @Override
+                public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                    return false;
+                }
+
+                @Override
+                public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                    final ModelProdukt model = adapterListaZakupow.getItem(position);
+                    switch (item.getItemId()) {
+                        case R.id.fwcCena:
+                            if(new Zetony(getContext()).sprawdzZetony(Zetony.ZETONY_CENA_ZOBACZ,
+                                    true, getView())) {
+                                new AsyncTaskRzadanie(new AsyncTaskRzadanie.Gotowe() {
+                                    @Override
+                                    public void wykonaj(final String odpowiedz) {
+                                        if(!TextUtils.isEmpty(odpowiedz)) {
+                                            startActivity(new Intent(getContext(), ActivityKomunikat.class)
+                                                    .putExtra(ActivityKomunikat.IE_KOMUNIKAT,
+                                                            model.getNazwa() + ":\n"
+                                                                    + WebAPI.filtruj(odpowiedz)));
+                                        }
+                                    }
+                                }).execute(WebAPI.pobierzCeny(model.getNazwa()));
+                            }
+                            mode.finish();
+                            return true;
+                        case R.id.fwcUaktualnij:
+                            DialogFragmentProdukt
+                                    .newInstance(FragmentWKoszyku.this, position, model.getNazwa(),
+                                            model.getSklep(), model.getCena(),
+                                            ((IWspoldzielenieDanych)requireActivity()).getSklepy())
+                                    .show(requireActivity().getSupportFragmentManager(), CONTEXT_UAKTUALNIJ);
+                            mode.finish();
+                            return true;
+                        default:
+                            return false;
+                    }
+                }
+
+                @Override
+                public void onDestroyActionMode(ActionMode mode) {
+                    actionMode = null;
+                    adapterListaZakupow.clearSelection();
+                }
+            });
         }
     };
 
@@ -106,8 +174,17 @@ public class FragmentWKoszyku
     @Override
     public void onDialogPositiveClick(final DialogFragment dialog, final int i, final String nazwa,
                                       final String sklep, final double cena) {
-        if (FragmentWKoszyku.ITEM_LONG_CLICK.equals(dialog.getTag())) {
+        if (FragmentWKoszyku.CONTEXT_UAKTUALNIJ.equals(dialog.getTag())) {
             final ModelProdukt model = adapterListaZakupow.getItem(i);
+            final Ustawienia ustawienia = new Ustawienia(requireContext());
+            if(ustawienia.getUdostepniajCeny(false) && model.getCena() != cena) {
+                new AsyncTaskRzadanie(new AsyncTaskRzadanie.Gotowe() {
+                    @Override
+                    public void wykonaj(final String odpowiedz) {
+                        new Zetony(getContext()).dodajZetony(Zetony.ZETONY_CENA_UDOSTEPNIENIE, null);
+                    }
+                }).execute(WebAPI.udostepnijCeny(getContext(), nazwa, sklep, cena));
+            }
             model.setNazwa(nazwa);
             model.setSklep(sklep);
             model.setCena(cena);

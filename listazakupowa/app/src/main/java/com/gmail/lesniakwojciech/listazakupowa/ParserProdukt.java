@@ -3,6 +3,7 @@ package com.gmail.lesniakwojciech.listazakupowa;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ParserProdukt {
@@ -120,5 +121,31 @@ public class ParserProdukt {
         }
         catch(final JSONException exception){
         }
+    }
+
+    public static List<String> sklepy(final List<ModelProdukt> produkty, final List<ModelProdukt> doKupienia,
+                              final List<ModelProdukt> wKoszyku) {
+        final List<String> listSklepy = new ArrayList<>();
+
+        for(int i = 0, d = produkty.size(); i < d; ++i) {
+            final String sklep = produkty.get(i).getSklep();
+            if(!listSklepy.contains(sklep)) {
+                listSklepy.add(sklep);
+            }
+        }
+        for(int i = 0, d = doKupienia.size(); i < d; ++i) {
+            final String sklep = doKupienia.get(i).getSklep();
+            if(!listSklepy.contains(sklep)) {
+                listSklepy.add(sklep);
+            }
+        }
+        for(int i = 0, d = wKoszyku.size(); i < d; ++i) {
+            final String sklep = wKoszyku.get(i).getSklep();
+            if(!listSklepy.contains(sklep)) {
+                listSklepy.add(sklep);
+            }
+        }
+
+        return listSklepy;
     }
 }

@@ -3,11 +3,14 @@ package com.gmail.lesniakwojciech.listazakupowa;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class Permissions {
-    public static String getPermissionDescription(final PackageManager packageManager, final String permissionGroup) {
+    public static String getPermissionDescription(final PackageManager packageManager,
+                                                  final String permissionGroup) {
         String uprawnienie = permissionGroup;
         try {
             uprawnienie = packageManager
@@ -19,7 +22,12 @@ public class Permissions {
         return uprawnienie;
     }
 
-    public static void requestPermission(final Activity activity, final String permission, final String message) {
+    public static void requestPermission(final Activity activity, final String permission,
+                                         final String message) {
+        if(PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(activity,
+                permission)) {
+            return;
+        }
         if(ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
             new AlertDialog
                     .Builder(activity)

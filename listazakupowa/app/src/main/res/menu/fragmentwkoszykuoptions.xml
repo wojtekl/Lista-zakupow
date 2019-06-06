@@ -3,7 +3,4 @@
     <item
         android:id="@+id/fwkoZakonczZakupy"
         android:title="@string/zakonczZakupy" />
-    <item
-        android:id="@+id/fwkoWyswietlReklame"
-        android:title="@string/wyswietlReklame" />
 </menu>

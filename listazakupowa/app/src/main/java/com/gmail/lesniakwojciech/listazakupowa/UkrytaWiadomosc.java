@@ -10,7 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 
-import static android.support.v4.content.FileProvider.getUriForFile;
+import static androidx.core.content.FileProvider.getUriForFile;
 
 public class UkrytaWiadomosc {
     private static final String PODPIS = "com.gmail.lesniakwojciech.listazakupowa";

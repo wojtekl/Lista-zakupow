@@ -10,41 +10,48 @@ import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.gms.ads.AdView;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class ActivityMain
         extends AppCompatActivity
         implements IWspoldzielenieDanych {
-    private AdView mAdView;
     private AdapterListaZakupow wKoszyku, doKupienia, produkty;
     private ArrayAdapter<String> sklepy;
 
     @Override
     protected void onCreate(final Bundle bundle) {
+        if(new Ustawienia(this).getTrybNocny(false)) {
+            setTheme(R.style.AppThemeNight);
+        }
         super.onCreate(bundle);
         setContentView(R.layout.activitymain);
         NotificationMain.createNotificationChannel(this);
 
         Reklamy.initialize(this);
-        mAdView = findViewById(R.id.adView);
-        final View main = findViewById(R.id.main);
-        Reklamy.banner(mAdView, main, this);
+        Reklamy.banner((AdView)findViewById(R.id.adView),
+                !new Zetony(this).sprawdzZetony(Zetony.ZETON_BANNER_WYLACZ, false, null),
+                new Reklamy.Listener() {
+            @Override
+            public void onRewarded(final int amount) {
+                new Zetony(getApplicationContext()).dodajZetony(Zetony.ZETONY_BANNER, findViewById(R.id.main));
+            }
+        });
 
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbarNavigation(toolbar);
 
         final ViewPager viewPager = findViewById(R.id.alzViewPager);
         viewPager.setAdapter(new FPagerAdapterMain(getSupportFragmentManager(), this));
@@ -53,9 +60,7 @@ public class ActivityMain
 
         viewPager.setCurrentItem(1);
 
-        if(Build.VERSION_CODES.M <= Build.VERSION.SDK_INT &&
-                PackageManager.PERMISSION_GRANTED != ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)) {
+        if(Build.VERSION_CODES.M <= Build.VERSION.SDK_INT) {
             Permissions.requestPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE,
                     getString(R.string.uprawnieniaDoWczytaniaListy) + " "
                             + Permissions.getPermissionDescription(getPackageManager(),
@@ -71,7 +76,6 @@ public class ActivityMain
     protected void onResume() {
         super.onResume();
 
-        mAdView.resume();
         Reklamy.resume(this);
 
         final Ustawienia ustawienia = new Ustawienia(this);
@@ -79,6 +83,9 @@ public class ActivityMain
         String stringLista = ustawienia.getListy("[[],[],[]]");
         if (ustawienia.getPierwszeUruchomienie(true)) {
             ustawienia.setPierwszeUruchomienie(false);
+            if(TextUtils.isEmpty(ustawienia.getIdentyfikator(""))) {
+                ustawienia.setIdentyfikator(UUID.randomUUID().toString());
+            }
             if ("[[],[],[]]".equals(stringLista)) {
                 stringLista = getString(R.string.pierwszaLista);
             }
@@ -91,7 +98,11 @@ public class ActivityMain
         listDoKupienia.clear();
         listWKoszyku.clear();
         ParserProdukt.parse(stringLista, listProdukty, listDoKupienia, listWKoszyku);
-        przygotujSklepy(listProdukty, listDoKupienia, listWKoszyku);
+        produkty.notifyDataSetChanged();
+        doKupienia.notifyDataSetChanged();
+        wKoszyku.notifyDataSetChanged();
+        sklepy = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line,
+                ParserProdukt.sklepy(listProdukty, listDoKupienia, listWKoszyku));
 
         new AsyncTaskRzadanie(new AsyncTaskRzadanie.Gotowe() {
             @Override
@@ -109,7 +120,6 @@ public class ActivityMain
         AWProviderListaZakupow.appWidgetUpdate(this);
         createShortcuts();
 
-        mAdView.pause();
         Reklamy.pause(this);
 
         super.onPause();
@@ -117,15 +127,9 @@ public class ActivityMain
 
     @Override
     protected void onDestroy() {
-        mAdView.destroy();
         Reklamy.destroy(this);
 
         super.onDestroy();
-    }
-
-    @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        Reklamy.interstitialAd(this);
     }
 
     @Override
@@ -166,49 +170,6 @@ public class ActivityMain
     @Override
     public void setSklepy(ArrayAdapter<String> sklepy) {
         this.sklepy = sklepy;
-    }
-
-    private void przygotujSklepy(final List<ModelProdukt> produkty, final List<ModelProdukt> doKupienia,
-                                 final List<ModelProdukt> wKoszyku) {
-        final List<String> listSklepy = new ArrayList<>();
-        for(int i = 0, d = produkty.size(); i < d; ++i) {
-            final String sklep = produkty.get(i).getSklep();
-            if(!listSklepy.contains(sklep)) {
-                listSklepy.add(sklep);
-            }
-        }
-        for(int i = 0, d = doKupienia.size(); i < d; ++i) {
-            final String sklep = doKupienia.get(i).getSklep();
-            if(!listSklepy.contains(sklep)) {
-                listSklepy.add(sklep);
-            }
-        }
-        for(int i = 0, d = wKoszyku.size(); i < d; ++i) {
-            final String sklep = wKoszyku.get(i).getSklep();
-            if(!listSklepy.contains(sklep)) {
-                listSklepy.add(sklep);
-            }
-        }
-        sklepy = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line,
-                listSklepy);
-    }
-
-    private void toolbarNavigation(final Toolbar toolbar) {
-        toolbar.setNavigationIcon(R.drawable.ic_launcher);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                final PackageManager packageManager = getPackageManager();
-                final Intent intent = new Intent(Intent.ACTION_VIEW)
-                        .setData(Uri.parse(getString(R.string.googlePlayLink)))
-                        .setPackage("com.android.vending");
-                final ActivityInfo activityInfo = intent.resolveActivityInfo(packageManager,
-                        intent.getFlags());
-                if(null != activityInfo && activityInfo.exported) {
-                    startActivity(intent);
-                }
-            }
-        });
     }
 
     private void createShortcuts() {

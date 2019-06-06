@@ -4,9 +4,6 @@
         android:id="@+id/fpoDodajProdukt"
         android:title="@string/dodajProdukt" />
     <item
-        android:id="@+id/fpoPokazInstrukcje"
-        android:title="@string/pokazInstrukcje" />
-    <item
-        android:id="@+id/fpoWyczyscWszystko"
-        android:title="@string/wyczyscWszystko" />
+        android:id="@+id/fpoUstawienia"
+        android:title="@string/ustawienia" />
 </menu>

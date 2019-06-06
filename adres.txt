@@ -1,1 +1,1 @@
-https://github.com/wojtekl/Lista-zakupow/raw/master/ceny.txt
+http://listazakupow.ugu.pl

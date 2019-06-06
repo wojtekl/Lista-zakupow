@@ -1,0 +1,78 @@
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/ogolne">
+
+        <EditTextPreference
+            app:key="wersja"
+            app:title="@string/wersjaAplikacji"
+            app:enabled="false"
+            app:defaultValue="@string/wersjaAplikacjiNumer"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreferenceCompat
+            app:key="trybNocny"
+            app:title="@string/trybNocny"
+            app:defaultValue="false" />
+
+        <Preference
+            app:key="pokazInstrukcje"
+            app:title="@string/pokazInstrukcje" />
+
+        <EditTextPreference
+            app:key="identyfikator"
+            app:title="@string/identyfikator"
+            app:dependency="aktywujRyzykowne"
+            app:useSimpleSummaryProvider="true" />
+
+        <Preference
+            app:key="wyczyscWszystko"
+            app:title="@string/wyczyscWszystko"
+            app:dependency="aktywujRyzykowne" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/zetony">
+
+        <EditTextPreference
+            app:key="zetony"
+            app:title="@string/zetony"
+            app:enabled="false"
+            app:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
+
+        <Preference
+            app:key="zetonyZaReklame"
+            app:title="@string/zetonyZaReklame" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/komunikacja">
+
+        <SwitchPreferenceCompat
+            app:key="udostepniajCeny"
+            app:title="@string/udostepniajCeny"
+            app:defaultValue="false" />
+
+        <Preference
+            app:key="udostepnij"
+            app:title="@string/udostepnijAplikacje" />
+
+        <Preference
+            app:key="googlePlay"
+            app:title="@string/inneAplikacje" />
+
+        <EditTextPreference
+            app:key="adres"
+            app:title="@string/adresAPI"
+            app:dependency="aktywujRyzykowne"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <SwitchPreferenceCompat
+        app:key="aktywujRyzykowne"
+        app:title="@string/aktywujRyzykowne"
+        app:defaultValue="false"
+        app:persistent="false" />
+
+</androidx.preference.PreferenceScreen>

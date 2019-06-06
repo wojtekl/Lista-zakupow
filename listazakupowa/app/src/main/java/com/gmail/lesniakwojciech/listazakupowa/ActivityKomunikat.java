@@ -2,8 +2,8 @@ package com.gmail.lesniakwojciech.listazakupowa;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ActivityKomunikat
         extends AppCompatActivity {
@@ -11,6 +11,9 @@ public class ActivityKomunikat
 
     @Override
     protected void onCreate(final Bundle bundle) {
+        if(new Ustawienia(this).getTrybNocny(false)) {
+            setTheme(R.style.AppThemeNight);
+        }
         super.onCreate(bundle);
         /*setContentView(R.layout.activityinstrukcje);
 

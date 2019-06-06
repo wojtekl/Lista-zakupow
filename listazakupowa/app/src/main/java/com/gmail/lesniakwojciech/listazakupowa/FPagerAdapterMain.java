@@ -2,22 +2,25 @@ package com.gmail.lesniakwojciech.listazakupowa;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.view.ViewPager;
+import com.google.android.material.tabs.TabLayout;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.viewpager.widget.ViewPager;
 
 public class FPagerAdapterMain
         extends FragmentPagerAdapter {
     private final Resources resources;
 
     public FPagerAdapterMain(final FragmentManager fm, final Context context) {
-        super(fm);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         resources = context.getResources();
     }
 
+    @NonNull
     @Override
     public Fragment getItem(final int i) {
         switch (i) {

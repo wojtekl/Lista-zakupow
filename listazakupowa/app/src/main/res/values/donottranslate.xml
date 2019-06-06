@@ -4,13 +4,15 @@
 
     <string name="ad_app_id">ca-app-pub-4377490341302105~7671764993</string>
     <string name="banner_ad_unit_id">ca-app-pub-4377490341302105/9148498192</string>
-    <string name="pelnoekranowa_ad_unit_id">ca-app-pub-4377490341302105/8729695799</string>
+    <!-- string name="pelnoekranowa_ad_unit_id">ca-app-pub-4377490341302105/8729695799</string -->
     <string name="znagroda_ad_unit_id">ca-app-pub-4377490341302105/7468432262</string>
 
-    <!--string name="ad_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <!-- string name="ad_app_id">ca-app-pub-3940256099942544~3347511713</string>
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
     <string name="pelnoekranowa_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="znagroda_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string-->
+    <string name="znagroda_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string -->
 
     <string name="adres">https://github.com/wojtekl/Lista-zakupow/raw/master/adres.txt</string>
+    <string name="udostepnijAdres">https://play.google.com/store/apps/details?id=com.gmail.lesniakwojciech.listazakupowa</string>
+    <string name="wersjaAplikacjiNumer">20</string>
 </resources>

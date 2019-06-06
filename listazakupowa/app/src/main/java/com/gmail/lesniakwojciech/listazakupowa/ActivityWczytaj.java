@@ -10,7 +10,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,6 +22,9 @@ public class ActivityWczytaj extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(new Ustawienia(this).getTrybNocny(false)) {
+            setTheme(R.style.AppThemeNight);
+        }
         super.onCreate(savedInstanceState);
 
         final Ustawienia ustawienia = new Ustawienia(this);

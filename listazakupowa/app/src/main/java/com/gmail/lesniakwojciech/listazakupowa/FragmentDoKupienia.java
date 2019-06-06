@@ -2,16 +2,9 @@ package com.gmail.lesniakwojciech.listazakupowa;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,13 +12,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class FragmentDoKupienia
         extends Fragment
         implements DialogFragmentProdukt.DialogListener {
-    private static final String ITEM_LONG_CLICK = "fdkItemLongClick";
+    private static final String CONTEXT_UAKTUALNIJ = "fdcUaktualnij";
 
     private AdapterListaZakupow adapterListaZakupow;
     private AdapterListaZakupow wKoszyku, produkty;
+
+    private ActionMode actionMode;
 
     @Override
     public View onCreateView(@NonNull final LayoutInflater li, final ViewGroup vg, final Bundle bundle) {
@@ -57,12 +60,21 @@ public class FragmentDoKupienia
     }
 
     @Override
-    public void onCreateOptionsMenu(final Menu menu, final MenuInflater mi) {
+    public void onPause() {
+        if(null != actionMode) {
+            actionMode.finish();
+        }
+
+        super.onPause();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater mi) {
         mi.inflate(R.menu.fragmentdokupieniaoptions, menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(final MenuItem mi) {
+    public boolean onOptionsItemSelected(@NonNull final MenuItem mi) {
         switch (mi.getItemId()) {
             case R.id.fdkoWyslijListeSMSem:
                 wyslijListeSMSem();
@@ -84,6 +96,10 @@ public class FragmentDoKupienia
             new AdapterListaZakupow.OnItemClickListener() {
         @Override
         public void onItemClick(final int position) {
+            if(null != actionMode){
+                return;
+            }
+
             wKoszyku.addItem(adapterListaZakupow.getItem(position));
             wKoszyku.sort(new ComparatorProduktCena());
             adapterListaZakupow.removeItem(position);
@@ -91,12 +107,70 @@ public class FragmentDoKupienia
 
         @Override
         public void onItemLongClick(final View view, final int position) {
-            final ModelProdukt model = adapterListaZakupow.getItem(position);
-            DialogFragmentProdukt
-                    .newInstance(FragmentDoKupienia.this, position, model.getNazwa(),
-                            model.getSklep(), model.getCena(),
-                            ((IWspoldzielenieDanych)requireActivity()).getSklepy())
-                    .show(requireActivity().getSupportFragmentManager(), ITEM_LONG_CLICK);
+            if(null != actionMode){
+                return;
+            }
+
+            adapterListaZakupow.setSelection(view);
+            actionMode = requireActivity().startActionMode(new ActionMode.Callback() {
+
+                @Override
+                public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                    mode.getMenuInflater().inflate(R.menu.fragmentdokupieniacontext, menu);
+                    return true;
+                }
+
+                @Override
+                public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                    return false;
+                }
+
+                @Override
+                public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                    final ModelProdukt model = adapterListaZakupow.getItem(position);
+                    switch (item.getItemId()) {
+                        case R.id.fdcCena:
+                            if(new Zetony(getContext()).sprawdzZetony(Zetony.ZETONY_CENA_ZOBACZ,
+                                    true, getView())) {
+                                new AsyncTaskRzadanie(new AsyncTaskRzadanie.Gotowe() {
+                                    @Override
+                                    public void wykonaj(final String odpowiedz) {
+                                        if(!TextUtils.isEmpty(odpowiedz)) {
+                                            startActivity(new Intent(getContext(), ActivityKomunikat.class)
+                                                    .putExtra(ActivityKomunikat.IE_KOMUNIKAT,
+                                                            model.getNazwa() + ":\n"
+                                                                    + WebAPI.filtruj(odpowiedz)));
+                                        }
+                                    }
+                                }).execute(WebAPI.pobierzCeny(model.getNazwa()));
+                            }
+                            mode.finish();
+                            return true;
+                        case R.id.fdcUaktualnij:
+                            DialogFragmentProdukt
+                                    .newInstance(FragmentDoKupienia.this, position, model.getNazwa(),
+                                            model.getSklep(), model.getCena(),
+                                            ((IWspoldzielenieDanych)requireActivity()).getSklepy())
+                                    .show(requireActivity().getSupportFragmentManager(), CONTEXT_UAKTUALNIJ);
+                            mode.finish();
+                            return true;
+                        case R.id.fdcUsun:
+                            produkty.addItem(adapterListaZakupow.getItem(position));
+                            produkty.sort(new ComparatorProduktPopularnosc());
+                            adapterListaZakupow.removeItem(position);
+                            mode.finish();
+                            return true;
+                        default:
+                            return false;
+                    }
+                }
+
+                @Override
+                public void onDestroyActionMode(ActionMode mode) {
+                    actionMode = null;
+                    adapterListaZakupow.clearSelection();
+                }
+            });
         }
     };
 
@@ -110,38 +184,24 @@ public class FragmentDoKupienia
                 stringBuilder.append(adapterListaZakupow.getItem(i).getNazwa()).append(",\n");
             }
             stringBuilder.append(adapterListaZakupow.getItem(l).getNazwa()).append(".");
-            final PackageManager packageManager = requireContext().getPackageManager();
-            final Intent intent = new Intent(Intent.ACTION_SENDTO)
-                    .setData(Uri.parse("smsto:"))
-                    .putExtra("sms_body", stringBuilder.toString());
-            final ActivityInfo activityInfo = intent.resolveActivityInfo(packageManager,
-                    intent.getFlags());
-            if(null != activityInfo && activityInfo.exported) {
-                startActivity(intent);
-            }
+            Wiadomosci.tekst(requireContext(), stringBuilder.toString());
         }
     }
 
     private void wyslijListe(final Context context) {
-        if(1 > adapterListaZakupow.getItemCount()) {
+        if(1 > adapterListaZakupow.getItemCount()
+                || !new Zetony(getContext()).sprawdzZetony(Zetony.ZETONY_WYSLIJLISTE,
+                true, getView())) {
             return;
         }
 
         final UkrytaWiadomosc wiadomosc = new UkrytaWiadomosc();
         wiadomosc.setTresc(ParserProdukt.listToJSON(adapterListaZakupow.getDataset()));
 
-        final PackageManager packageManager = context.getPackageManager();
-        final Intent intent = new Intent(Intent.ACTION_SEND)
-                .setData(Uri.parse("smsto:"))
-                .putExtra(Intent.EXTRA_STREAM, wiadomosc.przygotuj(context))
-                .setType("image/jpeg");
-        final ActivityInfo activityInfo = intent.resolveActivityInfo(packageManager,
-                intent.getFlags());
-        if(null != activityInfo && activityInfo.exported) {
-            startActivityForResult(intent, 0);
+        if(Wiadomosci.obraz(context, wiadomosc.przygotuj(context))) {
             final Ustawienia ustawienia = new Ustawienia(context);
             if(ustawienia.getPierwszeWyslanie(true)) {
-                NotificationMain.show(context, getString(R.string.pierwszeWyslanie));
+                NotificationMain.show(context, context.getString(R.string.pierwszeWyslanie));
                 ustawienia.setPierwszeWyslanie(false);
             }
         }
@@ -153,8 +213,16 @@ public class FragmentDoKupienia
     @Override
     public void onDialogPositiveClick(final DialogFragment dialog, final int i, final String nazwa,
                                       final String sklep, final double cena) {
-        if (FragmentDoKupienia.ITEM_LONG_CLICK.equals(dialog.getTag())) {
+        if (FragmentDoKupienia.CONTEXT_UAKTUALNIJ.equals(dialog.getTag())) {
             final ModelProdukt model = adapterListaZakupow.getItem(i);
+            if(new Ustawienia(requireContext()).getUdostepniajCeny(false) && model.getCena() != cena) {
+                new AsyncTaskRzadanie(new AsyncTaskRzadanie.Gotowe() {
+                    @Override
+                    public void wykonaj(final String odpowiedz) {
+                        new Zetony(getContext()).dodajZetony(Zetony.ZETONY_CENA_UDOSTEPNIENIE, null);
+                    }
+                }).execute(WebAPI.udostepnijCeny(getContext(), nazwa, sklep, cena));
+            }
             model.setNazwa(nazwa);
             model.setSklep(sklep);
             model.setCena(cena);
