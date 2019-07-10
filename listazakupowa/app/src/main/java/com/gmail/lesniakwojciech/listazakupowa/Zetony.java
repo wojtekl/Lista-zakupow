@@ -6,12 +6,14 @@ import android.view.View;
 import com.google.android.material.snackbar.Snackbar;
 
 public class Zetony {
+    private static final int ZETONY_PREMIA = 9;
     public static final int ZETONY_CENA_UDOSTEPNIENIE = 1;
     public static final int ZETONY_CENA_ZOBACZ = 1;
-    public static final int ZETONY_BANNER = 3;
-    public static final int ZETON_BANNER_WYLACZ = 8;
-    public static final int ZETONY_REWARDEDVIDEOAD = 5;
+    public static final int ZETONY_BANNER = 2;
+    public static final int ZETON_BANNER_WYLACZ = 50;
+    public static final int ZETONY_REWARDEDVIDEOAD = 3;
     public static final int ZETONY_WYSLIJLISTE = 2;
+    public static final int ZETONY_PRODUKTY_SPOLECZNOSCI = 3;
 
     private final Context context;
 
@@ -22,7 +24,7 @@ public class Zetony {
 
     public boolean sprawdzZetony(final int ile, final boolean pobierz, final View view) {
         final Ustawienia ustawienia = new Ustawienia(context);
-        final int stan = ustawienia.getZetony(0);
+        final int stan = ustawienia.getZetony(ZETONY_PREMIA);
         if(stan < ile) {
             if(null != view) {
                 Snackbar.make(view, R.string.brakZetonow, Snackbar.LENGTH_LONG).show();
@@ -37,10 +39,9 @@ public class Zetony {
 
     public int dodajZetony(final int ile, final View view) {
         final Ustawienia ustawienia = new Ustawienia(context);
-        ustawienia.setZetony(ustawienia.getZetony(0) + ile);
+        ustawienia.setZetony(ustawienia.getZetony(ZETONY_PREMIA) + ile);
         if(null != view) {
-            Snackbar.make(view, context.getString(R.string.przyznanoZetony) + ile,
-                    Snackbar.LENGTH_LONG).show();
+            Snackbar.make(view, context.getString(R.string.przyznanoZetony) + ile, Snackbar.LENGTH_LONG).show();
         }
         return ustawienia.getZetony(0);
     }

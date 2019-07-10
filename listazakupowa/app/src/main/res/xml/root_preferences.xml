@@ -3,10 +3,11 @@
     <PreferenceCategory app:title="@string/ogolne">
 
         <EditTextPreference
-            app:key="wersja"
+            app:key="aplikacjaWersja"
             app:title="@string/wersjaAplikacji"
             app:enabled="false"
-            app:defaultValue="@string/wersjaAplikacjiNumer"
+            app:defaultValue="@string/aplikacjaWersja"
+            app:persistent="false"
             app:useSimpleSummaryProvider="true" />
 
         <SwitchPreferenceCompat
@@ -37,7 +38,7 @@
             app:key="zetony"
             app:title="@string/zetony"
             app:enabled="false"
-            app:defaultValue="0"
+            app:defaultValue="@string/zetonyPremia"
             app:useSimpleSummaryProvider="true" />
 
         <Preference
@@ -51,18 +52,22 @@
         <SwitchPreferenceCompat
             app:key="udostepniajCeny"
             app:title="@string/udostepniajCeny"
-            app:defaultValue="false" />
+            app:defaultValue="true" />
 
         <Preference
-            app:key="udostepnij"
+            app:key="produktySpolecznosci"
+            app:title="@string/produktySpolecznosci" />
+
+        <Preference
+            app:key="udostepnijAplikacje"
             app:title="@string/udostepnijAplikacje" />
 
         <Preference
-            app:key="googlePlay"
+            app:key="inneAplikacje"
             app:title="@string/inneAplikacje" />
 
         <EditTextPreference
-            app:key="adres"
+            app:key="adresAPI"
             app:title="@string/adresAPI"
             app:dependency="aktywujRyzykowne"
             app:useSimpleSummaryProvider="true" />

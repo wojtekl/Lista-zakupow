@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/fpoDodajProdukt"
         android:title="@string/dodajProdukt" />
     <item
         android:id="@+id/fpoUstawienia"
-        android:title="@string/ustawienia" />
+        android:title="@string/ustawienia"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="ifRoom" />
 </menu>

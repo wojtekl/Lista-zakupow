@@ -72,16 +72,13 @@ public class ModelProdukt {
                 .toString();
     }
 
-    public static ModelProdukt fromJSON(final String p) {
+    public static ModelProdukt fromJSON(final String p) throws JSONException {
         final ModelProdukt produkt = new ModelProdukt();
-        try {
-            final JSONArray jsonArray = new JSONArray(p);
-            produkt.nazwa = jsonArray.getString(0);
-            produkt.sklep = jsonArray.getString(1);
-            produkt.cena = jsonArray.getDouble(2);
-            produkt.popularnosc = jsonArray.optInt(3, 0);
-        } catch (final JSONException exception) {
-        }
+        final JSONArray jsonArray = new JSONArray(p);
+        produkt.nazwa = jsonArray.getString(0);
+        produkt.sklep = jsonArray.getString(1);
+        produkt.cena = jsonArray.getDouble(2);
+        produkt.popularnosc = jsonArray.optInt(3, 0);
         return produkt;
     }
 

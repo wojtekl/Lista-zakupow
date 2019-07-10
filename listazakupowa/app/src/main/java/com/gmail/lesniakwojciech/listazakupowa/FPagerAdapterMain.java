@@ -1,23 +1,28 @@
 package com.gmail.lesniakwojciech.listazakupowa;
 
-import android.content.Context;
 import android.content.res.Resources;
-import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 
 public class FPagerAdapterMain
         extends FragmentPagerAdapter {
-    private final Resources resources;
+    private final String []titles;
 
-    public FPagerAdapterMain(final FragmentManager fm, final Context context) {
+    public FPagerAdapterMain(final FragmentManager fm, final Resources resources) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        resources = context.getResources();
+
+        titles = new String[]{
+                resources.getString(FragmentWKoszyku.title),
+                resources.getString(FragmentDoKupienia.title),
+                resources.getString(FragmentProdukty.title)
+        };
     }
 
     @NonNull
@@ -26,12 +31,11 @@ public class FPagerAdapterMain
         switch (i) {
             case 0:
                 return new FragmentWKoszyku();
-            case 1:
-                return new FragmentDoKupienia();
             case 2:
                 return new FragmentProdukty();
+            default:
+                return new FragmentDoKupienia();
         }
-        return null;
     }
 
     @Override
@@ -41,24 +45,16 @@ public class FPagerAdapterMain
 
     @Override
     public CharSequence getPageTitle(final int position) {
-        switch (position) {
-            case 0:
-                return resources.getString(R.string.wKoszyku);
-            case 1:
-                return resources.getString(R.string.doKupienia);
-            case 2:
-                return resources.getString(R.string.produkty);
-        }
-        return null;
+        return titles[position];
     }
 
     public static void tabLayout(final ViewPager viewPager, final TabLayout tabLayout,
                                  final Resources resources){
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             private final int []tabColors = {
-                    ResourcesCompat.getColor(resources, R.color.amberA100, null),
-                    ResourcesCompat.getColor(resources, R.color.redA100, null),
-                    ResourcesCompat.getColor(resources, R.color.lightBlueA100, null)
+                    ResourcesCompat.getColor(resources, FragmentWKoszyku.color, null),
+                    ResourcesCompat.getColor(resources, FragmentDoKupienia.color, null),
+                    ResourcesCompat.getColor(resources, FragmentProdukty.color, null)
             };
 
             @Override
@@ -70,11 +66,11 @@ public class FPagerAdapterMain
         tabLayout.setupWithViewPager(viewPager);
 
         final int []tabIcons = {
-                R.drawable.ic_shopping_cart,
-                R.drawable.ic_list,
-                R.drawable.ic_kitchen
+                FragmentWKoszyku.icon,
+                FragmentDoKupienia.icon,
+                FragmentProdukty.icon
         };
-        for(int i = 0, d = tabLayout.getTabCount(); i < d; ++i) {
+        for(int i = 0, d = tabLayout.getTabCount(); d > i; ++i) {
             tabLayout.getTabAt(i).setIcon(tabIcons[i]);
         }
     }

@@ -148,4 +148,29 @@ public class ParserProdukt {
 
         return listSklepy;
     }
+
+    public static String prepare(final List<ModelProdukt> list, final String header) {
+        int l = list.size();
+        if (1 > l) {
+            return null;
+        }
+        final StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(header).append(":\n");
+        --l;
+        for (int i = 0; i < l; ++i) {
+            stringBuilder.append(list.get(i).getNazwa()).append(",\n");
+        }
+        stringBuilder.append(list.get(l).getNazwa()).append(".");
+        return stringBuilder.toString();
+    }
+
+    public static void list(final String stringLista, final List<ModelProdukt> lista) {
+        try {
+            final JSONArray jsonArray = new JSONArray(stringLista);
+            for (int i = 0, d = jsonArray.length(); i < d; ++i) {
+                lista.add(ModelProdukt.fromJSON(jsonArray.getString(i)));
+            }
+        }
+        catch(final Exception exception) {}
+    }
 }

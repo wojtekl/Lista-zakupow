@@ -63,7 +63,8 @@ public class DialogFragmentProdukt
         etCena.setText((new DecimalFormat(CENA_FORMAT)).format(arguments.getDouble(CENA, 0.0f)));
         etSklep.setAdapter(sklepy);
         return new AlertDialog
-                .Builder(getActivity())
+                .Builder(getActivity(), new Ustawienia(requireContext()).getTrybNocny(false)
+                ? R.style.AppThemeNight_AlertOverlay : R.style.AppTheme_AlertOverlay)
                 .setView(view)
                 .setNegativeButton(R.string.zaniechaj, new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface di, final int i) {

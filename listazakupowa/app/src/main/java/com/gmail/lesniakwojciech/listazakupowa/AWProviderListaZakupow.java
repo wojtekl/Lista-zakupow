@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,47 +15,34 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Implementation of App Widget functionality.
- */
 public class AWProviderListaZakupow extends AppWidgetProvider {
-
-    /*static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
-
-        CharSequence widgetText = context.getString(R.string.appwidget_text);
-        // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.awproviderlistazakupow);
-        views.setTextViewText(R.id.appwidget_text, widgetText);
-
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
-    }*/
-
     @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+    public void onUpdate(final Context context, final AppWidgetManager appWidgetManager,
+                         final int[] appWidgetIds) {
         final List<ModelProdukt> doKupienia = new ArrayList<>();
         try {
             final JSONArray jsonArray = new JSONArray(new Ustawienia(context)
                     .getListy("[[],[],[]]")).getJSONArray(1);
-            for (int i = 0, d = jsonArray.length(); i < d; ++i) {
+            for (int i = 0, d = jsonArray.length(); d > i; ++i) {
                 doKupienia.add(ModelProdukt.fromJSON(jsonArray.getString(i)));
             }
-        } catch (final JSONException exception) {
+        }
+        catch (final JSONException exception) {
+            Toast.makeText(context, exception.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
         String string = "- - -";
         int l = doKupienia.size();
         if (0 < l) {
             final StringBuilder stringBuilder = new StringBuilder();
             --l;
-            for (int i = 0; i < l; ++i) {
+            for (int i = 0; l > i; ++i) {
                 stringBuilder.append(" * ").append(doKupienia.get(i).getNazwa()).append(",\n");
             }
             stringBuilder.append(" * ").append(doKupienia.get(l).getNazwa()).append(".");
             string = stringBuilder.toString();
         }
 
-        for (int i = 0, d = appWidgetIds.length; i < d; ++i) {
+        for (int i = 0, d = appWidgetIds.length; d > i; ++i) {
             final RemoteViews views = new RemoteViews(context.getPackageName(),
                     R.layout.awproviderlistazakupow);
             views.setTextViewText(R.id.awplzTextView, string);
@@ -69,17 +57,7 @@ public class AWProviderListaZakupow extends AppWidgetProvider {
         }
     }
 
-    @Override
-    public void onEnabled(Context context) {
-        // Enter relevant functionality for when the first widget is created
-    }
-
-    @Override
-    public void onDisabled(Context context) {
-        // Enter relevant functionality for when the last widget is disabled
-    }
-
-    public static void appWidgetUpdate(final Context context){
+    public static void update(final Context context) {
         context.sendBroadcast(new Intent(context, AWProviderListaZakupow.class)
                 .setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE)
                 .putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, AppWidgetManager
@@ -88,4 +66,15 @@ public class AWProviderListaZakupow extends AppWidgetProvider {
                 )
         );
     }
+
+    /* static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+                                int appWidgetId) {
+        CharSequence widgetText = context.getString(R.string.appwidget_text);
+        // Construct the RemoteViews object
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.awproviderlistazakupow);
+        views.setTextViewText(R.id.appwidget_text, widgetText);
+
+        // Instruct the widget manager to update the widget
+        appWidgetManager.updateAppWidget(appWidgetId, views);
+    } */
 }

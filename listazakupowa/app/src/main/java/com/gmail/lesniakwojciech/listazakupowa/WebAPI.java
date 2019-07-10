@@ -1,23 +1,35 @@
 package com.gmail.lesniakwojciech.listazakupowa;
 
-import android.content.Context;
-
 public class WebAPI {
-    public static String udostepnijCeny(final Context context, final String nazwa,
+    public static final String produkt = "/produkt";
+
+    public static String udostepnijCeny(final String identyfikator, final String nazwa,
                                         final String sklep, final double cena) {
-        return "http://listazakupow.ugu.pl"
-                + "/dodaj.php"
-                + "?nazwa=" + nazwa
+        return "nazwa=" + nazwa
                 + "&sklep=" + sklep
                 + "&cena=" + cena
-                + "&identyfikator=" + new Ustawienia(context).getIdentyfikator("");
+                + "&identyfikator=" + identyfikator;
     }
 
-    public static String pobierzCeny(final String nazwa) {
-        return "http://listazakupow.ugu.pl?nazwa=" + nazwa;
+    public static String pobierzCeny(final String adresAPI, final String nazwa, final String identyfikator) {
+        return adresAPI
+                + produkt
+                + "?nazwa=" + nazwa
+                + "&identyfikator=" + identyfikator;
+    }
+
+    public static String pobierzListe(final String adresAPI, final String identyfikator) {
+        return adresAPI
+                + "/produkty?identyfikator=" + identyfikator;
     }
 
     public static String filtruj(final String odpowiedz) {
-        return odpowiedz.substring(odpowiedz.indexOf("<p>") + 3, odpowiedz.indexOf("</p>"));
+        final int poczatek = odpowiedz.indexOf("<p>");
+        if(0 < poczatek) {
+            return odpowiedz.substring(poczatek + 3, odpowiedz.indexOf("</p>"));
+        }
+        else {
+            return odpowiedz;
+        }
     }
 }

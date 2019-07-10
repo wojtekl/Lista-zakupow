@@ -71,19 +71,20 @@ public class ActivityWczytaj extends Activity {
         final Context context = getApplicationContext();
         final Activity activity = this;
         new AlertDialog
-                .Builder(this)
+                .Builder(context, ustawienia.getTrybNocny(false)
+                ? R.style.AppThemeNight_AlertOverlay : R.style.AppTheme_AlertOverlay)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle(R.string.zaktualizujListe)
                 .setMessage(R.string.potwierdzAktualizacje)
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
-                    public void onCancel(DialogInterface dialog) {
+                    public void onCancel(final DialogInterface dialog) {
                         activity.finish();
                     }
                 })
                 .setNegativeButton(R.string.nie, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(final DialogInterface dialog, final int which) {
                         activity.finish();
                     }
                 })

@@ -8,7 +8,6 @@
     <string name="wyczyscListe">Wyczyść listę</string>
     <string name="nazwaPliku">Lista_zakupow</string>
     <string name="zaktualizujListe">Zaktualizuj listę</string>
-    <string name="pierwszeWyslanie">Lista Do kupienia znajduje się w dołączonym do MMSa obrazku. Otwórz obrazek z MMSa przy pomocy aplikacji Lista zakupów aby wczytać listę.</string>
     <string name="potwierdzAktualizacje">Posiadasz nowszą wersję. Kontynuować?</string>
     <string name="wyslijListe">Wyślij listę</string>
     <string name="produkty">Produkty</string>
@@ -21,12 +20,11 @@
     <string name="zachowaj">Zachowaj</string>
     <string name="uaktualnij">Uaktualnij</string>
     <string name="usun">Usuń</string>
-    <string name="pierwszaLista">[[[\"Chleb\",\"Piekrania\",\"4.39\"],[\"Czekolada\",\"Market\",\"1.99\"],[\"Jabłka\",\"Ryneczek\",\"2.99\"],[\"Jaja\",\"Ryneczek\",\"0.85\"],[\"Ketchup\",\"Market\",\"1.99\"],[\"Mydło\",\"Sklep ziołowy\",\"2.49\"],[\"Ogórek\",\"Ryneczek\",\"1.99\"],[\"Pasta do zębów\",\"Sklep ziołowy\",\"4.99\"],[\"Sałata\",\"Ryneczek\",\"0.99\"],[\"Szampon\",\"Sklep ziołowy\",\"7.99\"]],[[\"Napój gazowany\",\"Market\",\"2.69\"],[\"Ryż\",\"Market\",\"1.69\"],[\"Masło\",\"Ryneczek\",\"3.69\"],[\"Mleko\",\"Ryneczek\",\"2.09\"],[\"Pomidory\",\"Ryneczek\",\"3.99\"],[\"Ser żółty\",\"Ryneczek\",\"22.99\"],[\"Herbata\",\"Sklep ziołowy\",\"7.99\"]],[[\"Kawa\",\"Market\",\"16.22\"],[\"Ręczniki papierowe\",\"Market\",\"3.29\"],[\"Cukier\",\"Market\",\"3.19\"],[\"Płatki śniadaniowe\",\"Market\",\"1.79\"],[\"Makaron\",\"Market\",\"1.49\"]]]</string>
-    <string name="pierwszeUruchomienie">Do list dodano przykładowe produkty. Dodaj kolejne przesuwając ekran w lewo i wybierając Dodaj produkt z menu.</string>
-    <string name="pierwszyProdukt">Dodałaś/eś pierwszy produkt! Wybierz go, aby przenieść na listę Do kupienia lub przytrzymaj aby zmienić cenę.</string>
+    <string name="pierwszaLista">[[[\"Chleb\",\"Piekrania\",\"4.39\"],[\"Czekolada\",\"Market\",\"1.99\"],[\"Jabłka\",\"Ryneczek\",\"2.99\"],[\"Jaja\",\"Ryneczek\",\"0.85\"],[\"Ketchup\",\"Market\",\"1.99\"],[\"Mydło\",\"Sklep ziołowy\",\"2.49\"],[\"Ogórek\",\"Ryneczek\",\"1.99\"],[\"Pasta do zębów\",\"Sklep ziołowy\",\"4.99\"],[\"Sałata\",\"Ryneczek\",\"0.99\"],[\"Szampon\",\"Sklep ziołowy\",\"7.99\"],[\"Napój gazowany\",\"Market\",\"2.69\"],[\"Ryż\",\"Market\",\"1.69\"],[\"Masło\",\"Ryneczek\",\"3.69\"],[\"Mleko\",\"Ryneczek\",\"2.09\"],[\"Pomidory\",\"Ryneczek\",\"3.99\"],[\"Ser żółty\",\"Ryneczek\",\"22.99\"],[\"Herbata\",\"Sklep ziołowy\",\"7.99\"],[\"Kawa\",\"Market\",\"16.22\"],[\"Ręczniki papierowe\",\"Market\",\"3.29\"],[\"Cukier\",\"Market\",\"3.19\"],[\"Płatki śniadaniowe\",\"Market\",\"1.79\"],[\"Makaron\",\"Market\",\"1.49\"]],[],[]]</string>
     <string name="powroc">Powróć</string>
     <string name="uprawnienia">Uprawnienia</string>
     <string name="uprawnieniaDoWczytaniaListy">Uprawnienia wymagane do wczytania listy:</string>
+    <string name="brakPolaczeniaZInternetem">Brak połączenia z internetem</string>
     <string name="ustawienia">Ustawienia</string>
     <string name="ogolne">Ogólne</string>
     <string name="wersjaAplikacji">Wersja aplikacji</string>
@@ -41,9 +39,10 @@
     <string name="zetony">Żetony</string>
     <string name="brakZetonow">Brak żetonów :( Przejdź do ustawień.</string>
     <string name="zetonyZaReklame">Żetony za reklamę</string>
-    <string name="przyznanoZetony">Przyznano żetony: </string>
+    <string name="przyznanoZetony">Przyznano żetony:</string>
     <string name="komunikacja">Komunikacja</string>
     <string name="udostepniajCeny">Udostępniaj ceny</string>
+    <string name="produktySpolecznosci">Produkty społeczności</string>
     <string name="udostepnijAplikacje">Udostępnij tę aplikację</string>
     <string name="udostepnijTekst">Cześć! Wypróbuj Listę zakupów na Androida. Pobierz z Google Play:\n</string>
     <string name="inneAplikacje">Inne aplikacje</string>

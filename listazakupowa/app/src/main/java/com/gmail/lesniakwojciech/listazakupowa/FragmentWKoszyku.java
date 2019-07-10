@@ -1,8 +1,8 @@
 package com.gmail.lesniakwojciech.listazakupowa;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,6 +22,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class FragmentWKoszyku
         extends Fragment
         implements DialogFragmentProdukt.DialogListener {
+    protected static final int title = R.string.wKoszyku;
+    protected static final int color = R.color.amberA100;
+    protected static final int icon = R.drawable.ic_shopping_cart;
+
     private static final String CONTEXT_UAKTUALNIJ = "fwcUaktualnij";
 
     private AdapterListaZakupow adapterListaZakupow;
@@ -121,19 +125,24 @@ public class FragmentWKoszyku
                     final ModelProdukt model = adapterListaZakupow.getItem(position);
                     switch (item.getItemId()) {
                         case R.id.fwcCena:
-                            if(new Zetony(getContext()).sprawdzZetony(Zetony.ZETONY_CENA_ZOBACZ,
-                                    true, getView())) {
-                                new AsyncTaskRzadanie(new AsyncTaskRzadanie.Gotowe() {
+                            final Context context = requireContext();
+                            final View view = getView();
+                            if(Permissions.hasInternet(context, view) &&
+                                    new Zetony(context).sprawdzZetony(Zetony.ZETONY_CENA_ZOBACZ,
+                                    true, view)) {
+                                final Ustawienia ustawienia = new Ustawienia(context);
+                                new AsyncTaskRzadanie(new AsyncTaskRzadanie.Listener() {
                                     @Override
-                                    public void wykonaj(final String odpowiedz) {
-                                        if(!TextUtils.isEmpty(odpowiedz)) {
-                                            startActivity(new Intent(getContext(), ActivityKomunikat.class)
+                                    public void onPostExecute(final AsyncTaskRzadanie.RzadanieResponse response) {
+                                        if(response.isOK(false)) {
+                                            startActivity(new Intent(context, ActivityKomunikat.class)
                                                     .putExtra(ActivityKomunikat.IE_KOMUNIKAT,
-                                                            model.getNazwa() + ":\n"
-                                                                    + WebAPI.filtruj(odpowiedz)));
+                                                            model.getNazwa() + ":"
+                                                                    + WebAPI.filtruj(response.getMessage())));
                                         }
                                     }
-                                }).execute(WebAPI.pobierzCeny(model.getNazwa()));
+                                }).execute(WebAPI.pobierzCeny(ustawienia.getAdresAPI(""), model.getNazwa(),
+                                        ustawienia.getIdentyfikator("")));
                             }
                             mode.finish();
                             return true;
@@ -176,14 +185,17 @@ public class FragmentWKoszyku
                                       final String sklep, final double cena) {
         if (FragmentWKoszyku.CONTEXT_UAKTUALNIJ.equals(dialog.getTag())) {
             final ModelProdukt model = adapterListaZakupow.getItem(i);
-            final Ustawienia ustawienia = new Ustawienia(requireContext());
-            if(ustawienia.getUdostepniajCeny(false) && model.getCena() != cena) {
-                new AsyncTaskRzadanie(new AsyncTaskRzadanie.Gotowe() {
+            final Context context = requireContext();
+            final Ustawienia ustawienia = new Ustawienia(context);
+            if(ustawienia.getUdostepniajCeny(false) && model.getCena() != cena
+                    && Permissions.hasInternet(context, null)) {
+                new AsyncTaskRzadanie(new AsyncTaskRzadanie.Listener() {
                     @Override
-                    public void wykonaj(final String odpowiedz) {
-                        new Zetony(getContext()).dodajZetony(Zetony.ZETONY_CENA_UDOSTEPNIENIE, null);
+                    public void onPostExecute(final AsyncTaskRzadanie.RzadanieResponse response) {
+                        new Zetony(context).dodajZetony(Zetony.ZETONY_CENA_UDOSTEPNIENIE, getView());
                     }
-                }).execute(WebAPI.udostepnijCeny(getContext(), nazwa, sklep, cena));
+                }).execute(ustawienia.getAdresAPI("") + WebAPI.produkt, AsyncTaskRzadanie.POST,
+                        WebAPI.udostepnijCeny(ustawienia.getIdentyfikator(""), nazwa, sklep, cena));
             }
             model.setNazwa(nazwa);
             model.setSklep(sklep);

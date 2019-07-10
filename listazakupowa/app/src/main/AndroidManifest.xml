@@ -13,6 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <activity
             android:name=".ActivityMain"
             android:label="@string/app_name"
@@ -52,6 +57,13 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ActivityMain" />
+        </activity>
+        <activity
+            android:name=".ActivitySpolecznosc"
+            android:label="@string/produktySpolecznosci">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ActivityUstawienia" />
         </activity>
 
         <receiver android:name=".AWProviderListaZakupow">

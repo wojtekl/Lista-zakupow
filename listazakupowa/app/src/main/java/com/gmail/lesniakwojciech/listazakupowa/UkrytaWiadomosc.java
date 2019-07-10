@@ -17,8 +17,7 @@ public class UkrytaWiadomosc {
     private static final int PODPIS_DLUGOSC = PODPIS.length();
     private static final int IKONA_ROZMIAR = 3331;
 
-    public UkrytaWiadomosc()
-    {
+    public UkrytaWiadomosc() {
         this.tresc = "";
         this.data = 0;
     }
@@ -47,8 +46,7 @@ public class UkrytaWiadomosc {
         this.data = data;
     }
 
-    public boolean odczytaj(final Context context, final Uri uri)
-    {
+    public boolean odczytaj(final Context context, final Uri uri) {
         String string = "";
         try {
             string = Utils.readFromStream(context.getContentResolver().openInputStream(uri),
@@ -58,8 +56,7 @@ public class UkrytaWiadomosc {
             Toast.makeText(context, exception.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
 
-        if(TextUtils.isEmpty(string) || !PODPIS.equals(string.substring(0, PODPIS_DLUGOSC)))
-        {
+        if(TextUtils.isEmpty(string) || !PODPIS.equals(string.substring(0, PODPIS_DLUGOSC))) {
             return false;
         }
 
@@ -72,8 +69,7 @@ public class UkrytaWiadomosc {
         return true;
     }
 
-    public Uri przygotuj(final Context context)
-    {
+    public Uri przygotuj(final Context context) {
         final byte []wiadomosc = new StringBuilder()
                 .append(PODPIS)
                 .append(";")
@@ -83,9 +79,9 @@ public class UkrytaWiadomosc {
                 .toString()
                 .getBytes();
 
-        final byte []ikona = Utils.readFromStream(context.getResources()
-                .openRawResource(R.raw.ic_launcher));
         try {
+            final byte []ikona = Utils.readFromStream(context.getResources()
+                    .openRawResource(R.raw.ic_launcher));
             final File file = File.createTempFile(
                     context.getString(R.string.nazwaPliku),
                     ".jpg",
@@ -97,7 +93,8 @@ public class UkrytaWiadomosc {
             file.deleteOnExit();
             return getUriForFile(context, context.getString(R.string.FILEPROVIDER), file);
         }
-        catch(final IOException exception){
+        catch (final IOException exception) {
+            Toast.makeText(context, exception.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
 
         return null;

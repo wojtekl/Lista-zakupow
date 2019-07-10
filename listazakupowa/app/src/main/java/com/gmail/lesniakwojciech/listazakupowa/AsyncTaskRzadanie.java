@@ -1,59 +1,97 @@
 package com.gmail.lesniakwojciech.listazakupowa;
 
 import android.os.AsyncTask;
-import android.util.Log;
+import android.text.TextUtils;
 
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.util.Locale;
 
-public class AsyncTaskRzadanie extends AsyncTask<String, Integer, String> {
-    private final Gotowe gotowe;
+public class AsyncTaskRzadanie extends AsyncTask<String, Integer, AsyncTaskRzadanie.RzadanieResponse> {
+    private static final int OK = 200;
+    public static final String POST = "POST";
 
-    public AsyncTaskRzadanie(final Gotowe gotowe) {
-        this.gotowe = gotowe;
+    private final Listener listener;
+
+    public AsyncTaskRzadanie(final Listener listener) {
+        this.listener = listener;
     }
 
     @Override
-    protected String doInBackground(final String... strings) {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
+    protected RzadanieResponse doInBackground(final String... strings) {
         try {
             final HttpURLConnection httpURLConnection
                     = (HttpURLConnection) new java.net.URL(strings[0]).openConnection();
-            /*if(!TextUtils.isEmpty(strings[1])) {
-                Log.d("ziutek", strings[1]);
+            httpURLConnection.addRequestProperty("Accept-Language", Locale.getDefault().getLanguage());
+            if(strings.length > 1 && !TextUtils.isEmpty(strings[1])) {
                 httpURLConnection.setRequestMethod(strings[1]);
             }
-            if(!TextUtils.isEmpty(strings[2])) {
-                Log.d("ziutek", strings[2]);
+            if(strings.length > 2 && !TextUtils.isEmpty(strings[2])) {
                 httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 final OutputStream outputStream = httpURLConnection.getOutputStream();
                 outputStream.write(strings[2].getBytes());
                 outputStream.close();
-            }*/
-            final InputStream inputStream = httpURLConnection.getInputStream();
-            final int BUFFOR_SIZE = 4096;
-            final byte []buffor = new byte[BUFFOR_SIZE];
-            for(int d = inputStream.read(buffor); -1 < d; d = inputStream.read(buffor)) {
-                baos.write(buffor, 0, d);
             }
-            inputStream.close();
+            final RzadanieResponse response = new RzadanieResponse();
+            response.setCode(httpURLConnection.getResponseCode());
+            if(OK == response.getCode()) {
+                final InputStream inputStream = httpURLConnection.getInputStream();
+                response.setMessage(Utils.readFromStream(inputStream, 0));
+                inputStream.close();
+            }
+            else {
+                final InputStream inputStream = httpURLConnection.getErrorStream();
+                response.setMessage(Utils.readFromStream(inputStream, 0));
+                inputStream.close();
+            }
             httpURLConnection.disconnect();
+            return response;
         }
         catch(final Exception exception) {
-            Log.d("ziutek", exception.getLocalizedMessage());
+            final RzadanieResponse response = new RzadanieResponse();
+            response.setCode(-1);
+            response.setMessage(exception.getLocalizedMessage());
+            return response;
         }
-
-        return baos.toString();
     }
 
     @Override
-    protected void onPostExecute(final String odpowiedz) {
-        gotowe.wykonaj(odpowiedz);
+    protected void onPostExecute(final RzadanieResponse response) {
+        listener.onPostExecute(response);
     }
 
-    protected interface Gotowe {
-        void wykonaj(final String odpowiedz);
+    protected interface Listener {
+        void onPostExecute(final RzadanieResponse response);
+    }
+
+    protected class RzadanieResponse {
+        private int code;
+
+        public int getCode() {
+            return this.code;
+        }
+
+        public void setCode(final int code) {
+            this.code = code;
+        }
+
+        private String message;
+
+        public String getMessage() {
+            return this.message;
+        }
+
+        public void setMessage(final String message) {
+            this.message = message;
+        }
+
+        public boolean isOK(final boolean checkCode) {
+            boolean status = !TextUtils.isEmpty(message);
+            if(checkCode) {
+                status |= OK == this.code;
+            }
+            return status;
+        }
     }
 }
