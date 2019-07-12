@@ -4,12 +4,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
-import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
+import androidx.fragment.app.DialogFragment;
 
 import java.text.DecimalFormat;
 
@@ -19,16 +20,10 @@ public class DialogFragmentProdukt
     private static final String SKLEP = "sklep";
     private static final String CENA = "cena";
     private static final String CENA_FORMAT = "#0.00";
-
-    protected interface DialogListener {
-        void onDialogNegativeClick(final DialogFragment dialog);
-
-        void onDialogPositiveClick(final DialogFragment dialog, final int i, final String nazwa,
-                                   final String sklep, final double cena);
-    }
-
     private DialogListener listener;
     private ArrayAdapter<String> sklepy;
+    private EditText etNazwa, etCena;
+    private AppCompatAutoCompleteTextView etSklep;
 
     public static DialogFragmentProdukt newInstance(final DialogListener listener, final int i,
                                                     final String nazwa, final String sklep,
@@ -46,9 +41,6 @@ public class DialogFragmentProdukt
         return dialogFragment;
     }
 
-    private EditText etNazwa, etCena;
-    private AppCompatAutoCompleteTextView etSklep;
-
     @NonNull
     @Override
     public Dialog onCreateDialog(final Bundle bundle) {
@@ -63,26 +55,33 @@ public class DialogFragmentProdukt
         etCena.setText((new DecimalFormat(CENA_FORMAT)).format(arguments.getDouble(CENA, 0.0f)));
         etSklep.setAdapter(sklepy);
         return new AlertDialog
-                .Builder(getActivity(), new Ustawienia(requireContext()).getTrybNocny(false)
+                .Builder(getActivity(), new Ustawienia(requireContext()).getSkorkaCiemna(false)
                 ? R.style.AppThemeNight_AlertOverlay : R.style.AppTheme_AlertOverlay)
                 .setView(view)
                 .setNegativeButton(R.string.zaniechaj, new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface di, final int i) {
-                        listener.onDialogNegativeClick(DialogFragmentProdukt.this);
-                    }
-                }
+                            public void onClick(final DialogInterface di, final int i) {
+                                listener.onDialogNegativeClick(DialogFragmentProdukt.this);
+                            }
+                        }
                 )
                 .setPositiveButton(R.string.zachowaj, new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface di, final int i) {
-                        listener.onDialogPositiveClick(DialogFragmentProdukt.this,
-                                arguments.getInt("i", -1),
-                                etNazwa.getText().toString().trim(),
-                                etSklep.getText().toString().trim(),
-                                Double.parseDouble(etCena.getText().toString().trim()
-                                        .replaceAll(",", ".")));
-                    }
-                }
+                            public void onClick(final DialogInterface di, final int i) {
+                                listener.onDialogPositiveClick(DialogFragmentProdukt.this,
+                                        arguments.getInt("i", -1),
+                                        etNazwa.getText().toString().trim(),
+                                        etSklep.getText().toString().trim(),
+                                        Double.parseDouble(etCena.getText().toString().trim()
+                                                .replaceAll(",", ".")));
+                            }
+                        }
                 )
                 .create();
+    }
+
+    protected interface DialogListener {
+        void onDialogNegativeClick(final DialogFragment dialog);
+
+        void onDialogPositiveClick(final DialogFragment dialog, final int i, final String nazwa,
+                                   final String sklep, final double cena);
     }
 }

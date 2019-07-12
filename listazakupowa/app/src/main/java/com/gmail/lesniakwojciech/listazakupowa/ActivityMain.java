@@ -8,6 +8,7 @@ import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +31,8 @@ public class ActivityMain
 
     @Override
     protected void onCreate(final Bundle bundle) {
-        if(new Ustawienia(this).getTrybNocny(false)) {
+        final Ustawienia ustawienia = new Ustawienia(this);
+        if (ustawienia.getSkorkaCiemna(false)) {
             setTheme(R.style.AppThemeNight);
         }
         super.onCreate(bundle);
@@ -38,14 +40,14 @@ public class ActivityMain
         NotificationMain.createNotificationChannel(this);
 
         Reklamy.initialize(this);
-        Reklamy.banner((AdView)findViewById(R.id.adView),
+        Reklamy.banner((AdView) findViewById(R.id.adView),
                 !new Zetony(this).sprawdzZetony(Zetony.ZETON_BANNER_WYLACZ, false, null),
                 new Reklamy.Listener() {
-            @Override
-            public void onRewarded(final int amount) {
-                new Zetony(getApplicationContext()).dodajZetony(Zetony.ZETONY_BANNER, findViewById(R.id.main));
-            }
-        });
+                    @Override
+                    public void onRewarded(final int amount) {
+                        new Zetony(getApplicationContext()).dodajZetony(Zetony.ZETONY_BANNER, findViewById(R.id.main));
+                    }
+                });
 
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -57,9 +59,9 @@ public class ActivityMain
 
         viewPager.setCurrentItem(1);
 
-        if(Build.VERSION_CODES.M <= Build.VERSION.SDK_INT) {
+        if (Build.VERSION_CODES.M <= Build.VERSION.SDK_INT) {
             Permissions.requestPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE,
-                    getString(R.string.uprawnieniaDoWczytaniaListy) + " "
+                    getString(R.string.uprawnienia_do_wczytania_listy) + " "
                             + Permissions.getPermissionDescription(getPackageManager(),
                             Manifest.permission_group.STORAGE));
         }
@@ -68,18 +70,20 @@ public class ActivityMain
         doKupienia = new AdapterListaZakupow(new ArrayList<ModelProdukt>());
         wKoszyku = new AdapterListaZakupow(new ArrayList<ModelProdukt>());
 
-        final Ustawienia ustawienia = new Ustawienia(this);
-        if(TextUtils.isEmpty(ustawienia.getIdentyfikator(""))) {
+        if (TextUtils.isEmpty(ustawienia.getIdentyfikator(""))) {
             ustawienia.setIdentyfikator(UUID.randomUUID().toString());
         }
         new AsyncTaskRzadanie(new AsyncTaskRzadanie.Listener() {
             @Override
             public void onPostExecute(final AsyncTaskRzadanie.RzadanieResponse response) {
-                if(response.isOK(true)) {
-                    ustawienia.setAdresAPI(response.getMessage());
+                if (response.isOK(true)) {
+                    final String message = response.getMessage();
+                    if (Patterns.WEB_URL.matcher(message).matches()) {
+                        ustawienia.setAPIAdres(message);
+                    }
                 }
             }
-        }).execute(getString(R.string.adresPosrednik));
+        }).execute(getString(R.string.ADRES_POSREDNIK));
     }
 
     @Override
@@ -94,7 +98,7 @@ public class ActivityMain
         listProdukty.clear();
         listDoKupienia.clear();
         listWKoszyku.clear();
-        ParserProdukt.parse(new Ustawienia(this).getListy(getString(R.string.pierwszaLista)),
+        ParserProdukt.parse(new Ustawienia(this).getListy(getString(R.string.lista_poczatkowa)),
                 listProdukty, listDoKupienia, listWKoszyku);
         produkty.notifyDataSetChanged();
         doKupienia.notifyDataSetChanged();
@@ -165,15 +169,15 @@ public class ActivityMain
 
     private void createShortcuts() {
         if (Build.VERSION_CODES.N_MR1 <= Build.VERSION.SDK_INT) {
-            final String lista = ParserProdukt.prepare(doKupienia.getDataset(), getString(R.string.doKupienia));
-            if(null != lista) {
+            final String lista = ParserProdukt.prepare(doKupienia.getDataset(), getString(R.string.do_kupienia));
+            if (null != lista) {
                 final Intent intent = Wiadomosci.tekst(this.getPackageManager(), lista);
                 if (null != intent) {
                     getSystemService(ShortcutManager.class).setDynamicShortcuts(Arrays.asList(
                             new ShortcutInfo
                                     .Builder(this, getString(R.string.app_name))
-                                    .setShortLabel(getString(R.string.wyslijListeSMSem))
-                                    .setLongLabel(getString(R.string.wyslijListeSMSem))
+                                    .setShortLabel(getString(R.string.wyslij_liste_SMSem))
+                                    .setLongLabel(getString(R.string.wyslij_liste_SMSem))
                                     .setIcon(Icon.createWithResource(this,
                                             R.drawable.ic_launcher))
                                     .setIntent(intent)

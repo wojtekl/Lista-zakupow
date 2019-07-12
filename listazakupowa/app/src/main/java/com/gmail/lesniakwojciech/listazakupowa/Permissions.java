@@ -25,18 +25,18 @@ public class Permissions {
                     .getPermissionGroupInfo(permissionGroup, 0)
                     .loadDescription(packageManager)
                     .toString();
+        } catch (final Exception exception) {
         }
-        catch(final Exception exception) {}
         return uprawnienie;
     }
 
     public static void requestPermission(final Activity activity, final String permission,
                                          final String message) {
-        if(PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(activity,
+        if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(activity,
                 permission)) {
             return;
         }
-        if(ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
             new AlertDialog
                     .Builder(activity)
                     .setIcon(android.R.drawable.ic_dialog_alert)
@@ -50,18 +50,17 @@ public class Permissions {
                         }
                     })
                     .show();
-        }
-        else {
+        } else {
             ActivityCompat.requestPermissions(activity, new String[]{permission}, 0);
         }
     }
 
     public static boolean hasInternet(final Context context, final View view) {
-        final NetworkInfo networkInfo = ((ConnectivityManager)context
+        final NetworkInfo networkInfo = ((ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
         final boolean isConnected = null != networkInfo && networkInfo.isConnected();
         if (!isConnected) {
-            Snackbar.make(view, R.string.brakPolaczeniaZInternetem, Snackbar.LENGTH_LONG).show();
+            Snackbar.make(view, R.string.brak_polaczenia_z_internetem, Snackbar.LENGTH_LONG).show();
         }
         return isConnected;
     }

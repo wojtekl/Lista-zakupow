@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:padding="24sp">
 
     <TextView
@@ -16,27 +16,27 @@
         android:id="@+id/dfpEtNazwa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="8sp"
+        android:hint="@string/nazwa"
         android:inputType="textCapSentences"
-        android:hint="@string/nazwa" />
+        android:paddingBottom="8sp" />
 
     <androidx.appcompat.widget.AppCompatAutoCompleteTextView
         android:id="@+id/dfpEtSklep"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/sklep"
+        android:inputType="textCapSentences"
         android:paddingTop="16sp"
         android:paddingBottom="8sp"
-        android:inputType="textCapSentences"
-        android:hint="@string/sklep"
         android:selectAllOnFocus="true" />
 
     <EditText
         android:id="@+id/dfpEtCena"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/cena"
+        android:inputType="numberDecimal"
         android:paddingTop="16sp"
         android:paddingBottom="8sp"
-        android:inputType="numberDecimal"
-        android:hint="@string/cena"
         android:selectAllOnFocus="true" />
 </LinearLayout>

@@ -16,33 +16,27 @@ public class UkrytaWiadomosc {
     private static final String PODPIS = "com.gmail.lesniakwojciech.listazakupowa";
     private static final int PODPIS_DLUGOSC = PODPIS.length();
     private static final int IKONA_ROZMIAR = 3331;
+    private String tresc;
+    private long data;
 
     public UkrytaWiadomosc() {
         this.tresc = "";
         this.data = 0;
     }
 
-    private String tresc;
-
-    public String getTresc()
-    {
+    public String getTresc() {
         return this.tresc;
     }
 
-    public void setTresc(final String tresc)
-    {
+    public void setTresc(final String tresc) {
         this.tresc = tresc;
     }
 
-    private long data;
-
-    public long getData()
-    {
+    public long getData() {
         return this.data;
     }
 
-    public void setData(final long data)
-    {
+    public void setData(final long data) {
         this.data = data;
     }
 
@@ -51,12 +45,11 @@ public class UkrytaWiadomosc {
         try {
             string = Utils.readFromStream(context.getContentResolver().openInputStream(uri),
                     IKONA_ROZMIAR);
-        }
-        catch (final IOException exception) {
+        } catch (final IOException exception) {
             Toast.makeText(context, exception.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
 
-        if(TextUtils.isEmpty(string) || !PODPIS.equals(string.substring(0, PODPIS_DLUGOSC))) {
+        if (TextUtils.isEmpty(string) || !PODPIS.equals(string.substring(0, PODPIS_DLUGOSC))) {
             return false;
         }
 
@@ -70,7 +63,7 @@ public class UkrytaWiadomosc {
     }
 
     public Uri przygotuj(final Context context) {
-        final byte []wiadomosc = new StringBuilder()
+        final byte[] wiadomosc = new StringBuilder()
                 .append(PODPIS)
                 .append(";")
                 .append(Calendar.getInstance().getTimeInMillis())
@@ -80,10 +73,10 @@ public class UkrytaWiadomosc {
                 .getBytes();
 
         try {
-            final byte []ikona = Utils.readFromStream(context.getResources()
+            final byte[] ikona = Utils.readFromStream(context.getResources()
                     .openRawResource(R.raw.ic_launcher));
             final File file = File.createTempFile(
-                    context.getString(R.string.nazwaPliku),
+                    context.getString(R.string.nazwa_pliku),
                     ".jpg",
                     context.getCacheDir());
             final FileOutputStream fos = new FileOutputStream(file.getPath());
@@ -92,8 +85,7 @@ public class UkrytaWiadomosc {
             fos.close();
             file.deleteOnExit();
             return getUriForFile(context, context.getString(R.string.FILEPROVIDER), file);
-        }
-        catch (final IOException exception) {
+        } catch (final IOException exception) {
             Toast.makeText(context, exception.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
 

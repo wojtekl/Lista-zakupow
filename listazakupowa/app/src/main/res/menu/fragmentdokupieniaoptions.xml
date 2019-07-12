@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/fdkoWyslijListeSMSem"
-        android:title="@string/wyslijListeSMSem" />
+        android:title="@string/wyslij_liste_SMSem" />
     <item
         android:id="@+id/fdkoWyslijListe"
-        android:title="@string/wyslijListe"
         android:icon="@drawable/ic_share"
+        android:title="@string/wyslij_liste"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/fdkoWyczysc"
-        android:title="@string/wyczyscListe" />
+        android:title="@string/wyczysc_liste" />
 </menu>

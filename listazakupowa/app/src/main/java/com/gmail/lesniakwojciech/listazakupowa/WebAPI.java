@@ -25,10 +25,9 @@ public class WebAPI {
 
     public static String filtruj(final String odpowiedz) {
         final int poczatek = odpowiedz.indexOf("<p>");
-        if(0 < poczatek) {
+        if (0 < poczatek) {
             return odpowiedz.substring(poczatek + 3, odpowiedz.indexOf("</p>"));
-        }
-        else {
+        } else {
             return odpowiedz;
         }
     }

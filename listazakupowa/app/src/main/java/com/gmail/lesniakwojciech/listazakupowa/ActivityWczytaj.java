@@ -10,8 +10,9 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.core.content.ContextCompat;
 import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,12 +23,11 @@ public class ActivityWczytaj extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if(new Ustawienia(this).getTrybNocny(false)) {
+        final Ustawienia ustawienia = new Ustawienia(this);
+        if (ustawienia.getSkorkaCiemna(false)) {
             setTheme(R.style.AppThemeNight);
         }
         super.onCreate(savedInstanceState);
-
-        final Ustawienia ustawienia = new Ustawienia(this);
 
         produkty = new ArrayList<>();
         doKupienia = new ArrayList<>();
@@ -35,24 +35,24 @@ public class ActivityWczytaj extends Activity {
         ParserProdukt.parse(ustawienia.getListy("[[],[],[]]"), produkty, doKupienia, wKoszyku);
 
         final Intent intent = getIntent();
-        if(Intent.ACTION_VIEW.equals(intent.getAction())) {
+        if (Intent.ACTION_VIEW.equals(intent.getAction())) {
             wczytajListe(intent.getData(), ustawienia);
         }
     }
 
     private void wczytajListe(final Uri uri, final Ustawienia ustawienia) {
-        if(Build.VERSION_CODES.M <= Build.VERSION.SDK_INT
+        if (Build.VERSION_CODES.M <= Build.VERSION.SDK_INT
                 && PackageManager.PERMISSION_GRANTED != ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            Toast.makeText(this, getString(R.string.uprawnieniaDoWczytaniaListy) + " "
-                            + Permissions.getPermissionDescription(getPackageManager(),
+            Toast.makeText(this, getString(R.string.uprawnienia_do_wczytania_listy) + " "
+                    + Permissions.getPermissionDescription(getPackageManager(),
                     Manifest.permission_group.STORAGE), Toast.LENGTH_LONG).show();
             this.finish();
             return;
         }
 
         final UkrytaWiadomosc wiadomosc = new UkrytaWiadomosc();
-        if(!wiadomosc.odczytaj(this, uri)) {
+        if (!wiadomosc.odczytaj(this, uri)) {
             this.finish();
             return;
         }
@@ -71,11 +71,11 @@ public class ActivityWczytaj extends Activity {
         final Context context = getApplicationContext();
         final Activity activity = this;
         new AlertDialog
-                .Builder(context, ustawienia.getTrybNocny(false)
+                .Builder(context, ustawienia.getSkorkaCiemna(false)
                 ? R.style.AppThemeNight_AlertOverlay : R.style.AppTheme_AlertOverlay)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle(R.string.zaktualizujListe)
-                .setMessage(R.string.potwierdzAktualizacje)
+                .setTitle(R.string.zaktualizuj_liste)
+                .setMessage(R.string.potwierdz_aktualizacje)
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(final DialogInterface dialog) {

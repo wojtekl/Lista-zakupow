@@ -2,13 +2,14 @@ package com.gmail.lesniakwojciech.listazakupowa;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.NonNull;
-import androidx.core.view.ViewCompat;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
 import java.util.Collections;
@@ -24,8 +25,7 @@ public class AdapterListaZakupow
     private View selectedItem = null;
     private Drawable holderBackground = null;
 
-    public AdapterListaZakupow(final List<ModelProdukt> dataset)
-    {
+    public AdapterListaZakupow(final List<ModelProdukt> dataset) {
         this.dataset = dataset;
     }
 
@@ -88,7 +88,7 @@ public class AdapterListaZakupow
     }
 
     public void setSelection(final View view) {
-        if(null == selectedItem) {
+        if (null == selectedItem) {
             selectedItem = view;
             holderBackground = selectedItem.getBackground();
             selectedItem.setBackgroundColor(Color.LTGRAY);
@@ -99,6 +99,12 @@ public class AdapterListaZakupow
         ViewCompat.setBackground(selectedItem, holderBackground);
         holderBackground = null;
         selectedItem = null;
+    }
+
+    protected interface OnItemClickListener {
+        void onItemClick(final int position);
+
+        void onItemLongClick(final View view, final int position);
     }
 
     protected class ViewHolderListaZakupow
@@ -121,24 +127,19 @@ public class AdapterListaZakupow
 
         @Override
         public void onClick(final View view) {
-            if(null != this.onItemClickListener) {
+            if (null != this.onItemClickListener) {
                 this.onItemClickListener.onItemClick(getAdapterPosition());
             }
         }
 
         @Override
         public boolean onLongClick(final View view) {
-            if(null != this.onItemClickListener) {
+            if (null != this.onItemClickListener) {
                 this.onItemClickListener.onItemLongClick(view, getAdapterPosition());
                 return true;
             }
 
             return false;
         }
-    }
-
-    protected interface OnItemClickListener {
-        void onItemClick(final int position);
-        void onItemLongClick(final View view, final int position);
     }
 }

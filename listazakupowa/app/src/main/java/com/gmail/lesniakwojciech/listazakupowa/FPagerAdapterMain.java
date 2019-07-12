@@ -13,7 +13,7 @@ import com.google.android.material.tabs.TabLayout;
 
 public class FPagerAdapterMain
         extends FragmentPagerAdapter {
-    private final String []titles;
+    private final String[] titles;
 
     public FPagerAdapterMain(final FragmentManager fm, final Resources resources) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
@@ -23,6 +23,33 @@ public class FPagerAdapterMain
                 resources.getString(FragmentDoKupienia.title),
                 resources.getString(FragmentProdukty.title)
         };
+    }
+
+    public static void tabLayout(final ViewPager viewPager, final TabLayout tabLayout,
+                                 final Resources resources) {
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            private final int[] tabColors = {
+                    ResourcesCompat.getColor(resources, FragmentWKoszyku.color, null),
+                    ResourcesCompat.getColor(resources, FragmentDoKupienia.color, null),
+                    ResourcesCompat.getColor(resources, FragmentProdukty.color, null)
+            };
+
+            @Override
+            public void onPageSelected(final int i) {
+                tabLayout.setSelectedTabIndicatorColor(tabColors[i]);
+            }
+        });
+
+        tabLayout.setupWithViewPager(viewPager);
+
+        final int[] tabIcons = {
+                FragmentWKoszyku.icon,
+                FragmentDoKupienia.icon,
+                FragmentProdukty.icon
+        };
+        for (int i = 0, d = tabLayout.getTabCount(); d > i; ++i) {
+            tabLayout.getTabAt(i).setIcon(tabIcons[i]);
+        }
     }
 
     @NonNull
@@ -46,32 +73,5 @@ public class FPagerAdapterMain
     @Override
     public CharSequence getPageTitle(final int position) {
         return titles[position];
-    }
-
-    public static void tabLayout(final ViewPager viewPager, final TabLayout tabLayout,
-                                 final Resources resources){
-        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            private final int []tabColors = {
-                    ResourcesCompat.getColor(resources, FragmentWKoszyku.color, null),
-                    ResourcesCompat.getColor(resources, FragmentDoKupienia.color, null),
-                    ResourcesCompat.getColor(resources, FragmentProdukty.color, null)
-            };
-
-            @Override
-            public void onPageSelected(final int i) {
-                tabLayout.setSelectedTabIndicatorColor(tabColors[i]);
-            }
-        });
-
-        tabLayout.setupWithViewPager(viewPager);
-
-        final int []tabIcons = {
-                FragmentWKoszyku.icon,
-                FragmentDoKupienia.icon,
-                FragmentProdukty.icon
-        };
-        for(int i = 0, d = tabLayout.getTabCount(); d > i; ++i) {
-            tabLayout.getTabAt(i).setIcon(tabIcons[i]);
-        }
     }
 }

@@ -3,81 +3,83 @@
     <PreferenceCategory app:title="@string/ogolne">
 
         <EditTextPreference
-            app:key="aplikacjaWersja"
-            app:title="@string/wersjaAplikacji"
+            app:defaultValue="@string/APLIKACJA_WERSJA"
             app:enabled="false"
-            app:defaultValue="@string/aplikacjaWersja"
+            app:key="aplikacjaWersja"
             app:persistent="false"
+            app:title="@string/wersja_aplikacji"
             app:useSimpleSummaryProvider="true" />
 
         <SwitchPreferenceCompat
-            app:key="trybNocny"
-            app:title="@string/trybNocny"
-            app:defaultValue="false" />
+            app:defaultValue="false"
+            app:key="skorkaCiemna"
+            app:title="@string/ciemna_skorka" />
 
         <Preference
             app:key="pokazInstrukcje"
-            app:title="@string/pokazInstrukcje" />
+            app:title="@string/pokaz_instrukcje" />
 
         <EditTextPreference
+            app:dependency="aktywujRyzykowne"
             app:key="identyfikator"
             app:title="@string/identyfikator"
-            app:dependency="aktywujRyzykowne"
             app:useSimpleSummaryProvider="true" />
 
         <Preference
+            app:dependency="aktywujRyzykowne"
             app:key="wyczyscWszystko"
-            app:title="@string/wyczyscWszystko"
-            app:dependency="aktywujRyzykowne" />
+            app:title="@string/wyczysc_wszystko" />
 
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/zetony">
 
         <EditTextPreference
+            app:defaultValue="@string/ZETONY_PREMIA"
+            app:enabled="false"
             app:key="zetony"
             app:title="@string/zetony"
-            app:enabled="false"
-            app:defaultValue="@string/zetonyPremia"
             app:useSimpleSummaryProvider="true" />
 
         <Preference
-            app:key="zetonyZaReklame"
-            app:title="@string/zetonyZaReklame" />
+            app:key="zdobadzZetony"
+            app:summary="@string/zobaczysz_reklame"
+            app:title="@string/zdobadz_zetony" />
 
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/komunikacja">
 
         <SwitchPreferenceCompat
-            app:key="udostepniajCeny"
-            app:title="@string/udostepniajCeny"
-            app:defaultValue="true" />
+            app:defaultValue="true"
+            app:key="cenyUdostepniaj"
+            app:summary="@string/zdobywaj_zetony"
+            app:title="@string/udostepniaj_ceny" />
 
         <Preference
             app:key="produktySpolecznosci"
-            app:title="@string/produktySpolecznosci" />
+            app:title="@string/produkty_spolecznosci" />
 
         <Preference
             app:key="udostepnijAplikacje"
-            app:title="@string/udostepnijAplikacje" />
+            app:title="@string/udostepnij_aplikacje" />
 
         <Preference
             app:key="inneAplikacje"
-            app:title="@string/inneAplikacje" />
+            app:title="@string/inne_aplikacje" />
 
         <EditTextPreference
-            app:key="adresAPI"
-            app:title="@string/adresAPI"
             app:dependency="aktywujRyzykowne"
+            app:key="APIAdres"
+            app:title="@string/adres_API"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
 
     <SwitchPreferenceCompat
-        app:key="aktywujRyzykowne"
-        app:title="@string/aktywujRyzykowne"
         app:defaultValue="false"
-        app:persistent="false" />
+        app:key="aktywujRyzykowne"
+        app:persistent="false"
+        app:title="@string/aktywuj_ryzykowne" />
 
 </androidx.preference.PreferenceScreen>

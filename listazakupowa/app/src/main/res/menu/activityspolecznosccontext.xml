@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/ascCena"
-        android:title="@string/cena"
         android:icon="@drawable/ic_monetization_on"
+        android:title="@string/cena"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/ascDodajProdukt"
-        android:title="@string/dodajProdukt"
         android:icon="@drawable/ic_playlist_add"
+        android:title="@string/dodaj_produkt"
         app:showAsAction="ifRoom" />
 </menu>

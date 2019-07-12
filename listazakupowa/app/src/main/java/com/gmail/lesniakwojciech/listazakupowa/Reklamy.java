@@ -16,7 +16,7 @@ public class Reklamy {
     private static RewardedVideoAd mRewardedVideoAd;
 
     public static void initialize(final Context context) {
-        MobileAds.initialize(context, context.getString(R.string.ad_app_id));
+        MobileAds.initialize(context, context.getString(R.string.AD_APP_ID));
     }
 
     public static void banner(final AdView adView, final boolean show, final Listener listener) {
@@ -49,7 +49,7 @@ public class Reklamy {
             @Override
             public void onRewardedVideoAdLoaded() {
                 amount = 0;
-                if(mRewardedVideoAd.isLoaded()) {
+                if (mRewardedVideoAd.isLoaded()) {
                     mRewardedVideoAd.show();
                 }
             }
@@ -64,7 +64,7 @@ public class Reklamy {
 
             @Override
             public void onRewardedVideoAdClosed() {
-                if(0 < amount) {
+                if (0 < amount) {
                     listener.onRewarded(amount);
                 }
             }
@@ -87,33 +87,33 @@ public class Reklamy {
             }
         });
 
-        mRewardedVideoAd.loadAd(context.getString(R.string.znagroda_ad_unit_id),
+        mRewardedVideoAd.loadAd(context.getString(R.string.AD_UNIT_ID_REWARDED),
                 new AdRequest.Builder().build());
     }
 
     public static void resume(final Context context) {
-        if(null != mAdView) {
+        if (null != mAdView) {
             mAdView.resume();
         }
-        if(null != mRewardedVideoAd) {
+        if (null != mRewardedVideoAd) {
             mRewardedVideoAd.resume(context);
         }
     }
 
     public static void pause(final Context context) {
-        if(null != mAdView) {
+        if (null != mAdView) {
             mAdView.pause();
         }
-        if(null != mRewardedVideoAd) {
+        if (null != mRewardedVideoAd) {
             mRewardedVideoAd.pause(context);
         }
     }
 
     public static void destroy(final Context context) {
-        if(null != mAdView) {
+        if (null != mAdView) {
             mAdView.destroy();
         }
-        if(null != mRewardedVideoAd) {
+        if (null != mRewardedVideoAd) {
             mRewardedVideoAd.destroy(context);
         }
     }

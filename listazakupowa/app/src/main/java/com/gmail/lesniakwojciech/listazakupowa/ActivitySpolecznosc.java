@@ -20,46 +20,19 @@ public class ActivitySpolecznosc extends AppCompatActivity {
     private AdapterListaZakupow adapterListaZakupow;
     private ActionMode actionMode;
 
-    private View view;
     private Context context;
-
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        if(new Ustawienia(this).getTrybNocny(false)) {
-            setTheme(R.style.AppThemeNight);
-        }
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activityspolecznosc);
-        view = findViewById(R.id.activityspolecznosc);
-        context = this;
-
-        adapterListaZakupow = new AdapterListaZakupow(new ArrayList<ModelProdukt>());
-        adapterListaZakupow.setOnItemClickListener(onItemClickListener);
-        pobierzProdukty(adapterListaZakupow);
-
-        final RecyclerView recyclerView = findViewById(R.id.asListView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapterListaZakupow);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-    }
-
     private final AdapterListaZakupow.OnItemClickListener onItemClickListener =
             new AdapterListaZakupow.OnItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
-                    if(null != actionMode){
+                    /* if (null != actionMode) {
                         return;
-                    }
+                    } */
                 }
 
                 @Override
                 public void onItemLongClick(final View view, final int position) {
-                    if(null != actionMode){
+                    if (null != actionMode) {
                         return;
                     }
 
@@ -82,21 +55,21 @@ public class ActivitySpolecznosc extends AppCompatActivity {
                             final ModelProdukt model = adapterListaZakupow.getItem(position);
                             switch (item.getItemId()) {
                                 case R.id.ascCena:
-                                    if(Permissions.hasInternet(context, view) &&
+                                    if (Permissions.hasInternet(context, view) &&
                                             new Zetony(context).sprawdzZetony(Zetony.ZETONY_CENA_ZOBACZ,
-                                            true, view)) {
+                                                    true, view)) {
                                         final Ustawienia ustawienia = new Ustawienia(context);
                                         new AsyncTaskRzadanie(new AsyncTaskRzadanie.Listener() {
                                             @Override
                                             public void onPostExecute(final AsyncTaskRzadanie.RzadanieResponse response) {
-                                                if(response.isOK(false)) {
+                                                if (response.isOK(false)) {
                                                     startActivity(new Intent(context, ActivityKomunikat.class)
                                                             .putExtra(ActivityKomunikat.IE_KOMUNIKAT,
                                                                     model.getNazwa() + ":\n"
                                                                             + WebAPI.filtruj(response.getMessage())));
                                                 }
                                             }
-                                        }).execute(WebAPI.pobierzCeny(ustawienia.getAdresAPI(""),
+                                        }).execute(WebAPI.pobierzCeny(ustawienia.getAPIAdres(""),
                                                 model.getNazwa(), ustawienia.getIdentyfikator("")));
                                     }
                                     mode.finish();
@@ -110,16 +83,16 @@ public class ActivitySpolecznosc extends AppCompatActivity {
                                             listProdukty, listDoKupienia, listWKoszyku);
                                     final String nazwa = model.getNazwa();
                                     boolean istnieje = false;
-                                    for(int i = 0, d = listWKoszyku.size(); d > i; ++i) {
+                                    for (int i = 0, d = listWKoszyku.size(); d > i; ++i) {
                                         istnieje = istnieje || nazwa.equals(listWKoszyku.get(i).getNazwa());
                                     }
-                                    for(int i = 0, d = listDoKupienia.size(); d > i; ++i) {
+                                    for (int i = 0, d = listDoKupienia.size(); d > i; ++i) {
                                         istnieje = istnieje || nazwa.equals(listDoKupienia.get(i).getNazwa());
                                     }
-                                    for(int i = 0, d = listProdukty.size(); d > i; ++i) {
+                                    for (int i = 0, d = listProdukty.size(); d > i; ++i) {
                                         istnieje = istnieje || nazwa.equals(listProdukty.get(i).getNazwa());
                                     }
-                                    if(!istnieje) {
+                                    if (!istnieje) {
                                         listProdukty.add(model);
                                     }
                                     ustawienia.setListy(ParserProdukt.toString(listProdukty,
@@ -132,7 +105,7 @@ public class ActivitySpolecznosc extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onDestroyActionMode(ActionMode mode) {
+                        public void onDestroyActionMode(final ActionMode mode) {
                             actionMode = null;
                             adapterListaZakupow.clearSelection();
                         }
@@ -140,19 +113,43 @@ public class ActivitySpolecznosc extends AppCompatActivity {
                 }
             };
 
-    private void pobierzProdukty(final AdapterListaZakupow adapterListaZakupow) {
-        if(Permissions.hasInternet(context, view) &&
-                new Zetony(context).sprawdzZetony(Zetony.ZETONY_PRODUKTY_SPOLECZNOSCI, true, view)) {
-            final Ustawienia ustawienia = new Ustawienia(context);
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        if (new Ustawienia(this).getSkorkaCiemna(false)) {
+            setTheme(R.style.AppThemeNight);
+        }
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activityspolecznosc);
+        context = this;
+
+        adapterListaZakupow = new AdapterListaZakupow(new ArrayList<ModelProdukt>());
+        adapterListaZakupow.setOnItemClickListener(onItemClickListener);
+        pobierzProdukty(adapterListaZakupow, findViewById(R.id.activityspolecznosc));
+
+        final RecyclerView recyclerView = findViewById(R.id.asListView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapterListaZakupow);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    private void pobierzProdukty(final AdapterListaZakupow adapterListaZakupow, final View view) {
+        if (Permissions.hasInternet(this, view)) {
+            final Ustawienia ustawienia = new Ustawienia(this);
             new AsyncTaskRzadanie(new AsyncTaskRzadanie.Listener() {
                 @Override
                 public void onPostExecute(final AsyncTaskRzadanie.RzadanieResponse response) {
-                    if(response.isOK(true)) {
+                    if (response.isOK(true)) {
                         ParserProdukt.list(response.getMessage(), adapterListaZakupow.getDataset());
                         adapterListaZakupow.notifyDataSetChanged();
                     }
                 }
-            }).execute(WebAPI.pobierzListe(ustawienia.getAdresAPI(""), ustawienia.getIdentyfikator("")));
+            }).execute(WebAPI.pobierzListe(ustawienia.getAPIAdres("")
+                    , ustawienia.getIdentyfikator("")));
         }
     }
 }

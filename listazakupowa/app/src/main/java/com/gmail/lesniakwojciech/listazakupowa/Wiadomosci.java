@@ -10,7 +10,7 @@ public class Wiadomosci {
         final Intent intent = new Intent(Intent.ACTION_SENDTO)
                 .setData(Uri.parse("smsto:"))
                 .putExtra("sms_body", tresc);
-        if(Permissions.canStart(intent, packageManager)) {
+        if (Permissions.canStart(intent, packageManager)) {
             return intent;
         }
         return null;
@@ -21,7 +21,7 @@ public class Wiadomosci {
                 .setData(Uri.parse("smsto:"))
                 .putExtra(Intent.EXTRA_STREAM, uri)
                 .setType("image/jpeg");
-        if(Permissions.canStart(intent, context.getPackageManager())) {
+        if (Permissions.canStart(intent, context.getPackageManager())) {
             context.startActivity(intent);
         }
     }

@@ -77,8 +77,7 @@ public class ParserProdukt {
         return stringBuilder.toString();
     }
 
-    public static String listToJSON(final List<ModelProdukt> list)
-    {
+    public static String listToJSON(final List<ModelProdukt> list) {
         final StringBuilder stringBuilder = new StringBuilder().append("[");
 
         int l = list.size();
@@ -94,54 +93,51 @@ public class ParserProdukt {
     }
 
     public static void merge(final String lista, List<ModelProdukt> wKoszyku,
-                            List<ModelProdukt> doKupienia, List<ModelProdukt> produkty)
-    {
+                             List<ModelProdukt> doKupienia, List<ModelProdukt> produkty) {
         try {
             final JSONArray jsonArray = new JSONArray(lista);
             for (int i = 0, d = jsonArray.length(); i < d; ++i) {
                 final ModelProdukt produkt = ModelProdukt.fromJSON(jsonArray.getString(i));
-                if(wKoszyku.contains(produkt) || doKupienia.contains(produkt)){
+                if (wKoszyku.contains(produkt) || doKupienia.contains(produkt)) {
                     continue;
                 }
                 boolean istnieje = false;
-                for(int j = 0, e = produkty.size(); j < e; ++j)
-                {
+                for (int j = 0, e = produkty.size(); j < e; ++j) {
                     final ModelProdukt model = produkty.get(j);
-                    if(produkt.equals(model)){
+                    if (produkt.equals(model)) {
                         doKupienia.add(model);
                         produkty.remove(j);
                         istnieje = true;
                         break;
                     }
                 }
-                if(!istnieje){
+                if (!istnieje) {
                     doKupienia.add(produkt);
                 }
             }
-        }
-        catch(final JSONException exception){
+        } catch (final JSONException exception) {
         }
     }
 
     public static List<String> sklepy(final List<ModelProdukt> produkty, final List<ModelProdukt> doKupienia,
-                              final List<ModelProdukt> wKoszyku) {
+                                      final List<ModelProdukt> wKoszyku) {
         final List<String> listSklepy = new ArrayList<>();
 
-        for(int i = 0, d = produkty.size(); i < d; ++i) {
+        for (int i = 0, d = produkty.size(); i < d; ++i) {
             final String sklep = produkty.get(i).getSklep();
-            if(!listSklepy.contains(sklep)) {
+            if (!listSklepy.contains(sklep)) {
                 listSklepy.add(sklep);
             }
         }
-        for(int i = 0, d = doKupienia.size(); i < d; ++i) {
+        for (int i = 0, d = doKupienia.size(); i < d; ++i) {
             final String sklep = doKupienia.get(i).getSklep();
-            if(!listSklepy.contains(sklep)) {
+            if (!listSklepy.contains(sklep)) {
                 listSklepy.add(sklep);
             }
         }
-        for(int i = 0, d = wKoszyku.size(); i < d; ++i) {
+        for (int i = 0, d = wKoszyku.size(); i < d; ++i) {
             final String sklep = wKoszyku.get(i).getSklep();
-            if(!listSklepy.contains(sklep)) {
+            if (!listSklepy.contains(sklep)) {
                 listSklepy.add(sklep);
             }
         }
@@ -170,7 +166,7 @@ public class ParserProdukt {
             for (int i = 0, d = jsonArray.length(); i < d; ++i) {
                 lista.add(ModelProdukt.fromJSON(jsonArray.getString(i)));
             }
+        } catch (final Exception exception) {
         }
-        catch(final Exception exception) {}
     }
 }

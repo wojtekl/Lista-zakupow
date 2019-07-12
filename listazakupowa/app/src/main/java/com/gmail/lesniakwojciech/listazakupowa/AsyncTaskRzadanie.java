@@ -9,9 +9,8 @@ import java.net.HttpURLConnection;
 import java.util.Locale;
 
 public class AsyncTaskRzadanie extends AsyncTask<String, Integer, AsyncTaskRzadanie.RzadanieResponse> {
-    private static final int OK = 200;
     public static final String POST = "POST";
-
+    private static final int OK = 200;
     private final Listener listener;
 
     public AsyncTaskRzadanie(final Listener listener) {
@@ -24,10 +23,10 @@ public class AsyncTaskRzadanie extends AsyncTask<String, Integer, AsyncTaskRzada
             final HttpURLConnection httpURLConnection
                     = (HttpURLConnection) new java.net.URL(strings[0]).openConnection();
             httpURLConnection.addRequestProperty("Accept-Language", Locale.getDefault().getLanguage());
-            if(strings.length > 1 && !TextUtils.isEmpty(strings[1])) {
+            if (strings.length > 1 && !TextUtils.isEmpty(strings[1])) {
                 httpURLConnection.setRequestMethod(strings[1]);
             }
-            if(strings.length > 2 && !TextUtils.isEmpty(strings[2])) {
+            if (strings.length > 2 && !TextUtils.isEmpty(strings[2])) {
                 httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 final OutputStream outputStream = httpURLConnection.getOutputStream();
                 outputStream.write(strings[2].getBytes());
@@ -35,20 +34,18 @@ public class AsyncTaskRzadanie extends AsyncTask<String, Integer, AsyncTaskRzada
             }
             final RzadanieResponse response = new RzadanieResponse();
             response.setCode(httpURLConnection.getResponseCode());
-            if(OK == response.getCode()) {
+            if (OK == response.getCode()) {
                 final InputStream inputStream = httpURLConnection.getInputStream();
                 response.setMessage(Utils.readFromStream(inputStream, 0));
                 inputStream.close();
-            }
-            else {
+            } else {
                 final InputStream inputStream = httpURLConnection.getErrorStream();
                 response.setMessage(Utils.readFromStream(inputStream, 0));
                 inputStream.close();
             }
             httpURLConnection.disconnect();
             return response;
-        }
-        catch(final Exception exception) {
+        } catch (final Exception exception) {
             final RzadanieResponse response = new RzadanieResponse();
             response.setCode(-1);
             response.setMessage(exception.getLocalizedMessage());
@@ -67,6 +64,7 @@ public class AsyncTaskRzadanie extends AsyncTask<String, Integer, AsyncTaskRzada
 
     protected class RzadanieResponse {
         private int code;
+        private String message;
 
         public int getCode() {
             return this.code;
@@ -75,8 +73,6 @@ public class AsyncTaskRzadanie extends AsyncTask<String, Integer, AsyncTaskRzada
         public void setCode(final int code) {
             this.code = code;
         }
-
-        private String message;
 
         public String getMessage() {
             return this.message;
@@ -88,7 +84,7 @@ public class AsyncTaskRzadanie extends AsyncTask<String, Integer, AsyncTaskRzada
 
         public boolean isOK(final boolean checkCode) {
             boolean status = !TextUtils.isEmpty(message);
-            if(checkCode) {
+            if (checkCode) {
                 status |= OK == this.code;
             }
             return status;

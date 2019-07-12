@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Patterns;
+import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +20,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class ActivityUstawienia extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        if(new Ustawienia(this).getTrybNocny(false)) {
+        if (new Ustawienia(this).getSkorkaCiemna(false)) {
             setTheme(R.style.AppThemeNight);
         }
         super.onCreate(savedInstanceState);
@@ -44,11 +46,11 @@ public class ActivityUstawienia extends AppCompatActivity {
         public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
-            findPreference(Ustawienia.SP_TRYB_NOCNY).setOnPreferenceClickListener(new Preference
+            findPreference(Ustawienia.SP_SKORKA_CIEMNA).setOnPreferenceClickListener(new Preference
                     .OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(final Preference preference) {
-                    Snackbar.make(requireView(), R.string.uruchomAplikacjePonownie, Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(requireView(), R.string.uruchom_aplikacje_ponownie, Snackbar.LENGTH_LONG).show();
                     return true;
                 }
             });
@@ -57,18 +59,24 @@ public class ActivityUstawienia extends AppCompatActivity {
                     .OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(final Preference preference) {
-                    new AsyncTaskRzadanie(new AsyncTaskRzadanie.Listener() {
-                        @Override
-                        public void onPostExecute(final AsyncTaskRzadanie.RzadanieResponse response) {
-                            if(response.isOK(true)) {
-                                final Intent intent = new Intent(Intent.ACTION_VIEW,
-                                        Uri.parse(response.getMessage()));
-                                if(Permissions.canStart(intent, requireContext().getPackageManager())) {
-                                    startActivity(intent);
+                    final Context context = requireContext();
+                    if (Permissions.hasInternet(context, getView())) {
+                        new AsyncTaskRzadanie(new AsyncTaskRzadanie.Listener() {
+                            @Override
+                            public void onPostExecute(final AsyncTaskRzadanie.RzadanieResponse response) {
+                                if (response.isOK(true)) {
+                                    final String message = response.getMessage();
+                                    if (Patterns.WEB_URL.matcher(message).matches()) {
+                                        final Intent intent = new Intent(Intent.ACTION_VIEW,
+                                                Uri.parse(message));
+                                        if (Permissions.canStart(intent, context.getPackageManager())) {
+                                            startActivity(intent);
+                                        }
+                                    }
                                 }
                             }
-                        }
-                    }).execute(getString(R.string.adresInstrukcja));
+                        }).execute(getString(R.string.ADRES_INSTRUKCJA));
+                    }
                     return true;
                 }
             });
@@ -77,17 +85,19 @@ public class ActivityUstawienia extends AppCompatActivity {
                     .OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(final Preference preference) {
-                    new AlertDialog.Builder(getActivity())
+                    final Ustawienia ustawienia = new Ustawienia(requireContext());
+                    new AlertDialog.Builder(getActivity(), ustawienia.getSkorkaCiemna(false)
+                            ? R.style.AppThemeNight_AlertOverlay : R.style.AppTheme_AlertOverlay)
                             .setIcon(android.R.drawable.ic_dialog_alert)
-                            .setTitle(R.string.wyczyscWszystko)
-                            .setMessage(R.string.potwierdzCzyszczenie)
+                            .setTitle(R.string.wyczysc_wszystko)
+                            .setMessage(R.string.potwierdz_czyszczenie)
                             .setNegativeButton(R.string.nie, new DialogInterface.OnClickListener() {
-                                        public void onClick(final DialogInterface di, final int i) {}
+                                        public void onClick(final DialogInterface di, final int i) {
+                                        }
                                     }
                             )
                             .setPositiveButton(R.string.tak, new DialogInterface.OnClickListener() {
                                         public void onClick(final DialogInterface di, final int i) {
-                                            final Ustawienia ustawienia = new Ustawienia(requireContext());
                                             ustawienia.setListy("[[],[],[]]");
                                         }
                                     }
@@ -98,19 +108,22 @@ public class ActivityUstawienia extends AppCompatActivity {
                 }
             });
 
-            findPreference("zetonyZaReklame").setOnPreferenceClickListener(new Preference
+            findPreference("zdobadzZetony").setOnPreferenceClickListener(new Preference
                     .OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(final Preference preference) {
-                    final Context context = getContext();
-                    Reklamy.rewardedVideoAd(context, new Reklamy.Listener() {
-                        @Override
-                        public void onRewarded(final int amount) {
-                            ((EditTextPreference)findPreference("zetony"))
-                                    .setText(String.valueOf(new Zetony(context)
-                                            .dodajZetony(amount * Zetony.ZETONY_REWARDEDVIDEOAD, getView())));
-                        }
-                    });
+                    final Context context = requireContext();
+                    final View view = getView();
+                    if (Permissions.hasInternet(context, view)) {
+                        Reklamy.rewardedVideoAd(context, new Reklamy.Listener() {
+                            @Override
+                            public void onRewarded(final int amount) {
+                                ((EditTextPreference) findPreference("zetony"))
+                                        .setText(String.valueOf(new Zetony(context)
+                                                .dodajZetony(amount * Zetony.ZETONY_REWARDEDVIDEOAD, view)));
+                            }
+                        });
+                    }
                     return true;
                 }
             });
@@ -121,9 +134,9 @@ public class ActivityUstawienia extends AppCompatActivity {
                 public boolean onPreferenceClick(final Preference preference) {
                     final Intent intent = new Intent(Intent.ACTION_SENDTO)
                             .setData(Uri.parse("smsto:"))
-                            .putExtra("sms_body", getString(R.string.udostepnijTekst)
-                                    + getString(R.string.adresPlayAplikacja));
-                    if(Permissions.canStart(intent, requireContext().getPackageManager())) {
+                            .putExtra("sms_body", getString(R.string.udostepnij_tekst)
+                                    + getString(R.string.ADRES_PLAY_APLIKACJA));
+                    if (Permissions.canStart(intent, requireContext().getPackageManager())) {
                         startActivity(intent);
                     }
                     return true;
@@ -135,9 +148,9 @@ public class ActivityUstawienia extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceClick(final Preference preference) {
                     final Intent intent = new Intent(Intent.ACTION_VIEW)
-                            .setData(Uri.parse(getString(R.string.adresPlayAplikacje)))
+                            .setData(Uri.parse(getString(R.string.ADRES_PLAY_APLIKACJE)))
                             .setPackage("com.android.vending");
-                    if(Permissions.canStart(intent, requireContext().getPackageManager())) {
+                    if (Permissions.canStart(intent, requireContext().getPackageManager())) {
                         startActivity(intent);
                     }
                     return true;
@@ -148,7 +161,12 @@ public class ActivityUstawienia extends AppCompatActivity {
                     .OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(final Preference preference) {
-                    startActivity(new Intent(getContext(), ActivitySpolecznosc.class));
+                    final Context context = requireContext();
+                    final View view = getView();
+                    if (Permissions.hasInternet(context, view) && new Zetony(context)
+                            .sprawdzZetony(Zetony.ZETONY_PRODUKTY_SPOLECZNOSCI, true, view)) {
+                        startActivity(new Intent(context, ActivitySpolecznosc.class));
+                    }
                     return true;
                 }
             });

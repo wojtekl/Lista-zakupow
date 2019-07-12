@@ -16,6 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AWProviderListaZakupow extends AppWidgetProvider {
+    public static void update(final Context context) {
+        context.sendBroadcast(new Intent(context, AWProviderListaZakupow.class)
+                .setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE)
+                .putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, AppWidgetManager
+                        .getInstance(context)
+                        .getAppWidgetIds(new ComponentName(context, AWProviderListaZakupow.class))
+                )
+        );
+    }
+
     @Override
     public void onUpdate(final Context context, final AppWidgetManager appWidgetManager,
                          final int[] appWidgetIds) {
@@ -26,8 +36,7 @@ public class AWProviderListaZakupow extends AppWidgetProvider {
             for (int i = 0, d = jsonArray.length(); d > i; ++i) {
                 doKupienia.add(ModelProdukt.fromJSON(jsonArray.getString(i)));
             }
-        }
-        catch (final JSONException exception) {
+        } catch (final JSONException exception) {
             Toast.makeText(context, exception.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
         String string = "- - -";
@@ -55,16 +64,6 @@ public class AWProviderListaZakupow extends AppWidgetProvider {
             );
             appWidgetManager.updateAppWidget(appWidgetIds[i], views);
         }
-    }
-
-    public static void update(final Context context) {
-        context.sendBroadcast(new Intent(context, AWProviderListaZakupow.class)
-                .setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE)
-                .putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, AppWidgetManager
-                        .getInstance(context)
-                        .getAppWidgetIds(new ComponentName(context, AWProviderListaZakupow.class))
-                )
-        );
     }
 
     /* static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,

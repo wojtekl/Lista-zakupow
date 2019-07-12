@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/apk/tools"
     android:id="@+id/main"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ActivityMain">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -48,12 +48,11 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/alzTabLayout"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:tabBackground="@color/colorPrimary"
             app:tabIndicatorColor="@color/colorPrimaryDark"
-            app:tabIndicatorHeight="72sp"
-            />
+            app:tabIndicatorHeight="72sp" />
 
     </androidx.viewpager.widget.ViewPager>
 
@@ -69,11 +68,10 @@
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"
-        android:visibility="gone">
-    </com.google.android.gms.ads.AdView>
+        ads:adUnitId="@string/AD_UNIT_ID_BANNER" />
 
 </RelativeLayout>

@@ -22,7 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class FragmentDoKupienia
         extends Fragment
         implements DialogFragmentProdukt.DialogListener {
-    protected static final int title = R.string.doKupienia;
+    protected static final int title = R.string.do_kupienia;
     protected static final int color = R.color.redA100;
     protected static final int icon = R.drawable.ic_list;
 
@@ -32,6 +32,92 @@ public class FragmentDoKupienia
     private AdapterListaZakupow wKoszyku, produkty;
 
     private ActionMode actionMode;
+    private final AdapterListaZakupow.OnItemClickListener onItemClickListener =
+            new AdapterListaZakupow.OnItemClickListener() {
+                @Override
+                public void onItemClick(final int position) {
+                    if (null != actionMode) {
+                        return;
+                    }
+
+                    wKoszyku.addItem(adapterListaZakupow.getItem(position));
+                    wKoszyku.sort(new ComparatorProduktCena());
+                    adapterListaZakupow.removeItem(position);
+                }
+
+                @Override
+                public void onItemLongClick(final View view, final int position) {
+                    if (null != actionMode) {
+                        return;
+                    }
+
+                    adapterListaZakupow.setSelection(view);
+                    actionMode = requireActivity().startActionMode(new ActionMode.Callback() {
+
+                        @Override
+                        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                            mode.getMenuInflater().inflate(R.menu.fragmentdokupieniacontext, menu);
+                            return true;
+                        }
+
+                        @Override
+                        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                            final ModelProdukt model = adapterListaZakupow.getItem(position);
+                            switch (item.getItemId()) {
+                                case R.id.fdcCena:
+                                    final Context context = requireContext();
+                                    final View view = getView();
+                                    if (Permissions.hasInternet(context, view) &&
+                                            new Zetony(context).sprawdzZetony(Zetony.ZETONY_CENA_ZOBACZ,
+                                                    true, view)) {
+                                        final Ustawienia ustawienia = new Ustawienia(context);
+                                        new AsyncTaskRzadanie(new AsyncTaskRzadanie.Listener() {
+                                            @Override
+                                            public void onPostExecute(final AsyncTaskRzadanie.RzadanieResponse response) {
+                                                if (response.isOK(false)) {
+                                                    startActivity(new Intent(context, ActivityKomunikat.class)
+                                                            .putExtra(ActivityKomunikat.IE_KOMUNIKAT,
+                                                                    model.getNazwa() + ":\n"
+                                                                            + WebAPI.filtruj(response.getMessage())));
+                                                }
+                                            }
+                                        }).execute(WebAPI.pobierzCeny(ustawienia.getAPIAdres(""),
+                                                model.getNazwa(), ustawienia.getIdentyfikator("")));
+                                    }
+                                    mode.finish();
+                                    return true;
+                                case R.id.fdcUaktualnij:
+                                    DialogFragmentProdukt
+                                            .newInstance(FragmentDoKupienia.this, position, model.getNazwa(),
+                                                    model.getSklep(), model.getCena(),
+                                                    ((IWspoldzielenieDanych) requireActivity()).getSklepy())
+                                            .show(requireActivity().getSupportFragmentManager(), CONTEXT_UAKTUALNIJ);
+                                    mode.finish();
+                                    return true;
+                                case R.id.fdcUsun:
+                                    produkty.addItem(adapterListaZakupow.getItem(position));
+                                    produkty.sort(new ComparatorProduktPopularnosc());
+                                    adapterListaZakupow.removeItem(position);
+                                    mode.finish();
+                                    return true;
+                                default:
+                                    return false;
+                            }
+                        }
+
+                        @Override
+                        public void onDestroyActionMode(ActionMode mode) {
+                            actionMode = null;
+                            adapterListaZakupow.clearSelection();
+                        }
+                    });
+                }
+            };
 
     @Override
     public View onCreateView(@NonNull final LayoutInflater li, final ViewGroup vg, final Bundle bundle) {
@@ -64,7 +150,7 @@ public class FragmentDoKupienia
 
     @Override
     public void onPause() {
-        if(null != actionMode) {
+        if (null != actionMode) {
             actionMode.finish();
         }
 
@@ -95,106 +181,19 @@ public class FragmentDoKupienia
         }
     }
 
-    private final AdapterListaZakupow.OnItemClickListener onItemClickListener =
-            new AdapterListaZakupow.OnItemClickListener() {
-        @Override
-        public void onItemClick(final int position) {
-            if(null != actionMode){
-                return;
-            }
-
-            wKoszyku.addItem(adapterListaZakupow.getItem(position));
-            wKoszyku.sort(new ComparatorProduktCena());
-            adapterListaZakupow.removeItem(position);
-        }
-
-        @Override
-        public void onItemLongClick(final View view, final int position) {
-            if(null != actionMode){
-                return;
-            }
-
-            adapterListaZakupow.setSelection(view);
-            actionMode = requireActivity().startActionMode(new ActionMode.Callback() {
-
-                @Override
-                public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                    mode.getMenuInflater().inflate(R.menu.fragmentdokupieniacontext, menu);
-                    return true;
-                }
-
-                @Override
-                public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                    return false;
-                }
-
-                @Override
-                public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                    final ModelProdukt model = adapterListaZakupow.getItem(position);
-                    switch (item.getItemId()) {
-                        case R.id.fdcCena:
-                            final Context context = requireContext();
-                            final View view = getView();
-                            if(Permissions.hasInternet(context, view) &&
-                                    new Zetony(context).sprawdzZetony(Zetony.ZETONY_CENA_ZOBACZ,
-                                    true, view)) {
-                                final Ustawienia ustawienia = new Ustawienia(context);
-                                new AsyncTaskRzadanie(new AsyncTaskRzadanie.Listener() {
-                                    @Override
-                                    public void onPostExecute(final AsyncTaskRzadanie.RzadanieResponse response) {
-                                        if(response.isOK(false)) {
-                                            startActivity(new Intent(context, ActivityKomunikat.class)
-                                                    .putExtra(ActivityKomunikat.IE_KOMUNIKAT,
-                                                            model.getNazwa() + ":\n"
-                                                                    + WebAPI.filtruj(response.getMessage())));
-                                        }
-                                    }
-                                }).execute(WebAPI.pobierzCeny(ustawienia.getAdresAPI(""),
-                                        model.getNazwa(), ustawienia.getIdentyfikator("")));
-                            }
-                            mode.finish();
-                            return true;
-                        case R.id.fdcUaktualnij:
-                            DialogFragmentProdukt
-                                    .newInstance(FragmentDoKupienia.this, position, model.getNazwa(),
-                                            model.getSklep(), model.getCena(),
-                                            ((IWspoldzielenieDanych)requireActivity()).getSklepy())
-                                    .show(requireActivity().getSupportFragmentManager(), CONTEXT_UAKTUALNIJ);
-                            mode.finish();
-                            return true;
-                        case R.id.fdcUsun:
-                            produkty.addItem(adapterListaZakupow.getItem(position));
-                            produkty.sort(new ComparatorProduktPopularnosc());
-                            adapterListaZakupow.removeItem(position);
-                            mode.finish();
-                            return true;
-                        default:
-                            return false;
-                    }
-                }
-
-                @Override
-                public void onDestroyActionMode(ActionMode mode) {
-                    actionMode = null;
-                    adapterListaZakupow.clearSelection();
-                }
-            });
-        }
-    };
-
     private void wyslijListeSMSem() {
-        final String lista = ParserProdukt.prepare(adapterListaZakupow.getDataset(), getString(R.string.doKupienia));
-        if(null != lista) {
+        final String lista = ParserProdukt.prepare(adapterListaZakupow.getDataset(), getString(R.string.do_kupienia));
+        if (null != lista) {
             final Intent intent = Wiadomosci.tekst(requireContext().getPackageManager(), lista);
-            if(null != intent) {
+            if (null != intent) {
                 startActivity(intent);
             }
         }
     }
 
     private void wyslijListe(final Context context) {
-        if(1 > adapterListaZakupow.getItemCount()
-                || !new Zetony(getContext()).sprawdzZetony(Zetony.ZETONY_WYSLIJLISTE,
+        if (1 > adapterListaZakupow.getItemCount()
+                || !new Zetony(context).sprawdzZetony(Zetony.ZETONY_WYSLIJLISTE,
                 true, getView())) {
             return;
         }
@@ -206,7 +205,8 @@ public class FragmentDoKupienia
     }
 
     @Override
-    public void onDialogNegativeClick(final DialogFragment dialog) {}
+    public void onDialogNegativeClick(final DialogFragment dialog) {
+    }
 
     @Override
     public void onDialogPositiveClick(final DialogFragment dialog, final int i, final String nazwa,
@@ -215,14 +215,14 @@ public class FragmentDoKupienia
             final ModelProdukt model = adapterListaZakupow.getItem(i);
             final Context context = requireContext();
             final Ustawienia ustawienia = new Ustawienia(context);
-            if(ustawienia.getUdostepniajCeny(false) && model.getCena() != cena
+            if (ustawienia.getCenyUdostepniaj(false) && model.getCena() != cena
                     && Permissions.hasInternet(context, null)) {
                 new AsyncTaskRzadanie(new AsyncTaskRzadanie.Listener() {
                     @Override
                     public void onPostExecute(final AsyncTaskRzadanie.RzadanieResponse response) {
                         new Zetony(context).dodajZetony(Zetony.ZETONY_CENA_UDOSTEPNIENIE, getView());
                     }
-                }).execute(ustawienia.getAdresAPI("") + WebAPI.produkt, AsyncTaskRzadanie.POST,
+                }).execute(ustawienia.getAPIAdres("") + WebAPI.produkt, AsyncTaskRzadanie.POST,
                         WebAPI.udostepnijCeny(ustawienia.getIdentyfikator(""), nazwa, sklep, cena));
             }
             model.setNazwa(nazwa);

@@ -2,6 +2,7 @@ package com.gmail.lesniakwojciech.listazakupowa;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +12,7 @@ public class ActivityKomunikat
 
     @Override
     protected void onCreate(final Bundle bundle) {
-        if(new Ustawienia(this).getTrybNocny(false)) {
+        if (new Ustawienia(this).getSkorkaCiemna(false)) {
             setTheme(R.style.AppThemeNight);
         }
         super.onCreate(bundle);
