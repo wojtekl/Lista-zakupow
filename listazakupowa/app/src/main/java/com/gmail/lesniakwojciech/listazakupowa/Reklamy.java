@@ -25,7 +25,7 @@ public class Reklamy {
             @Override
             public void onAdLoaded() {
                 super.onAdLoaded();
-                // mAdView.setVisibility(View.VISIBLE);
+                mAdView.setVisibility(View.VISIBLE);
             }
 
             @Override
