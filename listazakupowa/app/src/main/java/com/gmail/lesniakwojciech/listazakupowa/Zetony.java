@@ -43,4 +43,11 @@ public class Zetony {
         }
         return ustawienia.getZetony(0);
     }
+
+    public void wlaczInternet(final View view) {
+        if (new Ustawienia(context).getCenyUdostepniaj(false)
+                && !Permissions.hasInternet(context, null)) {
+            Snackbar.make(view, R.string.wlacz_internet, Snackbar.LENGTH_LONG).show();
+        }
+    }
 }

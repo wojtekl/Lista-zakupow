@@ -3,7 +3,6 @@ package com.gmail.lesniakwojciech.listazakupowa;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -68,10 +67,9 @@ public class ActivityWczytaj extends Activity {
             return;
         }
 
-        final Context context = getApplicationContext();
         final Activity activity = this;
         new AlertDialog
-                .Builder(context, ustawienia.getSkorkaCiemna(false)
+                .Builder(activity, ustawienia.getSkorkaCiemna(false)
                 ? R.style.AppThemeNight_AlertOverlay : R.style.AppTheme_AlertOverlay)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle(R.string.zaktualizuj_liste)
@@ -93,7 +91,7 @@ public class ActivityWczytaj extends Activity {
                                 ParserProdukt.merge(wiadomosc.getTresc(), wKoszyku, doKupienia, produkty);
                                 Collections.sort(doKupienia, new ComparatorProduktSklep());
                                 ustawienia.setListy(ParserProdukt.toString(produkty, doKupienia, wKoszyku));
-                                startActivity(new Intent(context, ActivityMain.class).setFlags(
+                                startActivity(new Intent(getApplicationContext(), ActivityMain.class).setFlags(
                                         Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                                 activity.finish();
                             }

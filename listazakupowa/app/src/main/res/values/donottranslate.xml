@@ -9,7 +9,7 @@
     <string name="AD_UNIT_ID_PELNOEKRANOWA">ca-app-pub-3940256099942544/1033173712</string>
     <string name="AD_UNIT_ID_REWARDED">ca-app-pub-3940256099942544/1033173712</string -->
 
-    <string name="APLIKACJA_WERSJA">1.2.0</string>
+    <string name="APLIKACJA_WERSJA">1.2.1</string>
     <string name="ADRES_PLAY_APLIKACJA">https://play.google.com/store/apps/details?id=com.gmail.lesniakwojciech.listazakupowa</string>
     <string name="ADRES_PLAY_APLIKACJE">https://play.google.com/store/search?q=pub:Wojciech+Leśniak</string>
     <string name="ADRES_POSREDNIK">https://github.com/wojtekl/Lista-zakupow/raw/master/adres.txt</string>

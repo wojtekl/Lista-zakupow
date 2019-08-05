@@ -101,6 +101,7 @@ public class FragmentProdukty
                                             .show(requireActivity().getSupportFragmentManager(),
                                                     CONTEXT_UAKTUALNIJ);
                                     mode.finish();
+                                    new Zetony(getContext()).wlaczInternet(getView());
                                     return true;
                                 case R.id.fpcUsun:
                                     adapterListaZakupow.removeItem(position);
@@ -144,6 +145,7 @@ public class FragmentProdukty
                         .newInstance(FragmentProdukty.this, -1, "", "",
                                 0.0f, wspoldzielenieDanych.getSklepy())
                         .show(requireActivity().getSupportFragmentManager(), OPTIONS_DODAJ_PRODUKT);
+                new Zetony(getContext()).wlaczInternet(getView());
             }
         });
 
@@ -173,6 +175,7 @@ public class FragmentProdukty
                         .newInstance(FragmentProdukty.this, -1, "", "",
                                 0.0f, wspoldzielenieDanych.getSklepy())
                         .show(requireActivity().getSupportFragmentManager(), OPTIONS_DODAJ_PRODUKT);
+                new Zetony(getContext()).wlaczInternet(getView());
                 return true;
             case R.id.fpoUstawienia:
                 startActivity(new Intent(getContext(), ActivityUstawienia.class));

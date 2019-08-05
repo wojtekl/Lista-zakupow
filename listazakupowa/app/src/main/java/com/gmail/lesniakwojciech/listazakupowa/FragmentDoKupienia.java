@@ -98,6 +98,7 @@ public class FragmentDoKupienia
                                                     ((IWspoldzielenieDanych) requireActivity()).getSklepy())
                                             .show(requireActivity().getSupportFragmentManager(), CONTEXT_UAKTUALNIJ);
                                     mode.finish();
+                                    new Zetony(getContext()).wlaczInternet(getView());
                                     return true;
                                 case R.id.fdcUsun:
                                     produkty.addItem(adapterListaZakupow.getItem(position));

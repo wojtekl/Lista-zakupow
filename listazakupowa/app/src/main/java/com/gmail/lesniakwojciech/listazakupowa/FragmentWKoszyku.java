@@ -98,6 +98,7 @@ public class FragmentWKoszyku
                                                     ((IWspoldzielenieDanych) requireActivity()).getSklepy())
                                             .show(requireActivity().getSupportFragmentManager(), CONTEXT_UAKTUALNIJ);
                                     mode.finish();
+                                    new Zetony(getContext()).wlaczInternet(getView());
                                     return true;
                                 default:
                                     return false;

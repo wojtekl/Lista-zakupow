@@ -19,6 +19,7 @@
     <string name="zachowaj">Save</string>
     <string name="uaktualnij">Update</string>
     <string name="usun">Remove</string>
+    <string name="wlacz_internet">Enable internet connection to share price and get rewarded.</string>
     <string name="lista_poczatkowa">[[[\"Apples\",\"City Market\",\"2.41\"],[\"Bread\",\"Charlie\'s Bakery\",\"2.98\"],[\"Chocolate Bar\",\"Supa Maket\",\"2.11\"],[\"Cucumber\",\"City Market\",\"2.98\"],[\"Eggs\",\"City Market\",\"1.60\"],[\"Hand Soap\",\"Maria\'s Herbal Shop\",\"2.67\"],[\"Ketchup\",\"Supa Maket\",\"2.22\"],[\"Salad\",\"City Market\",\"2.48\"],[\"Shampoo\",\"Maria\'s Herbal Shop\",\"2.97\"],[\"Toothpaste\",\"Maria\'s Herbal Shop\",\"2.96\"],[\"Butter\",\"City Market\",\"2.98\"],[\"Cheese\",\"City Market\",\"2.47\"],[\"Milk\",\"City Market\",\"1.86\"],[\"Tomatoes\",\"City Market\",\"1.68\"],[\"Tea Bags\",\"Maria\'s Herbal Shop\",\"2.32\"],[\"Rice\",\"Supa Maket\",\"1.00\"],[\"Soda\",\"Supa Maket\",\"2.50\"],[\"Coffee\",\"Supa Maket\",\"8.48\"],[\"Towels\",\"Supa Maket\",\"4.97\"],[\"Cereal\",\"Supa Maket\",\"3.64\"],[\"Sugar\",\"Supa Maket\",\"2.38\"],[\"Pasta\",\"Supa Maket\",\"1.38\"]],[],[]]</string>
     <string name="powroc">Back</string>
     <string name="uprawnienia">Permissions</string>

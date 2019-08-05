@@ -59,7 +59,7 @@ public class Permissions {
         final NetworkInfo networkInfo = ((ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
         final boolean isConnected = null != networkInfo && networkInfo.isConnected();
-        if (!isConnected) {
+        if (null != view && !isConnected) {
             Snackbar.make(view, R.string.brak_polaczenia_z_internetem, Snackbar.LENGTH_LONG).show();
         }
         return isConnected;
