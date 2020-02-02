@@ -99,7 +99,7 @@ class ActivityUstawienia : AppCompatActivity() {
                             context,
                             object : Reklamy.Listener {
                                 override fun onRewarded(amount: Int) {
-                                    (findPreference<EditTextPreference>(ustawienia.ZETONY))?.text =
+                                    (findPreference<EditTextPreference>(ustawienia.ZETONY))!!.text =
                                         Zetony(context).dodajZetony(
                                             amount * Zetony.ZETONY_REWARDEDVIDEOAD,
                                             view
