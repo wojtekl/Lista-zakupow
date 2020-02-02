@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24sp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20sp"
+        android:text="@string/produkt"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/dfpEtNazwa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/nazwa"
+        android:inputType="textCapSentences"
+        android:paddingBottom="8sp"
+        android:importantForAutofill="no" />
+
+    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+        android:id="@+id/dfpEtSklep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/sklep"
+        android:inputType="textCapSentences"
+        android:paddingTop="16sp"
+        android:paddingBottom="8sp"
+        android:selectAllOnFocus="true" />
+
+    <EditText
+        android:id="@+id/dfpEtCena"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/cena"
+        android:inputType="numberDecimal"
+        android:paddingTop="16sp"
+        android:paddingBottom="8sp"
+        android:selectAllOnFocus="true"
+        android:importantForAutofill="no" />
+</LinearLayout>

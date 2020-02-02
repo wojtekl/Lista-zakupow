@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lista zakupów</string>
+    <string name="w_koszyku">W koszyku</string>
+    <string name="zakoncz_zakupy">Zakończ zakupy</string>
+    <string name="do_kupienia">Do kupienia</string>
+    <string name="wyslij_liste_SMSem">Wyślij listę SMSem</string>
+    <string name="wyczysc_liste">Wyczyść listę</string>
+    <string name="nazwa_pliku">Lista_zakupow</string>
+    <string name="zaktualizuj_liste">Zaktualizuj listę</string>
+    <string name="potwierdz_aktualizacje">Posiadasz nowszą wersję. Kontynuować?</string>
+    <string name="wyslij_liste">Wyślij listę</string>
+    <string name="produkty">Produkty</string>
+    <string name="dodaj_produkt">Dodaj produkt</string>
+    <string name="produkt">Produkt</string>
+    <string name="sklep">Sklep</string>
+    <string name="cena">Cena</string>
+    <string name="wlacz_internet">Włącz internet by podzielić się ceną i otrzymać nagrodę.</string>
+    <string name="lista_poczatkowa">[[[\"Chleb\",\"Piekrania\",\"4.39\"],[\"Czekolada\",\"Market\",\"1.99\"],[\"Jabłka\",\"Ryneczek\",\"2.99\"],[\"Jaja\",\"Ryneczek\",\"0.85\"],[\"Ketchup\",\"Market\",\"1.99\"],[\"Mydło\",\"Sklep ziołowy\",\"2.49\"],[\"Ogórek\",\"Ryneczek\",\"1.99\"],[\"Pasta do zębów\",\"Sklep ziołowy\",\"4.99\"],[\"Sałata\",\"Ryneczek\",\"0.99\"],[\"Szampon\",\"Sklep ziołowy\",\"7.99\"],[\"Napój gazowany\",\"Market\",\"2.69\"],[\"Ryż\",\"Market\",\"1.69\"],[\"Masło\",\"Ryneczek\",\"3.69\"],[\"Mleko\",\"Ryneczek\",\"2.09\"],[\"Pomidory\",\"Ryneczek\",\"3.99\"],[\"Ser żółty\",\"Ryneczek\",\"22.99\"],[\"Herbata\",\"Sklep ziołowy\",\"7.99\"],[\"Kawa\",\"Market\",\"16.22\"],[\"Ręczniki papierowe\",\"Market\",\"3.29\"],[\"Cukier\",\"Market\",\"3.19\"],[\"Płatki śniadaniowe\",\"Market\",\"1.79\"],[\"Makaron\",\"Market\",\"1.49\"]],[],[]]</string>
+    <string name="pokaz_instrukcje">Pokaż instrukcję</string>
+    <string name="wyczysc_wszystko">Wyczyść wszystko</string>
+    <string name="potwierdz_czyszczenie">Wszystkie listy i produkty zostaną utracone bezpowrotnie.</string>
+    <string name="zobaczysz_reklame">Zobaczysz reklamę</string>
+    <string name="udostepniaj_ceny">Udostępniaj ceny</string>
+    <string name="zdobywaj_zetony">Zdobywaj żetony</string>
+    <string name="produkty_spolecznosci">Produkty społeczności</string>
+    <string name="udostepnij_tekst">Cześć! Wypróbuj Listę zakupów na Androida. Pobierz z Google Play:\n</string>
+    <string name="adres_API">Adres API</string>
+</resources>

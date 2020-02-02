@@ -1,0 +1,14 @@
+<resources>
+    <string name="APLIKACJA_WERSJA">1.2.1</string>
+    <string name="ADRES_PLAY_APLIKACJA">https://play.google.com/store/apps/details?id=com.gmail.lesniakwojciech.listazakupowa</string>
+    <string name="ADRES_POSREDNIK">https://github.com/wojtekl/Lista-zakupow/raw/master/adres.txt</string>
+    <string name="ADRES_INSTRUKCJA">https://github.com/wojtekl/Lista-zakupow/raw/master/instrukcja.txt</string>
+    <string name="ZETONY_PREMIA">9</string>
+    <string name="PREFERENCJE_LISTY">listy</string>
+    <string name="PREFERENCJE_WCZYTANIE_OSTATNIE">wczytanieOstatnie</string>
+    <string name="PREFERENCJE_CENY_UDOSTEPNIAJ">cenyUdostepniaj</string>
+    <string name="PREFERENCJE_API_ADRES">APIAdres</string>
+    <string name="PREFERENCJE_POKAZ_INSTRUKCJE">pokazInstrukcje</string>
+    <string name="PREFERENCJE_WYCZYSC_WSZYSTKO">wyczyscWszystko</string>
+    <string name="PREFERENCJE_PRODUKTY_SPOLECZNOSCI">produktySpolecznosci</string>
+</resources>

@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Shopping List</string>
+
+    <string name="w_koszyku">In basket</string>
+    <string name="zakoncz_zakupy">Finish shopping</string>
+    <string name="do_kupienia">To buy</string>
+    <string name="wyslij_liste_SMSem">Send this list with SMS</string>
+    <string name="wyslij_liste">Send this list</string>
+    <string name="nazwa_pliku">Shopping_List</string>
+    <string name="zaktualizuj_liste">Update list</string>
+    <string name="potwierdz_aktualizacje">Currenty newer version. Proceed anyway?</string>
+    <string name="wyczysc_liste">Clean list</string>
+    <string name="produkty">Products</string>
+    <string name="dodaj_produkt">Add product</string>
+    <string name="produkt">Item</string>
+    <string name="sklep">Store</string>
+    <string name="cena">Price</string>
+    <string name="wlacz_internet">Enable internet connection to share price and get rewarded.</string>
+    <string name="lista_poczatkowa">[[[\"Apples\",\"City Market\",\"2.41\"],[\"Bread\",\"Charlie\'s Bakery\",\"2.98\"],[\"Chocolate Bar\",\"Supa Maket\",\"2.11\"],[\"Cucumber\",\"City Market\",\"2.98\"],[\"Eggs\",\"City Market\",\"1.60\"],[\"Hand Soap\",\"Maria\'s Herbal Shop\",\"2.67\"],[\"Ketchup\",\"Supa Maket\",\"2.22\"],[\"Salad\",\"City Market\",\"2.48\"],[\"Shampoo\",\"Maria\'s Herbal Shop\",\"2.97\"],[\"Toothpaste\",\"Maria\'s Herbal Shop\",\"2.96\"],[\"Butter\",\"City Market\",\"2.98\"],[\"Cheese\",\"City Market\",\"2.47\"],[\"Milk\",\"City Market\",\"1.86\"],[\"Tomatoes\",\"City Market\",\"1.68\"],[\"Tea Bags\",\"Maria\'s Herbal Shop\",\"2.32\"],[\"Rice\",\"Supa Maket\",\"1.00\"],[\"Soda\",\"Supa Maket\",\"2.50\"],[\"Coffee\",\"Supa Maket\",\"8.48\"],[\"Towels\",\"Supa Maket\",\"4.97\"],[\"Cereal\",\"Supa Maket\",\"3.64\"],[\"Sugar\",\"Supa Maket\",\"2.38\"],[\"Pasta\",\"Supa Maket\",\"1.38\"]],[],[]]</string>
+    <string name="pokaz_instrukcje">Show instruction</string>
+    <string name="wyczysc_wszystko">Clean all</string>
+    <string name="potwierdz_czyszczenie">All the lists and the items will be lost permanently.</string>
+    <string name="zobaczysz_reklame">You will see an ad</string>
+    <string name="udostepniaj_ceny">Share prices</string>
+    <string name="zdobywaj_zetony">Get tokens</string>
+    <string name="produkty_spolecznosci">Community products</string>
+    <string name="udostepnij_tekst">Hi! Try out Shopping List for Android. Get it from Google Play:\n</string>
+    <string name="adres_API">API address</string>
+</resources>

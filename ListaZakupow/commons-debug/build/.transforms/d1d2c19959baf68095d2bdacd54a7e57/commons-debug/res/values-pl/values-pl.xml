@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="adres">Adres</string>
+    <string name="adres_API">Adres API</string>
+    <string name="aktywuj_ryzykowne">Aktywuj ryzykowne</string>
+    <string name="brak_polaczenia_z_internetem">Brak połączenia z internetem</string>
+    <string name="ciemna_skorka">Ciemna skórka</string>
+    <string name="dodaj_dodatek">Dodaj dodatek</string>
+    <string name="dodatek">Dodatek</string>
+    <string name="dodatki">Dodatki</string>
+    <string name="identyfikator">Identyfikator</string>
+    <string name="inne_aplikacje">Inne aplikacje</string>
+    <string name="klucz">Klucz</string>
+    <string name="komunikacja">Komunikacja</string>
+    <string name="nacisnij_ponownie_by_wyjsc">Naciśnij ponownie by wyjść</string>
+    <string name="nazwa">Nazwa</string>
+    <string name="nie">Nie</string>
+    <string name="ogolne">Ogólne</string>
+    <string name="powroc">Powróć</string>
+    <string name="przyznano_zetony">Przyznano żetony:</string>
+    <string name="tak">Tak</string>
+    <string name="uaktualnij">Uaktualnij</string>
+    <string name="udostepnij">Udostępnij</string>
+    <string name="udostepnij_aplikacje">Udostępnij tę aplikację</string>
+    <string name="uprawnienia">Uprawnienia</string>
+    <string name="uruchom_aplikacje_ponownie">Uruchom aplikację ponownie.</string>
+    <string name="ustawienia">Ustawienia</string>
+    <string name="usun">Usuń</string>
+    <string name="wersja_aplikacji">Wersja aplikacji</string>
+    <string name="wymagane_uprawnienia">Wymagane uprawnienia: </string>
+    <string name="zachowaj">Zachowaj</string>
+    <string name="zaniechaj">Zaniechaj</string>
+    <string name="zbyt_malo_zetonow">Zbyt mało żetonów :( Przejdź do ustawień.</string>
+    <string name="zdobadz_zetony">Zdobądź żetony</string>
+    <string name="zetony">Żetony</string>
+</resources>
