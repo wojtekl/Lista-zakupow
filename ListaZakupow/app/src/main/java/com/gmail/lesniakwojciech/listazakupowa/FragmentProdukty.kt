@@ -3,6 +3,7 @@ package com.gmail.lesniakwojciech.listazakupowa
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,7 +31,7 @@ class FragmentProdukty : Fragment(), DialogListener {
                 return
             }
 
-            adapterListaZakupow.moveItem(position, RepositoryProdukty.Lista.DO_KUPIENIA)
+            adapterListaZakupow.moveItem(position, RepositoryListaZakupow.Lista.DO_KUPIENIA)
         }
 
         override fun onItemLongClick(view: View, position: Int) {
@@ -125,14 +126,21 @@ class FragmentProdukty : Fragment(), DialogListener {
 
     override fun onCreateView(li: LayoutInflater, vg: ViewGroup?, bundle: Bundle?): View {
         val view = li.inflate(R.layout.fragmentprodukty, vg, false)
-        adapterListaZakupow = AdapterListaZakupow(requireContext())
+        adapterListaZakupow = AdapterListaZakupow(
+            (activity as RepositoryListaZakupow.IRepository)
+                .getRepository()
+        )
         adapterListaZakupow.setOnItemClickListener(onItemClickListener)
+        adapterListaZakupow.setSelectedItemColor(
+            ResourcesCompat
+                .getColor(this.resources, R.color.colorAccent, null)
+        )
         val recyclerView: RecyclerView = view.findViewById(R.id.fpListView)
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapterListaZakupow
         recyclerView.layoutManager = LinearLayoutManager(context)
         val fab: FloatingActionButton = view.findViewById(R.id.fab)
-        fab.setImageResource(R.drawable.ic_add)
+        fab.setImageResource(com.gmail.lesniakwojciech.commons.R.drawable.ic_add)
         fab.setOnClickListener {
             val context = requireContext()
             DialogFragmentProdukt
@@ -150,7 +158,7 @@ class FragmentProdukty : Fragment(), DialogListener {
     override fun onResume() {
         super.onResume()
 
-        adapterListaZakupow.get(RepositoryProdukty.Lista.PRODUKTY)
+        adapterListaZakupow.get(RepositoryListaZakupow.Lista.PRODUKTY)
     }
 
     override fun onPause() {
@@ -191,7 +199,7 @@ class FragmentProdukty : Fragment(), DialogListener {
         val ustawienia = Ustawienia(context)
         val view = requireView()
         if (OPTIONS_DODAJ_PRODUKT == tag) {
-            adapterListaZakupow.addItem(model, RepositoryProdukty.Lista.PRODUKTY)
+            adapterListaZakupow.addItem(model, RepositoryListaZakupow.Lista.PRODUKTY)
             if (ustawienia.getCenyUdostepniaj(false)
                 && Permissions.hasInternet(context, view)
             ) {

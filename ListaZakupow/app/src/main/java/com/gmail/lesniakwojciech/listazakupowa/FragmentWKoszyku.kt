@@ -3,6 +3,7 @@ package com.gmail.lesniakwojciech.listazakupowa
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,7 +30,7 @@ class FragmentWKoszyku : Fragment(), DialogListener {
                 return
             }
 
-            adapterListaZakupow.moveItem(position, RepositoryProdukty.Lista.DO_KUPIENIA)
+            adapterListaZakupow.moveItem(position, RepositoryListaZakupow.Lista.DO_KUPIENIA)
         }
 
         override fun onItemLongClick(view: View, position: Int) {
@@ -116,8 +117,15 @@ class FragmentWKoszyku : Fragment(), DialogListener {
 
     override fun onCreateView(li: LayoutInflater, vg: ViewGroup?, bundle: Bundle?): View {
         val view = li.inflate(R.layout.fragmentprodukty, vg, false)
-        adapterListaZakupow = AdapterListaZakupow(requireContext())
+        adapterListaZakupow = AdapterListaZakupow(
+            (activity as RepositoryListaZakupow.IRepository)
+                .getRepository()
+        )
         adapterListaZakupow.setOnItemClickListener(onItemClickListener)
+        adapterListaZakupow.setSelectedItemColor(
+            ResourcesCompat
+                .getColor(this.resources, R.color.colorAccent, null)
+        )
         val recyclerView: RecyclerView = view.findViewById(R.id.fpListView)
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapterListaZakupow
@@ -132,7 +140,7 @@ class FragmentWKoszyku : Fragment(), DialogListener {
     override fun onResume() {
         super.onResume()
 
-        adapterListaZakupow.get(RepositoryProdukty.Lista.W_KOSZYKU)
+        adapterListaZakupow.get(RepositoryListaZakupow.Lista.W_KOSZYKU)
     }
 
     override fun onPause() {
@@ -159,7 +167,7 @@ class FragmentWKoszyku : Fragment(), DialogListener {
         for (i in 0 until adapterListaZakupow.itemCount) {
             adapterListaZakupow.getItem(i).podbijPopularnosc()
         }
-        adapterListaZakupow.moveAll(RepositoryProdukty.Lista.PRODUKTY)
+        adapterListaZakupow.moveAll(RepositoryListaZakupow.Lista.PRODUKTY)
     }
 
     override fun onDialogNegativeClick(dialog: DialogFragment) {}

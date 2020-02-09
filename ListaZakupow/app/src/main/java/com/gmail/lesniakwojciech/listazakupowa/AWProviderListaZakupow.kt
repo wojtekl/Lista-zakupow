@@ -34,7 +34,7 @@ class AWProviderListaZakupow : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
-        val repository = RepositoryProdukty(context)
+        val repository = RepositoryListaZakupow(context)
         repository.get()
         var string = repository.doWyslania("")
         if (TextUtils.isEmpty(string)) string = "- - -"

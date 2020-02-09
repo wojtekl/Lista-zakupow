@@ -34,18 +34,13 @@
         <activity
             android:name=".ActivityWczytaj"
             android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+            <intent-filter android:label="@string/zaktualizuj_liste">
+                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.ATTACH_DATA" />
 
-                <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <data
-                    android:mimeType="image/jpeg"
-                    android:scheme="content" />
-                <data
-                    android:mimeType="image/jpeg"
-                    android:scheme="file" />
+                <data android:mimeType="image/jpeg" />
             </intent-filter>
         </activity>
 

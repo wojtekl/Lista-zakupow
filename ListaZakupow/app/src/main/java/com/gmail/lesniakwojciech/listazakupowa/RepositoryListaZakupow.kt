@@ -6,7 +6,7 @@ import org.json.JSONArray
 import java.util.*
 import kotlin.collections.ArrayList
 
-class RepositoryProdukty(context: Context) {
+class RepositoryListaZakupow(context: Context) {
     companion object {
         fun JSONToList(array: JSONArray, list: MutableList<ModelProdukt>) {
             list.clear()
@@ -67,14 +67,14 @@ class RepositoryProdukty(context: Context) {
         val list = getLista(lista)
         list.add(model)
         Collections.sort(list, getComparator(lista))
-        update()
+        //update()
     }
 
     fun insertAll(lista: Lista, models: List<ModelProdukt>) {
         val list = getLista(lista)
         list.addAll(models)
         Collections.sort(list, getComparator(lista))
-        update()
+        //update()
     }
 
     fun sort(lista: Lista) {
@@ -158,6 +158,10 @@ class RepositoryProdukty(context: Context) {
     interface IDatabaseListaZakupow {
         fun getListaZakupow(json: String): String
         fun setListaZakupow(json: String)
+    }
+
+    interface IRepository {
+        fun getRepository(): RepositoryListaZakupow
     }
 
     private fun getComparator(lista: Lista): Comparator<ModelProdukt> {

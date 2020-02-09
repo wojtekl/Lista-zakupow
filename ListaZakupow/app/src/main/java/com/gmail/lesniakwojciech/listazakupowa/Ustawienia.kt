@@ -3,7 +3,7 @@ package com.gmail.lesniakwojciech.listazakupowa
 import android.content.Context
 import com.gmail.lesniakwojciech.commons.Ustawienia
 
-class Ustawienia(context: Context) : Ustawienia(context), RepositoryProdukty.IDatabaseListaZakupow {
+class Ustawienia(context: Context) : Ustawienia(context), RepositoryListaZakupow.IDatabaseListaZakupow {
     private val PREFERENCJE_LISTY = context.getString(R.string.PREFERENCJE_LISTY)
     private val PREFERENCJE_WCZYTANIE_OSTATNIE =
         context.getString(R.string.PREFERENCJE_WCZYTANIE_OSTATNIE)

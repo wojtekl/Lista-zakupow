@@ -23,8 +23,12 @@ class ActivityWczytaj : AppCompatActivity() {
             Utils.ustawAnimacje(window, Explode(), Explode(), true)
         }
 
-        if (Intent.ACTION_VIEW == intent.action) {
-            wczytajListe(intent.data!!, ustawienia)
+        val isActionSend = Intent.ACTION_SEND == intent.action
+        if (isActionSend || Intent.ACTION_ATTACH_DATA == intent.action) {
+            wczytajListe(
+                (if (isActionSend) intent.extras?.get(Intent.EXTRA_STREAM)
+                else intent.data) as Uri, ustawienia
+            )
         }
     }
 
@@ -32,10 +36,10 @@ class ActivityWczytaj : AppCompatActivity() {
         if (Build.VERSION_CODES.M <= Build.VERSION.SDK_INT && !Permissions.requestPermission(
                 this,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission_group.STORAGE
+                Manifest.permission_group.STORAGE,
+                true
             )
         ) {
-            finish()
             return
         }
         val wiadomosc = UkrytaWiadomosc(this)
@@ -43,17 +47,11 @@ class ActivityWczytaj : AppCompatActivity() {
             finish()
             return
         }
-        val repository = RepositoryProdukty(this)
+        val repository = RepositoryListaZakupow(this)
         repository.get()
         if (ustawienia.getWczytanieOstatnie(0) < wiadomosc.data) {
-            repository.merge(wiadomosc.tresc)
             ustawienia.setWczytanieOstatnie(wiadomosc.data)
-            startActivity(
-                Intent(this, ActivityMain::class.java).setFlags(
-                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                )
-            )
-            finish()
+            aktualizujListe(repository, wiadomosc.tresc)
             return
         }
         AlertDialog.Builder(
@@ -64,18 +62,24 @@ class ActivityWczytaj : AppCompatActivity() {
             .setIcon(android.R.drawable.ic_dialog_alert)
             .setTitle(R.string.zaktualizuj_liste)
             .setMessage(R.string.potwierdz_aktualizacje)
-            .setOnCancelListener { this.finish() }
-            .setNegativeButton(R.string.nie) { dialog, which -> this.finish() }
+            .setOnCancelListener { finish() }
+            .setNegativeButton(R.string.nie) { dialog, which -> finish() }
             .setPositiveButton(R.string.tak) { di, i ->
-                repository.merge(wiadomosc.tresc)
-                startActivity(
-                    Intent(applicationContext, ActivityMain::class.java).setFlags(
-                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    )
+                aktualizujListe(
+                    repository,
+                    wiadomosc.tresc
                 )
-                this.finish()
             }
             .create()
             .show()
+    }
+
+    private fun aktualizujListe(repository: RepositoryListaZakupow, lista: String) {
+        repository.merge(lista)
+        startActivity(
+            Intent(this, ActivityMain::class.java)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        )
+        finish()
     }
 }

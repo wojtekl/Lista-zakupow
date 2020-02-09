@@ -13,7 +13,9 @@ import androidx.viewpager.widget.ViewPager
 import com.gmail.lesniakwojciech.commons.*
 import java.util.*
 
-class ActivityMain : AppCompatActivity() {
+class ActivityMain : AppCompatActivity(), RepositoryListaZakupow.IRepository {
+    private lateinit var repository: RepositoryListaZakupow
+
     override fun onCreate(savedInstanceState: Bundle?) {
         /*val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
         val viewPager: ViewPager = findViewById(R.id.view_pager)
@@ -48,6 +50,8 @@ class ActivityMain : AppCompatActivity() {
                 }
             })
 
+        repository = RepositoryListaZakupow(this)
+
         setSupportActionBar(findViewById(R.id.toolbar))
 
         val viewPager = findViewById<ViewPager>(R.id.alzViewPager)
@@ -74,11 +78,13 @@ class ActivityMain : AppCompatActivity() {
         super.onResume()
 
         Reklamy.resume(this)
+        repository.get()
     }
 
     override fun onPause() {
         AWProviderListaZakupow.update(this)
         createShortcuts()
+        repository.update()
         Reklamy.pause(this)
 
         super.onPause()
@@ -90,12 +96,16 @@ class ActivityMain : AppCompatActivity() {
         super.onDestroy()
     }
 
+    override fun getRepository(): RepositoryListaZakupow {
+        return repository
+    }
+
     private fun createShortcuts() {
         if (Build.VERSION_CODES.N_MR1 > Build.VERSION.SDK_INT) {
             return
         }
         val intent = Wiadomosci.tekst(
-            this.packageManager, RepositoryProdukty(this)
+            this.packageManager, RepositoryListaZakupow(this)
                 .doWyslania(getString(R.string.do_kupienia))
         )
         if (null != intent) {

@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gmail.lesniakwojciech.commons.*
@@ -90,17 +91,17 @@ class ActivitySpolecznosc : AppCompatActivity() {
                             val nazwa = model.nazwa
                             var istnieje = false
                             val listWKoszyku =
-                                repository.getLista(RepositoryProdukty.Lista.W_KOSZYKU)
+                                repository.getLista(RepositoryListaZakupow.Lista.W_KOSZYKU)
                             for (i in 0 until listWKoszyku.size) {
                                 istnieje = istnieje || nazwa == listWKoszyku[i].nazwa
                             }
                             val listDoKupienia =
-                                repository.getLista(RepositoryProdukty.Lista.DO_KUPIENIA)
+                                repository.getLista(RepositoryListaZakupow.Lista.DO_KUPIENIA)
                             for (i in 0 until listDoKupienia.size) {
                                 istnieje = istnieje || nazwa == listDoKupienia[i].nazwa
                             }
                             val listProdukty =
-                                repository.getLista(RepositoryProdukty.Lista.PRODUKTY)
+                                repository.getLista(RepositoryListaZakupow.Lista.PRODUKTY)
                             for (i in 0 until listProdukty.size) {
                                 istnieje = istnieje || nazwa == listProdukty[i].nazwa
                             }
@@ -134,8 +135,12 @@ class ActivitySpolecznosc : AppCompatActivity() {
         setContentView(R.layout.activityspolecznosc)
         context = this
 
-        adapterListaZakupow = AdapterListaZakupow(this)
+        adapterListaZakupow = AdapterListaZakupow(RepositoryListaZakupow(this))
         adapterListaZakupow.setOnItemClickListener(onItemClickListener)
+        adapterListaZakupow.setSelectedItemColor(
+            ResourcesCompat
+                .getColor(context.resources, R.color.colorAccent, null)
+        )
         pobierzProdukty(adapterListaZakupow, findViewById<View>(R.id.activityspolecznosc))
 
         val recyclerView = findViewById<RecyclerView>(R.id.asListView)
@@ -154,9 +159,14 @@ class ActivitySpolecznosc : AppCompatActivity() {
                 ustawienia,
                 object : AsyncTaskRzadanie.Listener {
                     override fun onPostExecute(response: Response) {
+                        val jsonArray = try {
+                            JSONArray(response.message)
+                        } catch (exception: Exception) {
+                            JSONArray()
+                        }
                         if (response.isOK(true)) {
-                            RepositoryProdukty.JSONToList(
-                                JSONArray(response.message),
+                            RepositoryListaZakupow.JSONToList(
+                                jsonArray,
                                 adapterListaZakupow.getDataset()
                             )
                             adapterListaZakupow.notifyDataSetChanged()

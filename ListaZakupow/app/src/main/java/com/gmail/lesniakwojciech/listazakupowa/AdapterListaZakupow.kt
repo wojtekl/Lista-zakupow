@@ -1,6 +1,5 @@
 package com.gmail.lesniakwojciech.listazakupowa
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -12,15 +11,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gmail.lesniakwojciech.commons.OnItemClickListener
 import com.gmail.lesniakwojciech.commons.ViewHolderBase
 
-class AdapterListaZakupow(context: Context) :
+class AdapterListaZakupow(val repository: RepositoryListaZakupow) :
     RecyclerView.Adapter<AdapterListaZakupow.ViewHolderListaZakupow>() {
     private var onItemClickListener: OnItemClickListener? = null
     private var selectedItem: View? = null
+    private var selectedItemColor = Color.GRAY
     private var holderBackground: Drawable? = null
 
     private var dataset: MutableList<ModelProdukt> = ArrayList()
-    val repository = RepositoryProdukty(context)
-    private lateinit var lista: RepositoryProdukty.Lista
+    //val repository = RepositoryListaZakupow(context)
+    private lateinit var lista: RepositoryListaZakupow.Lista
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderListaZakupow {
         return ViewHolderListaZakupow(
@@ -47,10 +47,10 @@ class AdapterListaZakupow(context: Context) :
     fun removeItem(position: Int) {
         dataset.removeAt(position)
         notifyItemRemoved(position)
-        repository.update()
+        //repository.update()
     }
 
-    fun addItem(model: ModelProdukt, lista: RepositoryProdukty.Lista) {
+    fun addItem(model: ModelProdukt, lista: RepositoryListaZakupow.Lista) {
         repository.insert(lista, model)
         if (this.lista == lista) {
             notifyItemInserted(dataset.size - 1)
@@ -70,21 +70,21 @@ class AdapterListaZakupow(context: Context) :
         produkt.cena = model.cena
         repository.sort(lista)
         notifyDataSetChanged()
-        repository.update()
+        //repository.update()
         return true
     }
 
-    fun moveItem(position: Int, lista: RepositoryProdukty.Lista) {
+    fun moveItem(position: Int, lista: RepositoryListaZakupow.Lista) {
         repository.insert(lista, dataset[position])
         dataset.removeAt(position)
-        repository.update()
+        //repository.update()
         notifyDataSetChanged()
     }
 
-    fun moveAll(lista: RepositoryProdukty.Lista) {
+    fun moveAll(lista: RepositoryListaZakupow.Lista) {
         repository.insertAll(lista, dataset)
         dataset.clear()
-        repository.update()
+        //repository.update()
         notifyDataSetChanged()
     }
 
@@ -96,9 +96,9 @@ class AdapterListaZakupow(context: Context) :
         return repository.getListaJSON(lista)
     }
 
-    fun get(lista: RepositoryProdukty.Lista) {
+    fun get(lista: RepositoryListaZakupow.Lista) {
         this.lista = lista
-        repository.get()
+        //repository.get()
         dataset = repository.getLista(lista)
         notifyDataSetChanged()
     }
@@ -107,11 +107,15 @@ class AdapterListaZakupow(context: Context) :
         this.onItemClickListener = onItemClickListener
     }
 
+    fun setSelectedItemColor(selectedItemColor: Int) {
+        this.selectedItemColor = selectedItemColor
+    }
+
     fun setSelection(view: View) {
         if (null == selectedItem) {
             selectedItem = view
             holderBackground = selectedItem!!.background
-            selectedItem?.setBackgroundColor(Color.LTGRAY)
+            selectedItem?.setBackgroundColor(selectedItemColor)
         }
     }
 

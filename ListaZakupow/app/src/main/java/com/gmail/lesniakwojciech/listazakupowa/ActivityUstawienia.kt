@@ -110,6 +110,16 @@ class ActivityUstawienia : AppCompatActivity() {
                     true
                 }
 
+            findPreference<Preference>(ustawienia.PREFERENCJE_PRODUKTY_SPOLECZNOSCI)!!.onPreferenceClickListener =
+                Preference.OnPreferenceClickListener {
+                    if (Permissions.hasInternet(context, requireView()) && Zetony(context)
+                            .sprawdzZetony(Zetony.ZETONY_PRODUKTY_SPOLECZNOSCI, true, view)
+                    ) {
+                        startActivity(Intent(context, ActivitySpolecznosc::class.java))
+                    }
+                    true
+                }
+
             findPreference<Preference>(ustawienia.UDOSTEPNIJ_APLIKACJE)!!.onPreferenceClickListener =
                 Preference.OnPreferenceClickListener {
                     Utils.udostepnijAplikacje(
@@ -122,16 +132,6 @@ class ActivityUstawienia : AppCompatActivity() {
             findPreference<Preference>(ustawienia.INNE_APLIKACJE)!!.onPreferenceClickListener =
                 Preference.OnPreferenceClickListener {
                     Utils.inneAplikacje(context)
-                    true
-                }
-
-            findPreference<Preference>(ustawienia.PREFERENCJE_PRODUKTY_SPOLECZNOSCI)!!.onPreferenceClickListener =
-                Preference.OnPreferenceClickListener {
-                    if (Permissions.hasInternet(context, requireView()) && Zetony(context)
-                            .sprawdzZetony(Zetony.ZETONY_PRODUKTY_SPOLECZNOSCI, true, view)
-                    ) {
-                        startActivity(Intent(context, ActivitySpolecznosc::class.java))
-                    }
                     true
                 }
         }

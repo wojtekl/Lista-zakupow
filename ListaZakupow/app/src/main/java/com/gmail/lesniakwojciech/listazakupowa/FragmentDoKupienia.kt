@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,7 +31,7 @@ class FragmentDoKupienia : Fragment(), DialogListener {
                 return
             }
 
-            adapterListaZakupow.moveItem(position, RepositoryProdukty.Lista.W_KOSZYKU)
+            adapterListaZakupow.moveItem(position, RepositoryListaZakupow.Lista.W_KOSZYKU)
         }
 
         override fun onItemLongClick(view: View, position: Int) {
@@ -111,7 +112,7 @@ class FragmentDoKupienia : Fragment(), DialogListener {
                         R.id.fdcUsun -> {
                             adapterListaZakupow.moveItem(
                                 position,
-                                RepositoryProdukty.Lista.PRODUKTY
+                                RepositoryListaZakupow.Lista.PRODUKTY
                             )
                             mode.finish()
                             true
@@ -130,14 +131,21 @@ class FragmentDoKupienia : Fragment(), DialogListener {
 
     override fun onCreateView(li: LayoutInflater, vg: ViewGroup?, bundle: Bundle?): View {
         val view = li.inflate(R.layout.fragmentprodukty, vg, false)
-        adapterListaZakupow = AdapterListaZakupow(requireContext())
+        adapterListaZakupow = AdapterListaZakupow(
+            (activity as RepositoryListaZakupow.IRepository)
+                .getRepository()
+        )
         adapterListaZakupow.setOnItemClickListener(onItemClickListener)
+        adapterListaZakupow.setSelectedItemColor(
+            ResourcesCompat
+                .getColor(resources, R.color.colorAccent, null)
+        )
         val recyclerView: RecyclerView = view.findViewById(R.id.fpListView)
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapterListaZakupow
         recyclerView.layoutManager = LinearLayoutManager(context)
         val fab: FloatingActionButton = view.findViewById(R.id.fab)
-        fab.setImageResource(R.drawable.ic_send)
+        fab.setImageResource(com.gmail.lesniakwojciech.commons.R.drawable.ic_send)
         fab.setOnClickListener { wyslijListeSMSem() }
         setHasOptionsMenu(true)
         return view
@@ -146,7 +154,7 @@ class FragmentDoKupienia : Fragment(), DialogListener {
     override fun onResume() {
         super.onResume()
 
-        adapterListaZakupow.get(RepositoryProdukty.Lista.DO_KUPIENIA)
+        adapterListaZakupow.get(RepositoryListaZakupow.Lista.DO_KUPIENIA)
     }
 
     override fun onPause() {
@@ -170,7 +178,7 @@ class FragmentDoKupienia : Fragment(), DialogListener {
                 true
             }
             R.id.fdkoWyczysc -> {
-                adapterListaZakupow.moveAll(RepositoryProdukty.Lista.PRODUKTY)
+                adapterListaZakupow.moveAll(RepositoryListaZakupow.Lista.PRODUKTY)
                 true
             }
             else -> super.onOptionsItemSelected(mi)
