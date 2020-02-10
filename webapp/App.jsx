@@ -3,20 +3,20 @@ class App extends React.Component {
     super(props);
     
     this.state = {
-      ekran: (
+      source: (
 <div class="container">
   <div class="row">
     <div class="col-sm">
-      <Card ikona="https://source.unsplash.com/400x225/?shopping" tytul="Lista zakupów" zrodlo="/lista.php" opis="Aplikacja Lista Zakupów" aktualizuj={this.aktualizuj} powroc={this.powroc} />
+      <Card image="https://source.unsplash.com/400x225/?shopping" title="Lista zakupów" description="Aplikacja Lista Zakupów" source="/produkty" replace={this.replace} back={this.back} />
     </div>
     <div class="col-sm">
-      <Card ikona="https://source.unsplash.com/400x225/?meeting" tytul="Kalendarz" opis="Aplikacja Kalendarz" aktualizuj={this.aktualizuj} />
+      <Card image="https://source.unsplash.com/400x225/?meeting" title="Kalendarz" description="Aplikacja Kalendarz" source="http://mojdzien.cba.pl/#app" replace={this.replace} back={this.back} />
     </div>
     <div class="col-sm">
-      <Card ikona="https://source.unsplash.com/400x225/?finding" tytul="DuckDuckGo" opis="Wyszukiwarka" zrodlo="https://duckduckgo.com" />
+      <Card image="https://source.unsplash.com/400x225/?agenda" title="Launcher" description="Launcher dla Androida" source="http://mojdzien.cba.pl/#app" replace={this.replace} back={this.back} />
     </div>
     <div class="col-sm">
-      <Card ikona="https://source.unsplash.com/400x225/?map" tytul="OpenStreetMap" opis="Otwarte mapy" zrodlo="https://www.openstreetmap.org" />
+      <Card image="https://source.unsplash.com/400x225/?rubbish" title="Puste" description="Puste" source="http://mojdzien.cba.pl/#app" replace={this.replace} back={this.back} />
     </div>
   </div>
 </div>
@@ -24,15 +24,15 @@ class App extends React.Component {
     }
   }
   
-  aktualizuj = (ekran) => {
-    this.setState({ekran: ekran});
+  replace = (source) => {
+    this.setState({source: source});
   }
   
-  powroc = () => {
-    this.setState({ekran: <App />});
+  back = () => {
+    this.setState({source: <App />});
   }
   
   render() {
-    return this.state.ekran
+    return this.state.source
   }
 }

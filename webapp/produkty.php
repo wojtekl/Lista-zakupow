@@ -27,10 +27,10 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 function get() {
   header("Content-Type: application/json");
   global $jezyk, $identyfikator, $repository;
-  $result = $repository -> getCeny($_GET["nazwa"]);
+  $result = $repository -> getCenyAll();
   $lista = "[";
   foreach ($result as $r) {
-    $lista .= "{\"sklep\": \"${r["SKLEP"]}\", \"cena\": \"${r["CENA"]}\", \"dodano\": \"${r["DODANO"]}\"},";
+    $lista .= "[\"${r["PRODUKT"]}\", \"${r["SKLEP"]}\", \"${r["CENA"]}\", 0],";
   }
   $lista[strlen($lista) - 1] = "]";
   echo $lista;
@@ -39,7 +39,13 @@ function get() {
 function post() {
   header("Content-Type: application/json");
   global $jezyk, $identyfikator, $repository;
-  echo $repository -> insertCena($_POST["nazwa"], $_POST["sklep"], $_POST["cena"], $jezyk, $identyfikator);
+  $result = $repository -> getCenyAll();
+  $lista = "[";
+  foreach ($result as $r) {
+    $lista .= "{\"produkt\": \"${r["PRODUKT"]}\", \"sklep\": \"${r["SKLEP"]}\", \"cena\": \"${r["CENA"]}\", \"dodano\": \"${r["DODANO"]}\"},";
+  }
+  $lista[strlen($lista) - 1] = "]";
+  echo $lista;
 }
 
 function put() {
