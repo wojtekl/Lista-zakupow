@@ -10,7 +10,7 @@ class List extends React.Component {
   }
   
   handleClick = () => {
-    var self = this;
+    let self = this;
     axios.get("/produkt?nazwa=" + this.state.selected).then(function (response) {
       self.props.replace(<List properties={["sklep", "cena", "dodano"]} list={response.data} replace={self.props.replace} back={self.back} />);
     })
@@ -18,15 +18,18 @@ class List extends React.Component {
   render() {
     return (
 <div class="container">
-  <div class="row"><a href="#app" class="btn btn-primary" onClick={this.props.back}>Powrót</a></div>
+  <div class="row mt-3">
+    <a href="#app" class="btn btn-primary" onClick={this.props.back}>{localise.powrot}</a>
+    <a class="btn p-0" href='https://play.google.com/store/apps/details?id=com.gmail.lesniakwojciech.listazakupowa&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img height="36px" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+  </div>
   <div class="row mt-3">
     <table class="table table-hover">
       <thead class="thead-dark">
         <tr>
           {this.props.properties.map(property => {
-            return (<th>{property.toUpperCase()}</th>)
+            return (<th>{String(localise[property]).toUpperCase()}</th>)
           })}
-          {this.props.expandable && <th>Więcej</th>}
+          {this.props.expandable && <th>{localise.wiecej.toUpperCase()}</th>}
         </tr>
       </thead>
       <tbody>

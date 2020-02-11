@@ -26,16 +26,16 @@ class Repository {
     }
   }
   
-  public function insertCena($nazwa, $sklep, $cena, $kraj, $identyfikator) {
-    return $this -> execute("INSERT INTO `CENA` VALUES (0, '$nazwa', '$sklep', '$cena', '$kraj', '$identyfikator', CURRENT_TIMESTAMP);");
+  public function insertCena($produkt, $sklep, $cena, $kraj, $identyfikator) {
+    return $this -> execute("INSERT INTO `CENA` VALUES (0, '$produkt', '$sklep', '$cena', '$kraj', '$identyfikator', CURRENT_TIMESTAMP);");
   }
   
-  public function getCeny($nazwa) {
-    return $this -> execute("SELECT `SKLEP`, `CENA`, `DODANO` FROM `CENA` WHERE `PRODUKT` = '$nazwa' ORDER BY `DODANO` DESC, `SKLEP`;");
+  public function getCeny($produkt) {
+    return $this -> execute("SELECT `SKLEP`, `CENA`, `DODANO` FROM `CENA` WHERE `PRODUKT` = '$produkt' ORDER BY `CENA`, `DODANO` DESC, `SKLEP` LIMIT 10;");
   }
   
-  public function getCenyAll() {
-    return $this -> execute("SELECT `c`.`PRODUKT`, `c`.`SKLEP`, `c`.`CENA`, `c`.`DODANO` FROM `CENA` `c` JOIN (SELECT MAX(`ID`) AS `ID`, `PRODUKT` FROM `CENA` GROUP BY `PRODUKT`) `s` ON `s`.`ID` = `c`.`ID` ORDER BY `PRODUKT`;");
+  public function getCenyAll($kraj) {
+    return $this -> execute("SELECT `c`.`PRODUKT`, `c`.`SKLEP`, `c`.`CENA`, `c`.`DODANO` FROM `CENA` `c` JOIN (SELECT MAX(`ID`) AS `ID`, `PRODUKT` FROM `CENA` WHERE `KRAJ` = '$kraj' GROUP BY `PRODUKT`) `s` ON `s`.`ID` = `c`.`ID` ORDER BY `PRODUKT`;");
   }
 }
 

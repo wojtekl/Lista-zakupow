@@ -2,13 +2,17 @@
 
 require "repository.php";
 
-$jezyk = "en-GB";
+$kraj = "en-GB";
 $httpAcceptLanguage = explode(",", $_SERVER["HTTP_ACCEPT_LANGUAGE"]);
 if (isset($httpAcceptLanguage[0])) {
-  $jezyk = $httpAcceptLanguage[0];
+  $kraj = $httpAcceptLanguage[0];
 }
 
-$identyfikator = $_POST["identyfikator"];
+if(isset($_GET["lang"])) {
+  $kraj = $_GET["lang"];
+}
+
+$identyfikator = $_GET["identyfikator"];
 
 switch ($_SERVER["REQUEST_METHOD"]) {
   case "POST":
@@ -26,36 +30,36 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
 function get() {
   header("Content-Type: application/json");
-  global $jezyk, $identyfikator, $repository;
-  $result = $repository -> getCenyAll();
-  $lista = "[";
-  foreach ($result as $r) {
-    $lista .= "[\"${r["PRODUKT"]}\", \"${r["SKLEP"]}\", \"${r["CENA"]}\", 0],";
+  global $kraj, $identyfikator, $repository;
+  $result = $repository -> getCenyAll($kraj);
+  $list = "[";
+  foreach ($result as $row) {
+    $list .= "[\"${row["PRODUKT"]}\", \"${row["SKLEP"]}\", \"${row["CENA"]}\", 0],";
   }
-  $lista[strlen($lista) - 1] = "]";
-  echo $lista;
+  $list .= "]";
+  echo str_replace(",]", "]", $list);
 }
 
 function post() {
   header("Content-Type: application/json");
-  global $jezyk, $identyfikator, $repository;
-  $result = $repository -> getCenyAll();
-  $lista = "[";
-  foreach ($result as $r) {
-    $lista .= "{\"produkt\": \"${r["PRODUKT"]}\", \"sklep\": \"${r["SKLEP"]}\", \"cena\": \"${r["CENA"]}\", \"dodano\": \"${r["DODANO"]}\"},";
+  global $kraj, $identyfikator, $repository;
+  $result = $repository -> getCenyAll($kraj);
+  $list = "[";
+  foreach ($result as $row) {
+    $list .= "{\"produkt\": \"${row["PRODUKT"]}\", \"sklep\": \"${row["SKLEP"]}\", \"cena\": \"${row["CENA"]}\", \"dodano\": \"${row["DODANO"]}\"},";
   }
-  $lista[strlen($lista) - 1] = "]";
-  echo $lista;
+  $list .= "]";
+  echo str_replace(",]", "]", $list);
 }
 
 function put() {
   header("Content-Type: application/json");
-  global $jezyk, $identyfikator, $repository;
+  global $kraj, $identyfikator, $repository;
 }
 
 function delete() {
   header("Content-Type: application/json");
-  global $jezyk, $identyfikator, $repository;
+  global $kraj, $identyfikator, $repository;
 }
 
 ?>
