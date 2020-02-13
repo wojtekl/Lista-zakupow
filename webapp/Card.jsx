@@ -1,4 +1,7 @@
-class Card extends React.Component {
+const Component=React.Component;
+const Link=ReactRouterDOM.Link;
+
+class Card extends Component {
   constructor(props) {
     super(props);
     
@@ -33,3 +36,9 @@ class Card extends React.Component {
     )
   }
 }
+
+/*
+
+<a><Link to="/listaZakupow">test</Link></a>
+
+*/
