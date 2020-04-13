@@ -65,6 +65,10 @@ class ActivityMain : AppCompatActivity(), RepositoryListaZakupow.IRepository {
             )
         }
 
+        if (TextUtils.isEmpty(ustawienia.getKraj(""))) {
+            ustawienia.setKraj(Utils.pobierzKraj(this))
+        }
+
         if (TextUtils.isEmpty(ustawienia.getIdentyfikator(""))) {
             ustawienia.setIdentyfikator(UUID.randomUUID().toString())
         }

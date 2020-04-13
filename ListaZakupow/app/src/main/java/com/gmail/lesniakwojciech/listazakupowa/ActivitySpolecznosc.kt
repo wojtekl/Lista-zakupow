@@ -141,7 +141,7 @@ class ActivitySpolecznosc : AppCompatActivity() {
             ResourcesCompat
                 .getColor(context.resources, R.color.colorAccent, null)
         )
-        pobierzProdukty(adapterListaZakupow, findViewById<View>(R.id.activityspolecznosc))
+        pobierzProdukty(adapterListaZakupow, findViewById(R.id.activityspolecznosc))
 
         val recyclerView = findViewById<RecyclerView>(R.id.asListView)
         recyclerView.setHasFixedSize(true)

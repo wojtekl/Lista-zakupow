@@ -31,6 +31,7 @@ class FragmentWKoszyku : Fragment(), DialogListener {
             }
 
             adapterListaZakupow.moveItem(position, RepositoryListaZakupow.Lista.DO_KUPIENIA)
+            ustawKoszt()
         }
 
         override fun onItemLongClick(view: View, position: Int) {
@@ -141,6 +142,7 @@ class FragmentWKoszyku : Fragment(), DialogListener {
         super.onResume()
 
         adapterListaZakupow.get(RepositoryListaZakupow.Lista.W_KOSZYKU)
+        ustawKoszt()
     }
 
     override fun onPause() {
@@ -168,6 +170,13 @@ class FragmentWKoszyku : Fragment(), DialogListener {
             adapterListaZakupow.getItem(i).podbijPopularnosc()
         }
         adapterListaZakupow.moveAll(RepositoryListaZakupow.Lista.PRODUKTY)
+        ustawKoszt()
+    }
+
+    private fun ustawKoszt() {
+        requireActivity().title = getString(R.string.app_name) + ": $" + ModelProdukt.formatCena(
+            adapterListaZakupow.repository.koszt(RepositoryListaZakupow.Lista.W_KOSZYKU)
+        )
     }
 
     override fun onDialogNegativeClick(dialog: DialogFragment) {}
@@ -186,6 +195,7 @@ class FragmentWKoszyku : Fragment(), DialogListener {
                     }
                 })
             }
+            ustawKoszt()
         }
     }
 }

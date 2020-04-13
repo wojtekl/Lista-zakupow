@@ -35,6 +35,7 @@ class WebAPI {
             AsyncTaskRzadanie(listener).execute(
                 ustawienia.getAPIAdres("") + KONCOWKA_PRODUKT,
                 AsyncTaskRzadanie.POST,
+                ustawienia.getKraj("en"),
                 PARAMETER_NAZWA + model.nazwa +
                         "&" + PARAMETER_SKLEP + model.sklep +
                         "&" + PARAMETER_CENA + model.cena +
@@ -60,7 +61,9 @@ class WebAPI {
         ) {
             AsyncTaskRzadanie(listener).execute(
                 ustawienia.getAPIAdres("") + KONCOWKA_PRODUKTY +
-                        PARAMETER_IDENTYFIKATOR + ustawienia.getIdentyfikator("")
+                        PARAMETER_IDENTYFIKATOR + ustawienia.getIdentyfikator(""),
+                AsyncTaskRzadanie.GET,
+                ustawienia.getKraj("en")
             )
         }
 

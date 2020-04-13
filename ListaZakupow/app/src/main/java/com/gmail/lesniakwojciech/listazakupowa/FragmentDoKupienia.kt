@@ -32,6 +32,7 @@ class FragmentDoKupienia : Fragment(), DialogListener {
             }
 
             adapterListaZakupow.moveItem(position, RepositoryListaZakupow.Lista.W_KOSZYKU)
+            ustawKoszt()
         }
 
         override fun onItemLongClick(view: View, position: Int) {
@@ -114,6 +115,7 @@ class FragmentDoKupienia : Fragment(), DialogListener {
                                 position,
                                 RepositoryListaZakupow.Lista.PRODUKTY
                             )
+                            ustawKoszt()
                             mode.finish()
                             true
                         }
@@ -155,6 +157,7 @@ class FragmentDoKupienia : Fragment(), DialogListener {
         super.onResume()
 
         adapterListaZakupow.get(RepositoryListaZakupow.Lista.DO_KUPIENIA)
+        ustawKoszt()
     }
 
     override fun onPause() {
@@ -179,6 +182,7 @@ class FragmentDoKupienia : Fragment(), DialogListener {
             }
             R.id.fdkoWyczysc -> {
                 adapterListaZakupow.moveAll(RepositoryListaZakupow.Lista.PRODUKTY)
+                ustawKoszt()
                 true
             }
             else -> super.onOptionsItemSelected(mi)
@@ -207,6 +211,12 @@ class FragmentDoKupienia : Fragment(), DialogListener {
         }
     }
 
+    private fun ustawKoszt() {
+        requireActivity().title = getString(R.string.app_name) + ": $" + ModelProdukt.formatCena(
+            adapterListaZakupow.repository.koszt(RepositoryListaZakupow.Lista.DO_KUPIENIA)
+        )
+    }
+
     override fun onDialogNegativeClick(dialog: DialogFragment) {}
     override fun onDialogPositiveClick(dialog: DialogFragment, i: Int, model: ModelProdukt) {
         if (CONTEXT_UAKTUALNIJ == dialog.tag) {
@@ -223,6 +233,7 @@ class FragmentDoKupienia : Fragment(), DialogListener {
                     }
                 })
             }
+            ustawKoszt()
         }
     }
 }

@@ -128,6 +128,14 @@ class RepositoryListaZakupow(context: Context) {
         return stringBuilder.append(" * ").append(doKupienia[size].nazwa).append(".").toString()
     }
 
+    fun koszt(lista: Lista): Double {
+        var koszt = 0.0
+        for (produkt in getLista(lista)) {
+            koszt += produkt.cena
+        }
+        return koszt
+    }
+
     private fun listToJSON(list: List<ModelProdukt>): String {
         val stringBuilder = StringBuilder().append("[")
         val size = list.size
